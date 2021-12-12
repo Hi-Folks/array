@@ -1,16 +1,16 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "hi-folks/array",
+    "description": "This is my package array",
     "keywords": [
-        ":vendor_name",
-        ":package_slug"
+        "Hi-Folks",
+        "array"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/hi-folks/array",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Roberto B.",
+            "email": "roberto.butti@gmail.com",
             "role": "Developer"
         }
     ],
@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src"
+            "HiFolks\\DataType\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "HiFolks\\Array\\Tests\\": "tests"
         }
     },
     "scripts": {
