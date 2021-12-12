@@ -4,8 +4,8 @@
 [![Tests](https://github.com/hi-folks/array/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/hi-folks/array/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/hi-folks/array.svg?style=flat-square)](https://packagist.org/packages/hi-folks/array)
 
-Arr class is built on top of the PHP array functions.
-Arr exposes methods for crateing, managing, accessing to the array data structure.
+**Arr** class is built on top of the PHP array functions.
+**Arr** exposes methods for creating, managing, accessing to the array data structure.
 The interface (method names, method arguments) are pretty similar to the Javascript Array class.
 I built this class because comparing method functions arrays of Javascript and PHP i think (my personal though) that the JS one is more fluent and has a good developer experience (but, I repeat, it is a personal opinion).
 
