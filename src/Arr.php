@@ -106,6 +106,7 @@ class Arr implements \Iterator
     public function forEach($callback)
     {
         $x = array_map($callback, $this->arr, array_keys($this->arr));
+
         return self::make($x);
     }
 
@@ -147,6 +148,7 @@ class Arr implements \Iterator
     public function append(...$elements): self
     {
         $this->arr = array_merge($this->arr, ...$elements);
+
         return $this;
     }
 
@@ -200,6 +202,7 @@ class Arr implements \Iterator
                 return false;
             }
         }
+
         return true;
     }
 
@@ -213,6 +216,7 @@ class Arr implements \Iterator
                 return true;
             }
         }
+
         return false;
     }
 
@@ -239,10 +243,11 @@ class Arr implements \Iterator
     {
         $array = array_reduce(
             $this->arr,
-            fn($result, $element) =>
+            fn ($result, $element) =>
                 array_merge($result, is_array($element) ? [...$element] : [$element]),
             []
         );
+
         return Arr::make($array);
     }
 
@@ -260,6 +265,7 @@ class Arr implements \Iterator
                 $array[] = $a;
             }
         }
+
         return Arr::make($array);
     }
 
@@ -293,6 +299,7 @@ class Arr implements \Iterator
     public function reverse($preserve_keys = false): Arr
     {
         $this->arr = array_reverse($this->arr, $preserve_keys);
+
         return Arr::make($this->arr);
     }
 
@@ -302,6 +309,7 @@ class Arr implements \Iterator
     public function sort(): Arr
     {
         sort($this->arr);
+
         return $this;
     }
 
