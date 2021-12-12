@@ -8,7 +8,6 @@ it('iterates', function () {
         expect($element)->toBeGreaterThanOrEqual(100);
         expect($element)->toBeLessThanOrEqual(102);
     }
-    
 });
 
 it('iterates prev and next', function () {
@@ -20,5 +19,4 @@ it('iterates prev and next', function () {
     $arr->prev();
     $element = $arr->current();
     expect($element)->toEqual(101);
-    
 });
