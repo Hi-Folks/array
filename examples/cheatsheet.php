@@ -112,6 +112,11 @@ print_result($arr->length());
 $isArray = Arr::isArray(['Jan', 'Feb', 'March', 'April', 'May']);
 print_result($isArray);
 
+$arr = Arr::fromFunction(fn () => random_int(0, 10), 5);
+print_result($arr);
+
+$arr = Arr::fromValue(0, 3);
+print_result($arr);
 
 /**
  * Print a line for string, integer, array, boolean.

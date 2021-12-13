@@ -6,6 +6,31 @@ it('is Array', function () {
     $arr = Arr::make();
     expect($arr->arr())->toBeArray();
 });
+
+it('creates Arr from function', function () {
+    $arr = Arr::fromFunction(fn () => random_int(0, 100), 500);
+    expect($arr->arr())->toBeArray();
+    expect($arr->length())->toEqual(500);
+
+    expect($arr->every(fn ($element) => $element >= 0))->toBeTrue();
+    expect($arr->every(fn ($element) => $element <= 100))->toBeTrue();
+
+    $arr = Arr::fromFunction(fn ($i) => $i, 5000);
+    expect($arr->arr())->toBeArray();
+    expect($arr->length())->toEqual(5000);
+    //print_result($arr);
+
+    expect($arr->every(fn ($element) => $element >= 0))->toBeTrue();
+    expect($arr->every(fn ($element) => $element <= 5000))->toBeTrue();
+});
+
+it('creates Arr from value', function () {
+    $arr = Arr::fromValue(0, 5000);
+    expect($arr->arr())->toBeArray();
+    expect($arr->length())->toEqual(5000);
+    expect($arr->every(fn ($element) => $element === 0))->toBeTrue();
+});
+
 it('is Array empty', function () {
     $arr = Arr::make();
     expect($arr->arr())->toBeArray();

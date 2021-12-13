@@ -16,6 +16,8 @@ I built this class because comparing method functions arrays of Javascript and P
 
 The Arr class provides some methods:
 - make() create array;
+- fromFunction(): create Arr from a function;
+- fromValue(): create Arr from a value;
 - length(): length/size of the array;
 - arr(): returns data with the type PHP array
 - get(): get the element by index
@@ -73,7 +75,12 @@ $arr->push('Folks');
 echo $arr->length();
 // to access to the "native" PHP array:
 print_r($arr->arr());
-
+```
+To create an array with random values:
+```php
+require("./vendor/autoload.php");
+use HiFolks\DataType\Arr;
+$arr = Arr::fromFunction(fn () => random_int(0, 100), 500);
 ```
 
 ## Testing

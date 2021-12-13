@@ -12,6 +12,21 @@ class Arr implements \Iterator
         $this->arr = $arr;
     }
 
+    public static function fromFunction($callable, $count)
+    {
+        $array = [];
+        for ($i = 0; $i < $count; $i++) {
+            $array[$i] = $callable($i);
+        }
+
+        return self::make($array);
+    }
+
+    public static function fromValue($value, $count)
+    {
+        return self::make(array_fill(0, $count, $value));
+    }
+
     public static function make(array $arr = []): self
     {
         return new self($arr);

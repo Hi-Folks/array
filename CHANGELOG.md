@@ -2,7 +2,12 @@
 
 All notable changes to `array` will be documented in this file.
 
-## 0.0.1 - WIP
+## 0.0.2 - WIP
+### Add
+- fromFunction() method for creating new Arr from a assignment function;
+- fromValue() method for creating new Arr from a value;
+
+## 0.0.1 - 2021-12-12
 Initial release with some Arr methods:
 - make() create array;
 - length(): length/size of the array;
