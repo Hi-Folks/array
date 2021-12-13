@@ -186,10 +186,13 @@ it('flats array', function () {
 
 it('flats and maps array', function () {
     $arr = Arr::make([ 1,2,3,4,5,6,7]);
-    ;
+
     $arr2 = $arr->flatMap(fn ($element) => [$element, $element * 2]);
     expect($arr->length())->toEqual(7);
     expect($arr2->length())->toEqual(14);
+    $arr2 = $arr->flatMap(fn ($element) => $element);
+    expect($arr->length())->toEqual(7);
+    expect($arr2->length())->toEqual(7);
 });
 
 it('fills array', function () {
