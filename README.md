@@ -5,6 +5,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hi-folks/array.svg?style=flat-square)](https://packagist.org/packages/hi-folks/array)
 [![Tests](https://github.com/hi-folks/array/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/hi-folks/array/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/hi-folks/array.svg?style=flat-square)](https://packagist.org/packages/hi-folks/array)
+[![Test Coverage](https://github.com/hi-folks/array/actions/workflows/run-tests.yml/badge-coverage.svg?branch=main)](https://packagist.org/packages/hi-folks/array)
 
 **Arr** class is built on top of the PHP array functions.
 
