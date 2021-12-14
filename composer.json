@@ -1,7 +1,7 @@
 {
     "name": "hi-folks/array",
-    "version": "0.0.1",
-    "description": "This is my package array",
+    "version": "0.0.2",
+    "description": "Arr class for managing arrays, built on top of the PHP array functions.",
     "keywords": [
         "Hi-Folks",
         "array"
@@ -34,6 +34,9 @@
         }
     },
     "scripts": {
+        "all": [
+            "@test", "@format"
+        ],
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
         "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"

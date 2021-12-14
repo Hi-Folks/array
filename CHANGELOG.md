@@ -2,7 +2,7 @@
 
 All notable changes to `array` will be documented in this file.
 
-## 0.0.2 - WIP
+## 0.0.2 - 2021-12-14
 ### Add
 - fromFunction() method for creating new Arr from a assignment function;
 - fromValue() method for creating new Arr from a value;
