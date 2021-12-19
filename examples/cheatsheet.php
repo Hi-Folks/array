@@ -118,6 +118,13 @@ print_result($arr);
 $arr = Arr::fromValue(0, 3);
 print_result($arr);
 
+
+$arr = Arr::fromValue(0, 3);
+$arr[0]= 1001;
+$arr[1]= 2002;
+print_result($arr[1] + $arr[0]);
+print_result($arr);
+
 /**
  * Print a line for string, integer, array, boolean.
  */

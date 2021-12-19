@@ -2,7 +2,7 @@
 
 namespace HiFolks\DataType;
 
-class Arr implements \Iterator
+class Arr implements \Iterator, \ArrayAccess
 {
     private array $arr;
     private int $idx;
@@ -55,7 +55,7 @@ class Arr implements \Iterator
      */
     public function get(mixed $index): mixed
     {
-        return $this->arr[$index];
+        return @$this->arr[$index];
     }
 
     /**
@@ -350,5 +350,41 @@ class Arr implements \Iterator
     public static function isArray(mixed $input): bool
     {
         return is_array($input);
+    }
+
+    /**
+     * This method is executed when using isset() or empty()
+     */
+    public function offsetExists(mixed $offset): bool
+    {
+        return array_key_exists($offset, $this->arr);
+    }
+
+    /**
+     * Offset to retrieve
+     */
+    public function offsetGet(mixed $offset): mixed
+    {
+        return $this->get($offset);
+    }
+
+    /**
+     * Offset to set
+     */
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        if (is_null($offset)) {
+            $this->arr[] = $value;
+        } else {
+            $this->arr[$offset] = $value;
+        }
+    }
+
+    /**
+     * This method will not be called when type-casting to (unset)
+     */
+    public function offsetUnset(mixed $offset): void
+    {
+        unset($this->arr[$offset]);
     }
 }
