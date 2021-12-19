@@ -1,6 +1,7 @@
 # Changelog
 
-All notable changes to `array` will be documented in this file.
+## 0.0.3 - 2021-12-19
+- Now, Arr implements "ArrayAccess"
 
 ## 0.0.2 - 2021-12-14
 ### Add
