@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1639463578">
-  <project timestamp="1639463578">
+<coverage generated="1639925407">
+  <project timestamp="1639925407">
     <file name="/home/runner/work/array/array/src/Arr.php">
       <class name="HiFolks\DataType\Arr" namespace="global">
-        <metrics complexity="47" methods="39" coveredmethods="39" conditionals="0" coveredconditionals="0" statements="67" coveredstatements="67" elements="106" coveredelements="106"/>
+        <metrics complexity="52" methods="43" coveredmethods="43" conditionals="0" coveredconditionals="0" statements="75" coveredstatements="75" elements="118" coveredelements="118"/>
       </class>
-      <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="29"/>
-      <line num="12" type="stmt" count="29"/>
-      <line num="13" type="stmt" count="29"/>
+      <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="33"/>
+      <line num="12" type="stmt" count="33"/>
+      <line num="13" type="stmt" count="33"/>
       <line num="15" type="method" name="fromFunction" visibility="public" complexity="2" crap="2" count="1"/>
       <line num="17" type="stmt" count="1"/>
       <line num="18" type="stmt" count="1"/>
@@ -15,16 +15,16 @@
       <line num="22" type="stmt" count="1"/>
       <line num="25" type="method" name="fromValue" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="27" type="stmt" count="1"/>
-      <line num="30" type="method" name="make" visibility="public" complexity="1" crap="1" count="29"/>
-      <line num="32" type="stmt" count="29"/>
-      <line num="35" type="method" name="count" visibility="public" complexity="1" crap="1" count="19"/>
-      <line num="37" type="stmt" count="19"/>
+      <line num="30" type="method" name="make" visibility="public" complexity="1" crap="1" count="33"/>
+      <line num="32" type="stmt" count="33"/>
+      <line num="35" type="method" name="count" visibility="public" complexity="1" crap="1" count="22"/>
+      <line num="37" type="stmt" count="22"/>
       <line num="40" type="method" name="length" visibility="public" complexity="1" crap="1" count="19"/>
       <line num="42" type="stmt" count="19"/>
       <line num="48" type="method" name="arr" visibility="public" complexity="1" crap="1" count="8"/>
       <line num="50" type="stmt" count="8"/>
-      <line num="56" type="method" name="get" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="58" type="stmt" count="3"/>
+      <line num="56" type="method" name="get" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="58" type="stmt" count="7"/>
       <line num="66" type="method" name="current" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="69" type="stmt" count="2"/>
       <line num="77" type="method" name="next" visibility="public" complexity="1" crap="1" count="2"/>
@@ -111,8 +111,20 @@
       <line num="344" type="stmt" count="1"/>
       <line num="350" type="method" name="isArray" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="352" type="stmt" count="1"/>
-      <metrics loc="354" ncloc="250" classes="1" methods="39" coveredmethods="39" conditionals="0" coveredconditionals="0" statements="67" coveredstatements="67" elements="106" coveredelements="106"/>
+      <line num="358" type="method" name="offsetExists" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="360" type="stmt" count="2"/>
+      <line num="366" type="method" name="offsetGet" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="368" type="stmt" count="4"/>
+      <line num="374" type="method" name="offsetSet" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="376" type="stmt" count="3"/>
+      <line num="377" type="stmt" count="1"/>
+      <line num="379" type="stmt" count="3"/>
+      <line num="381" type="stmt" count="3"/>
+      <line num="386" type="method" name="offsetUnset" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="388" type="stmt" count="1"/>
+      <line num="389" type="stmt" count="1"/>
+      <metrics loc="390" ncloc="274" classes="1" methods="43" coveredmethods="43" conditionals="0" coveredconditionals="0" statements="75" coveredstatements="75" elements="118" coveredelements="118"/>
     </file>
-    <metrics files="1" loc="354" ncloc="250" classes="1" methods="39" coveredmethods="39" conditionals="0" coveredconditionals="0" statements="67" coveredstatements="67" elements="106" coveredelements="106"/>
+    <metrics files="1" loc="390" ncloc="274" classes="1" methods="43" coveredmethods="43" conditionals="0" coveredconditionals="0" statements="75" coveredstatements="75" elements="118" coveredelements="118"/>
   </project>
 </coverage>
