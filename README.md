@@ -84,6 +84,20 @@ use HiFolks\DataType\Arr;
 $arr = Arr::fromFunction(fn () => random_int(0, 100), 500);
 ```
 
+You can access to the elements like a native array, but you have also Arr methods:
+```php
+require("./vendor/autoload.php");
+use HiFolks\DataType\Arr;
+$arr = Arr::make();
+$arr[] = "First element";
+$arr[] = "Second element";
+$count = $arr->length();
+// output: 2
+$arr->reverse();
+echo $arr[0];
+// output: Second element
+```
+
 ## Testing
 
 ```bash
