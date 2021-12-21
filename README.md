@@ -29,7 +29,7 @@ The Arr class provides some methods:
 - unshift(): add new element at the start;
 - shift(): remove an element from the start;
 - append(): append arrays to the current one;
-- concat(): return new array joining more arrays;
+- concat(): return new array joining more arrays, Arr objects or scalar variables;
 - join(): joins all elements into a string;
 - slice(): returns a sub array;
 - indexOf(): find the first occurrence;

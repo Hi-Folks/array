@@ -99,7 +99,15 @@ it('concats arrays', function () {
     expect($arr2->length())->toEqual(8);
     expect($arr->length())->toEqual(6);
 });
-
+it('concats more types', function () {
+    $arr = Arr::make([99,98, 97])->concat([1,2,3], [1000,1001]);
+    expect($arr->arr())->toBeArray();
+    expect($arr->length())->toEqual(8);
+    $arr2 = $arr->concat(9, true);
+    expect($arr2->length())->toEqual(10);
+    $arr3 = $arr->concat($arr2);
+    expect($arr3->length())->toEqual(18);
+});
 it('slices arrays', function () {
     $arr = Arr::make([99,98, 97])->append([1,2,3]);
     $arr2 = $arr->slice(1, 2);

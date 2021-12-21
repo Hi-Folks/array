@@ -173,11 +173,34 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * returns new Arr joining more arrays
+     * returns new Arr joining more elements: array, Arr, scalar type
      */
-    public function concat(array ...$elements): Arr
+    public function concat(mixed ...$elements): Arr
     {
-        return Arr::make(array_merge($this->arr, ...$elements));
+        $array = $this->arr;
+        foreach ($elements as $element) {
+            switch (gettype($element)) {
+                case "array":
+                    $array = array_merge($array, $element);
+
+                    break;
+                case "string":
+                case "integer":
+                case "boolean":
+                case "double":
+                    $array = array_merge($array, [$element]);
+
+                    break;
+                case "object":
+                    if (get_class($element) === get_class($this)) {
+                        $array = array_merge($array, $element->arr());
+                    }
+
+                    break;
+            }
+        }
+
+        return Arr::make($array);
     }
 
     /**

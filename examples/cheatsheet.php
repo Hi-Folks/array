@@ -5,8 +5,10 @@ use HiFolks\DataType\Arr;
 
 $arr = Arr::make([1,2,3,4,5,6]);
 
-// Returns new Arr joining 2 arrays together
+// Returns new Arr joining 2 arrays together (the current one and a new one)
 print_result($arr->concat([10,11,12]));
+print_result($arr->concat([10,11,12], 13, [14,15]));
+print_result($arr->concat($arr, $arr));
 
 // Joins all elements into a string separated by separator
 print_result($arr->join());
