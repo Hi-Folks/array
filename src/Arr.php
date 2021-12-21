@@ -22,7 +22,12 @@ class Arr implements \Iterator, \ArrayAccess
         return self::make($array);
     }
 
-    public static function fromValue($value, $count)
+    /**
+     * @param $value
+     * @param $count
+     * @return static
+     */
+    public static function fromValue(mixed $value, int $count): self
     {
         return self::make(array_fill(0, $count, $value));
     }
@@ -168,7 +173,7 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * returns new Arr joinin more arrays
+     * returns new Arr joining more arrays
      */
     public function concat(array ...$elements): Arr
     {
