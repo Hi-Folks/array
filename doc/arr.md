@@ -119,8 +119,51 @@ $fruits->forEach(function ($element, $key) {
     echo $key . " " . $element . PHP_EOL;
 });
 echo PHP_EOL . "--~--" . PHP_EOL;
-
 ```
 
+## Find the index of an element in the array
+To find the index of a element you can use *indexOf()* method:
 
+```php
+use HiFolks\DataType\Arr;
+// Create some fruits
+$fruits = Arr::make(['🥝','🍓','🍋','🥭','🍎','🍌']);
+echo "All fruits:" . $fruits->join(",") . PHP_EOL;
+// All fruits:🥝,🍓,🍋,🥭,🍎,🍌
+// Find the index of an item in the Array
+$pos = $fruits->indexOf('🍎');
+echo "Find 🍎 at position: " . $pos . PHP_EOL;
+// Find 🍎 at position: 4
+```
+
+## Remove an element by index position
+After last example ($pos === 4), you can remove an element with *splice()* method, using as arguments, $pos and the number of element you want to remove.
+In this case, if you want to remove the apple at position 4:
+
+```php
+$removedFruits = $fruits->splice($pos, 1);
+echo "Removed fruits: " . $removedFruits->join(",") . PHP_EOL;
+echo "Remaining fruits:" . $fruits->join(",") . PHP_EOL;
+// Removed fruits: 🍎
+// Remaining fruits:🥝,🍓,🍋,🥭,🍌
+```
+
+## Remove elements from an index position
+If you want to remove elements from position 1:
+```php
+// Remove items from an index position
+$removedFruits = $fruits->splice(1, 10);
+echo "Removed fruits: " . $removedFruits->join(",") . PHP_EOL;
+echo "Remaining fruits:" . $fruits->join(",") . PHP_EOL;
+// Removed fruits: 🍓,🍋,🥭,🍌
+// Remaining fruits:🥝
+```
+
+## Copy an array
+You can use *splice()* method for copying (cloning) an array, with 0 as position and the length of the array as the amount of elements:
+```php
+$some = $removedFruits->slice(0, $removedFruits->length());
+echo "Some Fruits: " . $some->join(",") . PHP_EOL;
+// Some Fruits: 🍓,🍋,🥭,🍌
+```
 
