@@ -2,8 +2,12 @@
 
 namespace HiFolks\DataType;
 
+use HiFolks\DataType\Traits\Calculable;
+
 class Arr implements \Iterator, \ArrayAccess
 {
+    use Calculable;
+
     private array $arr;
     private int $idx;
 
