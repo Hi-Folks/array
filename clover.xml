@@ -1,146 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1640123401">
-  <project timestamp="1640123401">
+<coverage generated="1640552918">
+  <project timestamp="1640552918">
     <file name="/home/runner/work/array/array/src/Arr.php">
       <class name="HiFolks\DataType\Arr" namespace="global">
         <metrics complexity="60" methods="43" coveredmethods="43" conditionals="0" coveredconditionals="0" statements="91" coveredstatements="91" elements="134" coveredelements="134"/>
       </class>
-      <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="34"/>
-      <line num="12" type="stmt" count="34"/>
-      <line num="13" type="stmt" count="34"/>
-      <line num="15" type="method" name="fromFunction" visibility="public" complexity="2" crap="2" count="1"/>
-      <line num="17" type="stmt" count="1"/>
-      <line num="18" type="stmt" count="1"/>
-      <line num="19" type="stmt" count="1"/>
+      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="36"/>
+      <line num="16" type="stmt" count="36"/>
+      <line num="17" type="stmt" count="36"/>
+      <line num="19" type="method" name="fromFunction" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="21" type="stmt" count="1"/>
       <line num="22" type="stmt" count="1"/>
-      <line num="30" type="method" name="fromValue" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="32" type="stmt" count="1"/>
-      <line num="35" type="method" name="make" visibility="public" complexity="1" crap="1" count="34"/>
-      <line num="37" type="stmt" count="34"/>
-      <line num="40" type="method" name="count" visibility="public" complexity="1" crap="1" count="23"/>
-      <line num="42" type="stmt" count="23"/>
-      <line num="45" type="method" name="length" visibility="public" complexity="1" crap="1" count="20"/>
-      <line num="47" type="stmt" count="20"/>
-      <line num="53" type="method" name="arr" visibility="public" complexity="1" crap="1" count="9"/>
-      <line num="55" type="stmt" count="9"/>
-      <line num="61" type="method" name="get" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="63" type="stmt" count="7"/>
-      <line num="71" type="method" name="current" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="74" type="stmt" count="2"/>
-      <line num="82" type="method" name="next" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="85" type="stmt" count="2"/>
-      <line num="86" type="stmt" count="2"/>
-      <line num="88" type="method" name="prev" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="90" type="stmt" count="1"/>
-      <line num="98" type="method" name="key" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="101" type="stmt" count="1"/>
-      <line num="110" type="method" name="valid" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="112" type="stmt" count="1"/>
-      <line num="120" type="method" name="rewind" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="123" type="stmt" count="1"/>
-      <line num="124" type="stmt" count="1"/>
-      <line num="126" type="method" name="forEach" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="128" type="stmt" count="2"/>
-      <line num="130" type="stmt" count="2"/>
-      <line num="136" type="method" name="push" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="138" type="stmt" count="2"/>
-      <line num="144" type="method" name="pop" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="146" type="stmt" count="1"/>
-      <line num="152" type="method" name="unshift" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="154" type="stmt" count="1"/>
-      <line num="160" type="method" name="shift" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="162" type="stmt" count="1"/>
-      <line num="168" type="method" name="append" visibility="public" complexity="1" crap="1" count="5"/>
-      <line num="170" type="stmt" count="5"/>
-      <line num="172" type="stmt" count="5"/>
-      <line num="178" type="method" name="concat" visibility="public" complexity="9" crap="9" count="2"/>
-      <line num="180" type="stmt" count="2"/>
-      <line num="181" type="stmt" count="2"/>
-      <line num="182" type="stmt" count="2"/>
-      <line num="183" type="stmt" count="2"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="26" type="stmt" count="1"/>
+      <line num="34" type="method" name="fromValue" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="36" type="stmt" count="3"/>
+      <line num="39" type="method" name="make" visibility="public" complexity="1" crap="1" count="36"/>
+      <line num="41" type="stmt" count="36"/>
+      <line num="44" type="method" name="count" visibility="public" complexity="1" crap="1" count="24"/>
+      <line num="46" type="stmt" count="24"/>
+      <line num="49" type="method" name="length" visibility="public" complexity="1" crap="1" count="21"/>
+      <line num="51" type="stmt" count="21"/>
+      <line num="57" type="method" name="arr" visibility="public" complexity="1" crap="1" count="9"/>
+      <line num="59" type="stmt" count="9"/>
+      <line num="65" type="method" name="get" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="67" type="stmt" count="7"/>
+      <line num="75" type="method" name="current" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="78" type="stmt" count="2"/>
+      <line num="86" type="method" name="next" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="89" type="stmt" count="2"/>
+      <line num="90" type="stmt" count="2"/>
+      <line num="92" type="method" name="prev" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="94" type="stmt" count="1"/>
+      <line num="102" type="method" name="key" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="105" type="stmt" count="1"/>
+      <line num="114" type="method" name="valid" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="116" type="stmt" count="1"/>
+      <line num="124" type="method" name="rewind" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="127" type="stmt" count="1"/>
+      <line num="128" type="stmt" count="1"/>
+      <line num="130" type="method" name="forEach" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="132" type="stmt" count="2"/>
+      <line num="134" type="stmt" count="2"/>
+      <line num="140" type="method" name="push" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="142" type="stmt" count="2"/>
+      <line num="148" type="method" name="pop" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="150" type="stmt" count="1"/>
+      <line num="156" type="method" name="unshift" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="158" type="stmt" count="1"/>
+      <line num="164" type="method" name="shift" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="166" type="stmt" count="1"/>
+      <line num="172" type="method" name="append" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="174" type="stmt" count="5"/>
+      <line num="176" type="stmt" count="5"/>
+      <line num="182" type="method" name="concat" visibility="public" complexity="9" crap="9" count="2"/>
       <line num="184" type="stmt" count="2"/>
+      <line num="185" type="stmt" count="2"/>
       <line num="186" type="stmt" count="2"/>
-      <line num="187" type="stmt" count="1"/>
-      <line num="188" type="stmt" count="1"/>
-      <line num="189" type="stmt" count="1"/>
-      <line num="190" type="stmt" count="1"/>
+      <line num="187" type="stmt" count="2"/>
+      <line num="188" type="stmt" count="2"/>
+      <line num="190" type="stmt" count="2"/>
       <line num="191" type="stmt" count="1"/>
+      <line num="192" type="stmt" count="1"/>
       <line num="193" type="stmt" count="1"/>
       <line num="194" type="stmt" count="1"/>
       <line num="195" type="stmt" count="1"/>
-      <line num="196" type="stmt" count="1"/>
+      <line num="197" type="stmt" count="1"/>
+      <line num="198" type="stmt" count="1"/>
       <line num="199" type="stmt" count="1"/>
-      <line num="203" type="stmt" count="2"/>
-      <line num="209" type="method" name="join" visibility="public" complexity="1" crap="1" count="5"/>
-      <line num="211" type="stmt" count="5"/>
-      <line num="217" type="method" name="slice" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="219" type="stmt" count="1"/>
-      <line num="225" type="method" name="indexOf" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="227" type="stmt" count="1"/>
-      <line num="233" type="method" name="lastIndexOf" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="235" type="stmt" count="1"/>
-      <line num="241" type="method" name="every" visibility="public" complexity="3" crap="3" count="5"/>
-      <line num="243" type="stmt" count="5"/>
-      <line num="244" type="stmt" count="5"/>
-      <line num="245" type="stmt" count="3"/>
-      <line num="249" type="stmt" count="5"/>
-      <line num="255" type="method" name="some" visibility="public" complexity="3" crap="3" count="1"/>
-      <line num="257" type="stmt" count="1"/>
-      <line num="258" type="stmt" count="1"/>
-      <line num="259" type="stmt" count="1"/>
+      <line num="200" type="stmt" count="1"/>
+      <line num="203" type="stmt" count="1"/>
+      <line num="207" type="stmt" count="2"/>
+      <line num="213" type="method" name="join" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="215" type="stmt" count="5"/>
+      <line num="221" type="method" name="slice" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="223" type="stmt" count="1"/>
+      <line num="229" type="method" name="indexOf" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="231" type="stmt" count="1"/>
+      <line num="237" type="method" name="lastIndexOf" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="239" type="stmt" count="1"/>
+      <line num="245" type="method" name="every" visibility="public" complexity="3" crap="3" count="5"/>
+      <line num="247" type="stmt" count="5"/>
+      <line num="248" type="stmt" count="5"/>
+      <line num="249" type="stmt" count="3"/>
+      <line num="253" type="stmt" count="5"/>
+      <line num="259" type="method" name="some" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="261" type="stmt" count="1"/>
+      <line num="262" type="stmt" count="1"/>
       <line num="263" type="stmt" count="1"/>
-      <line num="269" type="method" name="filter" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="271" type="stmt" count="2"/>
-      <line num="277" type="method" name="map" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="279" type="stmt" count="1"/>
-      <line num="285" type="method" name="flat" visibility="public" complexity="2" crap="2" count="1"/>
-      <line num="287" type="stmt" count="1"/>
-      <line num="288" type="stmt" count="1"/>
-      <line num="289" type="stmt" count="1"/>
-      <line num="290" type="stmt" count="1"/>
+      <line num="267" type="stmt" count="1"/>
+      <line num="273" type="method" name="filter" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="275" type="stmt" count="2"/>
+      <line num="281" type="method" name="map" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="283" type="stmt" count="1"/>
+      <line num="289" type="method" name="flat" visibility="public" complexity="2" crap="2" count="1"/>
       <line num="291" type="stmt" count="1"/>
+      <line num="292" type="stmt" count="1"/>
+      <line num="293" type="stmt" count="1"/>
       <line num="294" type="stmt" count="1"/>
-      <line num="300" type="method" name="flatMap" visibility="public" complexity="3" crap="3" count="1"/>
-      <line num="302" type="stmt" count="1"/>
-      <line num="303" type="stmt" count="1"/>
-      <line num="304" type="stmt" count="1"/>
-      <line num="305" type="stmt" count="1"/>
+      <line num="295" type="stmt" count="1"/>
+      <line num="298" type="stmt" count="1"/>
+      <line num="304" type="method" name="flatMap" visibility="public" complexity="3" crap="3" count="1"/>
       <line num="306" type="stmt" count="1"/>
+      <line num="307" type="stmt" count="1"/>
       <line num="308" type="stmt" count="1"/>
+      <line num="309" type="stmt" count="1"/>
+      <line num="310" type="stmt" count="1"/>
       <line num="312" type="stmt" count="1"/>
-      <line num="318" type="method" name="fill" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="320" type="stmt" count="1"/>
-      <line num="321" type="stmt" count="1"/>
-      <line num="326" type="method" name="reduce" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="328" type="stmt" count="1"/>
-      <line num="334" type="method" name="reduceRight" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="336" type="stmt" count="1"/>
-      <line num="342" type="method" name="reverse" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="344" type="stmt" count="1"/>
-      <line num="346" type="stmt" count="1"/>
-      <line num="352" type="method" name="sort" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="354" type="stmt" count="1"/>
-      <line num="356" type="stmt" count="1"/>
-      <line num="362" type="method" name="splice" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="364" type="stmt" count="1"/>
-      <line num="370" type="method" name="toString" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="372" type="stmt" count="1"/>
-      <line num="378" type="method" name="isArray" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="380" type="stmt" count="1"/>
-      <line num="386" type="method" name="offsetExists" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="388" type="stmt" count="2"/>
-      <line num="394" type="method" name="offsetGet" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="396" type="stmt" count="4"/>
-      <line num="402" type="method" name="offsetSet" visibility="public" complexity="2" crap="2" count="3"/>
-      <line num="404" type="stmt" count="3"/>
-      <line num="405" type="stmt" count="1"/>
-      <line num="407" type="stmt" count="3"/>
-      <line num="409" type="stmt" count="3"/>
-      <line num="414" type="method" name="offsetUnset" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="416" type="stmt" count="1"/>
-      <line num="417" type="stmt" count="1"/>
-      <metrics loc="418" ncloc="297" classes="1" methods="43" coveredmethods="43" conditionals="0" coveredconditionals="0" statements="91" coveredstatements="91" elements="134" coveredelements="134"/>
+      <line num="316" type="stmt" count="1"/>
+      <line num="322" type="method" name="fill" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="324" type="stmt" count="1"/>
+      <line num="325" type="stmt" count="1"/>
+      <line num="330" type="method" name="reduce" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="332" type="stmt" count="1"/>
+      <line num="338" type="method" name="reduceRight" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="340" type="stmt" count="1"/>
+      <line num="346" type="method" name="reverse" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="348" type="stmt" count="1"/>
+      <line num="350" type="stmt" count="1"/>
+      <line num="356" type="method" name="sort" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="358" type="stmt" count="1"/>
+      <line num="360" type="stmt" count="1"/>
+      <line num="366" type="method" name="splice" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="368" type="stmt" count="1"/>
+      <line num="374" type="method" name="toString" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="376" type="stmt" count="1"/>
+      <line num="382" type="method" name="isArray" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="384" type="stmt" count="1"/>
+      <line num="390" type="method" name="offsetExists" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="392" type="stmt" count="2"/>
+      <line num="398" type="method" name="offsetGet" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="400" type="stmt" count="4"/>
+      <line num="406" type="method" name="offsetSet" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="408" type="stmt" count="3"/>
+      <line num="409" type="stmt" count="1"/>
+      <line num="411" type="stmt" count="3"/>
+      <line num="413" type="stmt" count="3"/>
+      <line num="418" type="method" name="offsetUnset" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="420" type="stmt" count="1"/>
+      <line num="421" type="stmt" count="1"/>
+      <metrics loc="422" ncloc="301" classes="1" methods="43" coveredmethods="43" conditionals="0" coveredconditionals="0" statements="91" coveredstatements="91" elements="134" coveredelements="134"/>
     </file>
-    <metrics files="1" loc="418" ncloc="297" classes="1" methods="43" coveredmethods="43" conditionals="0" coveredconditionals="0" statements="91" coveredstatements="91" elements="134" coveredelements="134"/>
+    <file name="/home/runner/work/array/array/src/Traits/Calculable.php">
+      <class name="HiFolks\DataType\Traits\Calculable" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+      </class>
+      <line num="11" type="method" name="sum" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="13" type="stmt" count="2"/>
+      <line num="20" type="method" name="avg" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="26" type="stmt" count="1"/>
+      <metrics loc="28" ncloc="20" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+    </file>
+    <metrics files="2" loc="450" ncloc="321" classes="2" methods="45" coveredmethods="45" conditionals="0" coveredconditionals="0" statements="95" coveredstatements="95" elements="140" coveredelements="140"/>
   </project>
 </coverage>
