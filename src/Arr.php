@@ -224,7 +224,7 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * Returns index of first occurence of element in arr
+     * Returns index of first occurrence of element in arr
      */
     public function indexOf($searchElement): string|int|bool
     {
