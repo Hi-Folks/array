@@ -2,25 +2,26 @@
 Arr is a class for managing PHP arrays, so you can use methods to perform some common operations.
 
 ## Description
-Array in PHP is a basic but powerful type for managing list of elements.
-Arrays in PHP are list of map key => value.
- Usually key are integer index, from 0.
+Array in PHP is a basic but powerful data structure for managing list of elements.
+Arrays in PHP are list of map (pair of key => value).
+ Usually keys are integer that start from 0 (first element has position/index 0, the second one has position/index 1 etc... ).
 In this case arrays are treated like an indexed array.
 But keys could be "named" (integer, string...). In this case, arrays are treated like an associative array.
+For example:
+- ['🍎', '🍌'] : is an array with 2 elements the first one with index 0 and the second one with index 1;
+- ['apple' => '🍎', 'banana' => '🍌']: is an array with 2 element with the same **values** of the previous one, but different indexes. In this case the index 'apple' is related with value '🍎', the index 'banana' is related with value '🍌'.
 
 ## Create an array
-Create an array with static method *make()* and then you can access to all Arr methods, for example *length()*:
+You can create an array (using Arr class) with static method *make()* and then you can access to all *Arr object*  methods, for example *length()*:
 ```php
 use HiFolks\DataType\Arr;
-
 $fruits = Arr::make(['🍎', '🍌']);
 echo $fruits->length();
 // Output: 2
 ```
 
-## Access an Array item
-Access an array item using the index position.
-Even if you are using Arr class, you can access to the element with square brackets [] like with PHP standard array:
+## Access an array element using the index position
+Even if you are using *Arr* class, you can access to the element with square brackets [] like with PHP standard array:
 - $fruits[0];
 - $fruits[ $fruits->length() - 1];
 
@@ -39,7 +40,8 @@ echo PHP_EOL . "--~--" . PHP_EOL;
 ```
 
 ## Loop over an array
-If you need to walk through an array you can use forEach() method. You can specify the function as argument of *forEach()* in order to manage each single element (with key)
+If you need to walk through an array, you can use *forEach()* method.
+You can specify the function as argument of *forEach()* method in order to manage each single element (with key)
 ```php
 use HiFolks\DataType\Arr;
 // Create an array
@@ -52,13 +54,14 @@ $fruits = Arr::make([
     'banana' => '🍌']);
 // Loop over an array
 $fruits->forEach(function ($element, $key) {
-    echo $key . " " . $element . PHP_EOL;
+    echo $key . " " . $element . "; ";
 });
+// kiwi 🥝; fragola 🍓; lemon 🍋; mango 🥭; apple 🍎; banana 🍌;
 ```
 
-## Add an element
+## Add an element to the end
 
-Add an item **to the end** of an array, with *push()* method:
+Add an item **to the end** of an array with *push()* method:
 
 ```php
 use HiFolks\DataType\Arr;
@@ -73,7 +76,7 @@ $fruits->forEach(function ($element, $key) {
 echo PHP_EOL . "--~--" . PHP_EOL;
 ```
 ## Remove an element from the end of array
-Get and remove element at the end of the array with pop() method:
+Get and remove element **from the end** of the array with *pop()* method:
 
 ```php
 use HiFolks\DataType\Arr;
@@ -91,7 +94,7 @@ echo "Second last fruit: " . $secondLast . PHP_EOL; // apple
 ```
 
 ## Remove an element from the beginning of the array
-Get and remove the first element from the beginning of the array with *shift()* method:
+Get and remove the first element **from the beginning** of the array with *shift()* method:
 
 ```php
 use HiFolks\DataType\Arr;
@@ -121,8 +124,17 @@ $fruits->forEach(function ($element, $key) {
 echo PHP_EOL . "--~--" . PHP_EOL;
 ```
 
+## Recap add and remove elements
+
+| Method    | Operation          | Where              | Description                                                          |
+|-----------|--------------------|--------------------|----------------------------------------------------------------------|
+| push()    | **add** element    | to the **end**     | Add an item **to the end** of an array                               |
+| pop()     | **remove** element | from the **end**   | Get and remove element **from the end** of the array                 |
+| shift()   | **remove** element | from the **begin** | Get and remove the first element **from the beginning** of the array |
+| unshift() | **add** element    | to the **begin**   | **Add** a new element **to the beginning** of the array              |
+
 ## Find the index of an element in the array
-To find the index of a element you can use *indexOf()* method:
+To find the index of an element you can use *indexOf()* method:
 
 ```php
 use HiFolks\DataType\Arr;
@@ -137,8 +149,8 @@ echo "Find 🍎 at position: " . $pos . PHP_EOL;
 ```
 
 ## Remove an element by index position
-After last example ($pos === 4), you can remove an element with *splice()* method, using as arguments, $pos and the number of element you want to remove.
-In this case, if you want to remove the apple at position 4:
+After last example ($pos === 4), you can remove an element with *splice()* method, using *$pos* and the amount of elements as arguments.
+In this case, if you want to remove just one fruit (the apple) at position 4:
 
 ```php
 $removedFruits = $fruits->splice($pos, 1);
@@ -149,7 +161,7 @@ echo "Remaining fruits:" . $fruits->join(",") . PHP_EOL;
 ```
 
 ## Remove elements from an index position
-If you want to remove elements from position 1:
+If you want to remove more elements (for example 10) from position 1:
 ```php
 // Remove items from an index position
 $removedFruits = $fruits->splice(1, 10);
