@@ -270,3 +270,13 @@ it('checks is array', function () {
     $isArray = Arr::isArray(0);
     expect($isArray)->toEqual(false);
 });
+
+it('implements of() method', function () {
+    $arr = Arr::of('Jan', 'Feb', 'March', 'April', 'May');
+    expect($arr->length())->toEqual(5);
+    expect($arr[4])->toEqual('May');
+
+    $arr = Arr::of(7);
+    expect($arr->length())->toEqual(1);
+    expect($arr[0])->toEqual(7);
+});
