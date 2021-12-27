@@ -2,6 +2,7 @@
 
 ## 0.0.4 - WIP
 ### Add
+- *of()* static method, for creating Arr instance from parameters
 - *sum()* method;
 - *avg()* method;
 - *doc/arr.md*: class usage documentation.

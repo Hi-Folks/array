@@ -179,3 +179,17 @@ echo "Some Fruits: " . $some->join(",") . PHP_EOL;
 // Some Fruits: 🍓,🍋,🥭,🍌
 ```
 
+
+## Create array from arguments
+The Arr::of() method creates a new Arr instance from a variable number of arguments, regardless of number or type of the arguments.
+
+```php
+use HiFolks\DataType\Arr;
+// Create some fruits
+$fruits = Arr::of('🥝','🍓','🍋','🥭','🍎','🍌');
+echo $arr->length();
+// 6
+echo $arr[4];
+// 🍎
+```
+

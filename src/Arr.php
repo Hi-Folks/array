@@ -41,6 +41,17 @@ class Arr implements \Iterator, \ArrayAccess
         return new self($arr);
     }
 
+    /**
+     * Creates a new Arr instance from a variable number of arguments,
+     * regardless of number or type of the arguments.
+     * @param ...$elements
+     * @return Arr object
+     */
+    public static function of(...$elements): self
+    {
+        return self::make($elements);
+    }
+
     public function count(): int
     {
         return count($this->arr);
