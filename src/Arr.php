@@ -74,7 +74,6 @@ class Arr implements \Iterator, \ArrayAccess
      */
     public function current(): mixed
     {
-        // TODO: Implement current() method.
         return current($this->arr);
     }
 
@@ -85,7 +84,6 @@ class Arr implements \Iterator, \ArrayAccess
      */
     public function next(): void
     {
-        // TODO: Implement next() method.
         next($this->arr);
     }
 
@@ -101,7 +99,6 @@ class Arr implements \Iterator, \ArrayAccess
      */
     public function key(): mixed
     {
-        // TODO: Implement key() method.
         return key($this->arr);
     }
 
@@ -123,7 +120,6 @@ class Arr implements \Iterator, \ArrayAccess
      */
     public function rewind(): void
     {
-        // TODO: Implement rewind() method.
         reset($this->arr);
     }
 
