@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.0.4 - WIP
+### Add
+- *sum()* method;
+- *avg()* method;
+- *doc/arr.md*: class usage documentation.
+
+### Improve
+- Improve concat() method, now accept array and scalar values.
+
 ## 0.0.3 - 2021-12-19
 - Now, Arr implements "ArrayAccess"
 
