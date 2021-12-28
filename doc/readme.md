@@ -1,0 +1,40 @@
+# Methods to implement
+
+Reference: [List of JS Array Object methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+
+- [ ] at()
+- [ ] concat()
+- [ ] copyWithin()
+- [ ] entries()
+- [ ] every()
+- [ ] fill()
+- [ ] filter()
+- [ ] find()
+- [ ] findIndex()
+- [ ] flat()
+- [ ] flatMap()
+- [ ] forEach()
+- [ ] from(), static
+- [ ] includes()
+- [ ] indexOf()
+- [ ] isArray(), static
+- [ ] join()
+- [ ] keys()
+- [ ] lastIndexOf()
+- [ ] map()
+- [ ] of(), static
+- [ ] pop()
+- [ ] reduce()
+- [ ] reduceRight()
+- [ ] reverse()
+- [ ] shift()
+- [ ] slice()
+- [ ] some()
+- [ ] sort()
+- [ ] splice()
+- [ ] toLocaleString()
+- [ ] toSource()
+- [ ] toString()
+- [ ] unshift()
+- [ ] values()
+
