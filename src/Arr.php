@@ -217,7 +217,11 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * returns new Arr joining more elements: array, Arr, scalar type
+     * Returns new Arr joining more elements: array, Arr, scalar type.
+     * This method does not change the existing Arr object,
+     * but instead returns a new Arr object
+     * @param ...$elements
+     * @return Arr object
      */
     public function concat(mixed ...$elements): Arr
     {
@@ -280,7 +284,9 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * Returns true if all elements in arr pass the test in fn
+     * Returns true if all elements in Arr pass the test in fn.
+     * @param $callback
+     * @return bool
      */
     public function every($callback)
     {
@@ -357,11 +363,20 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * Changes all elements in range to a the specified value
+     * Changes all elements in range from $start for $count, to the specified value
+     * @param mixed $value the value to fill the array with
+     * @param int $start start index (from 0)
+     * @param int|null $end end index (default, the end of array)
+     * @return void
      */
-    public function fill($value, $start, $count)
+    public function fill(mixed $value, int $start = 0, int $end = null)
     {
-        $this->arr = array_replace($this->arr, array_fill($start, $count, $value));
+        if (is_null($end)) {
+            $end = $this->length() - 1;
+        }
+        for ($i = $start; $i <= $end; $i++) {
+            $this->arr[$i] = $value;
+        }
     }
 
     /**

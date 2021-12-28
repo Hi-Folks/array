@@ -208,8 +208,20 @@ it('fills array', function () {
     expect($arr->length())->toEqual(7);
     $arr->fill(0, 0, 3);
     expect($arr->length())->toEqual(7);
+    expect($arr[0])->toEqual(0);
+    expect($arr[1])->toEqual(0);
+    expect($arr[2])->toEqual(0);
+    expect($arr[3])->toEqual(0);
+    expect($arr[4])->toEqual(5);
+    expect($arr[5])->toEqual(6);
+    expect($arr[6])->toEqual(7);
     $arr2 = $arr->filter(fn ($element) => $element == 0);
-    expect($arr2->length())->toEqual(3);
+    expect($arr2->length())->toEqual(4);
+    $arr = Arr::make([ 1,2,3,4,5,6,7]);
+    $arr->fill(0);
+    $allAreZeros = $arr->every(fn ($element) => $element === 0);
+    expect($arr->length())->toEqual(7);
+    expect($allAreZeros)->toBeTrue();
 });
 
 it('reduces Arr', function () {
