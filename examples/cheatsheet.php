@@ -143,6 +143,17 @@ $arrayOfKeys = $fruits->keys();
 print_result($arrayOfKeys);
 $arrOfKeys = $fruits->keys(true);
 print_result($arrOfKeys->join());
+
+// get element by index, via at() method
+$arr = Arr::make([1001,1002,1003,1004,1005,1006]);
+print_result($arr->at(1));
+// 1002
+print_result($arr->at(-2));
+// 1005
+print_result($arr->at(20000));
+// NULL
+
+
 /**
  * Print a line for string, integer, array, boolean.
  */

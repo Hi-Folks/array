@@ -75,7 +75,24 @@ class Arr implements \Iterator, \ArrayAccess
      */
     public function get(mixed $index): mixed
     {
-        return @$this->arr[$index];
+        return $this->arr[$index] ?? null;
+    }
+
+    /**
+     * Takes an integer value $index and returns the item at that index,
+     * allowing for positive and negative integers.
+     * Negative integers count back from the last item in the array.
+     * For lists, map, associative array, uses get() method.
+     * @param int $index the index of the element of the array  (negative cont back from last item
+     * @return mixed item value (null if $index is not existent
+     */
+    public function at(int $index): mixed
+    {
+        if ($index < 0) {
+            $index = $this->length() + $index;
+        }
+
+        return $this->get($index);
     }
 
     /**
