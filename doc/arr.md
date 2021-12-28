@@ -193,3 +193,22 @@ echo $arr[4];
 // 🍎
 ```
 
+## Extract keys
+The keys() method returns a new array [] or Arr object that contains the keys for each index in the array.
+
+```php
+use HiFolks\DataType\Arr;
+// Create an array
+$fruits = Arr::make([
+    'kiwi' =>'🥝',
+    'fragola' => '🍓',
+    'lemon' => '🍋',
+    'mango' => '🥭',
+    'apple' => '🍎',
+    'banana' => '🍌']);
+// keys as array
+$arrayOfKeys = $fruits->keys();
+$arrOfKeys = $fruits->keys(true);
+echo $arrOfKeys->join();
+```
+

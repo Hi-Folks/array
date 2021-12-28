@@ -280,3 +280,27 @@ it('implements of() method', function () {
     expect($arr->length())->toEqual(1);
     expect($arr[0])->toEqual(7);
 });
+
+it('implements keys() method', function () {
+    $arr = Arr::make(
+        [
+            '01' => 'Jan', '02' => 'Feb', '03' => 'March', '04' => 'April',
+            '05' => 'May', '06' => 'Jun', '07' => 'Jul', '08' => 'Aug',
+            '09' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec',
+        ]
+    );
+    expect($arr->length())->toEqual(12);
+    $arrKeys = $arr->keys(true);
+    expect($arrKeys)->toBeObject();
+    expect($arrKeys->length())->toEqual(12);
+    expect($arrKeys[4])->toEqual("05");
+
+    $keys = $arr->keys();
+    expect($keys)->toBeArray();
+    expect(count($keys))->toEqual(12);
+    expect($keys[4])->toEqual("05");
+
+    foreach ($arrKeys as $key => $value) {
+        expect($arrKeys[$key])->toEqual($keys[$key]);
+    }
+});

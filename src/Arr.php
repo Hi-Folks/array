@@ -142,6 +142,22 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
+     * Returns a new array [] or a new Arr object that contains the keys
+     * for each index in the Arr object
+     * It returns Arr or [] depending on $returnArrClass value
+     * @param bool $returnArrClass true if you need Arr object
+     * @return int[]|string[]|Arr
+     */
+    public function keys($returnArrClass = false): array|Arr
+    {
+        if ($returnArrClass) {
+            return Arr::make(array_keys($this->arr));
+        }
+
+        return array_keys($this->arr);
+    }
+
+    /**
      * Add an $element to the end of an array and returns new length
      */
     public function push($element): int

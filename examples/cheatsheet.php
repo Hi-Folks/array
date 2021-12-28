@@ -114,12 +114,13 @@ print_result($arr->length());
 $isArray = Arr::isArray(['Jan', 'Feb', 'March', 'April', 'May']);
 print_result($isArray);
 
+// Create Arr from a function
 $arr = Arr::fromFunction(fn () => random_int(0, 10), 5);
 print_result($arr);
 
+// Create Arr with a value
 $arr = Arr::fromValue(0, 3);
 print_result($arr);
-
 
 $arr = Arr::fromValue(0, 3);
 $arr[0]= 1001;
@@ -127,6 +128,21 @@ $arr[1]= 2002;
 print_result($arr[1] + $arr[0]);
 print_result($arr);
 
+
+
+// Extract keys with keys()
+$fruits = Arr::make([
+    'kiwi' =>'🥝',
+    'fragola' => '🍓',
+    'lemon' => '🍋',
+    'mango' => '🥭',
+    'apple' => '🍎',
+    'banana' => '🍌']);
+// keys as array
+$arrayOfKeys = $fruits->keys();
+print_result($arrayOfKeys);
+$arrOfKeys = $fruits->keys(true);
+print_result($arrOfKeys->join());
 /**
  * Print a line for string, integer, array, boolean.
  */
