@@ -4,6 +4,7 @@
 ### Add
 - *of()* static method, for creating Arr instance from parameters;
 - *keys()* method for extracting keys from Arr;
+- *at()* method for returning the item at that integer index;
 - *sum()* method;
 - *avg()* method;
 - *doc/arr.md*: class usage documentation.

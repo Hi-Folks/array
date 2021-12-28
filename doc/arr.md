@@ -212,3 +212,18 @@ $arrOfKeys = $fruits->keys(true);
 echo $arrOfKeys->join();
 ```
 
+## Get element by index via at() method
+Takes an integer value $index and returns the item at that index,  allowing for positive and negative integers.
+Negative integers count back from the last item in the array.
+For lists, map, associative array, uses get() method.
+
+```php
+use HiFolks\DataType\Arr;
+$arr = Arr::make([1001,1002,1003,1004,1005,1006]);
+echo $arr->at(1);
+// 1002
+echo $arr->at(-2);
+// 1005
+var_dump($arr->at(20000));
+// NULL
+```
