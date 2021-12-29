@@ -30,11 +30,11 @@ Reference: [List of JS Array Object methods](https://developer.mozilla.org/en-US
 - [x] shift()
 - [x] slice()
 - [x] some()
-- [ ] sort()
-- [ ] splice()
-- [ ] toLocaleString()
-- [ ] toSource()
-- [ ] toString()
-- [ ] unshift()
-- [ ] values()
+- [x] sort()
+- [x] splice()
+- [ ] TODO toLocaleString()
+- [ ] toSource() it is deprecated in JS, so we don't need to implement it
+- [x] toString()
+- [x] unshift()
+- [ ] TODO values()
 
