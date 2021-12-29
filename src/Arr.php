@@ -199,10 +199,12 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Add element to start of Arr and return new length
+     * @param mixed $element the elements to add to the front of the array
+     * @return int the new length of the array upon which the method was called.
      */
-    public function unshift($element): int
+    public function unshift(mixed ...$element): int
     {
-        return array_unshift($this->arr, $element);
+        return array_unshift($this->arr, ...$element);
     }
 
     /**
@@ -272,11 +274,27 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * Returns a section of Arr from $start to $end
+     * Returns as new Arr instance of a portion of an array into a new Arr object
+     * selected from $start to $end ($end not included)
+     * where start and end represent the index of items in that array.
+     * The original array will not be modified
+     * @param int $start start index (array start from 0, start included)
+     * @param int $end end index (array starts from 0, end not included)
+     * @return Arr
      */
-    public function slice($start, $end): Arr
+    public function slice(int $start, int $end = null): Arr
     {
-        return Arr::make(array_slice($this->arr, $start, $end));
+        if (is_null($end)) {
+            $end = $this->length();
+        }
+        if ($end < 0) {
+            $end = $this->length() + $end;
+        }
+        if ($start < 0) {
+            $start = $this->length() + $start;
+        }
+
+        return Arr::make(array_slice($this->arr, $start, $end - $start));
     }
 
     /**
@@ -317,9 +335,18 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * Returns true if all elements in arr pass the test in fn
+     * Returns true if all elements in arr pass the test in fn.
+     * Tests whether at least one element in the array passes the test
+     * implemented by the provided function.
+     * It returns true if, in the array, it finds an element for which
+     * the provided function returns true;
+     * otherwise it returns false.
+     * It doesn't modify the array.
+     * @param callable $callback
+     * @return bool
+     *
      */
-    public function some($callback)
+    public function some(callable $callback): bool
     {
         foreach ($this->arr as $key => $element) {
             if ($callback($element, $key)) {
@@ -444,7 +471,9 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * Sort the elements of arr
+     * Sorts the elements of an Arr object in place and returns the sorted Arr object.
+     * The default sort order is ascending
+     * @return Arr
      */
     public function sort(): Arr
     {
@@ -455,14 +484,22 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Changes content of arr removing, replacing and adding elements
+     * Changes the contents of an array by removing or replacing existing elements
+     * and/or adding new elements in place.
+     * To access part of an array without modifying it, see slice().
+     * @param int $start the index at which to start changing the array
+     * @param int|null $deleteCount an integer indicating the number of elements in the array to remove from $start
+     * @param mixed $newElements The elements to add to the array, beginning from $start
+     * @return Arr an array containing the deleted elements
      */
-    public function splice($start, $deleteCount = null, $newElements = []): Arr
+    public function splice(int $start, int $deleteCount = null, mixed $newElements = []): Arr
     {
         return Arr::make(array_splice($this->arr, $start, $deleteCount, $newElements));
     }
 
     /**
      * Returns a string representing arr its elements (same as arr.join(','))
+     * @return string
      */
     public function toString(): string
     {
