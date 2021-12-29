@@ -358,6 +358,22 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
+     * Determines whether the array includes a certain value $element among its entries,
+     * returning true or false as appropriate
+     * @param mixed $element
+     * @param int|null $fromIndex
+     * @return bool
+     */
+    public function includes(mixed $element, int $fromIndex = null): bool
+    {
+        if (is_null($fromIndex)) {
+            return in_array($element, $this->arr, true);
+        }
+
+        return in_array($element, array_slice($this->arr, $fromIndex), true);
+    }
+
+    /**
      * Returns new Arr with elements of arr passing the filtering function fn
      * @param $callback the function for filtering
      * @return Arr

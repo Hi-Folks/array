@@ -410,3 +410,43 @@ it('test keys() method', function () {
     expect($arr->at(-2))->toEqual(130);
     expect($arr->at(100))->toBeNull();
 });
+
+it('includes element', function () {
+    $arr = Arr::make(
+        [1, 2, 3]
+    );
+    expect($arr->length())->toEqual(3);
+    expect($arr->includes(2))->toBeTrue();
+    expect($arr->includes('2'))->toBeFalse();
+
+    $arr = Arr::make(
+        ['cat', 'dog', 'bat']
+    );
+    expect($arr->length())->toEqual(3);
+    expect($arr->includes('cat'))->toBeTrue();
+    expect($arr->includes('Cat'))->toBeFalse();
+    expect($arr->includes('at'))->toBeFalse();
+});
+
+it('includes element from index', function () {
+    $arr = Arr::make(
+        [1, 2, 3]
+    );
+    expect($arr->length())->toEqual(3);
+    expect($arr->includes(2))->toBeTrue();
+    expect($arr->includes(4))->toBeFalse();
+    expect($arr->includes(3, 3))->toBeFalse();
+    expect($arr->includes(3, 2))->toBeTrue();
+    expect($arr->includes(3, -1))->toBeTrue();
+
+    $arr = Arr::make(
+        ['a', 'b', 'c']
+    );
+    expect($arr->includes('c', 3))->toBeFalse();
+    expect($arr->includes('c', 100))->toBeFalse();
+
+    expect($arr->includes('a', -100))->toBeTrue();
+    expect($arr->includes('b', -100))->toBeTrue();
+    expect($arr->includes('c', -100))->toBeTrue();
+    expect($arr->includes('a', -2))->toBeFalse();
+});

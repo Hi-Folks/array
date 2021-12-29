@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.5 - WIP
+### Add
+- *includes()* method
+- 
 ## 0.0.4 - 2021-12-28
 ### Add
 - *of()* static method, for creating Arr instance from parameters;
