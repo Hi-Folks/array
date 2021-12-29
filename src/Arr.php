@@ -151,7 +151,12 @@ class Arr implements \Iterator, \ArrayAccess
         reset($this->arr);
     }
 
-    public function forEach($callback)
+    /**
+     * It executes a provided function ($callback) once for each element.
+     * @param callable $callback
+     * @return Arr
+     */
+    public function forEach(callable $callback): self
     {
         $x = array_map($callback, $this->arr, array_keys($this->arr));
 
@@ -183,7 +188,9 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * Remove an item from the end of an Array
+     * It removes the last element from an array and returns that element.
+     * This method changes the length of the Arr
+     * @return mixed the element removed
      */
     public function pop(): mixed
     {
@@ -199,7 +206,10 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * Remove an item from the beginning of an Array
+     * Removes the first element from an array and
+     * returns that removed element.
+     * This method changes the length of the array.
+     * @return mixed the removed element
      */
     public function shift(): mixed
     {
@@ -253,6 +263,8 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Joins all elements into a string, separated by $separator
+     * @param string $separator the separator, could be also a string with more than 1 char
+     * @return string
      */
     public function join(string $separator = ","): string
     {
@@ -269,16 +281,21 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Returns index of first occurrence of element in arr
+     * @param mixed $searchElement the element to search
+     * @return string|int|bool the index of element found. If it is not found, false is returned
      */
-    public function indexOf($searchElement): string|int|bool
+    public function indexOf(mixed $searchElement): string|int|bool
     {
         return array_search($searchElement, $this->arr);
     }
 
     /**
-     * Returns index of last occurence of element in arr
+     * Returns index of last occurrence of element in Arr
+     * @param mixed $searchElement the element to search
+     * @return string|int|bool the index of element found. If it is not found, false is returned
+
      */
-    public function lastIndexOf($searchElement): string|int|bool
+    public function lastIndexOf(mixed $searchElement): string|int|bool
     {
         return array_search($searchElement, array_reverse($this->arr, true));
     }
@@ -315,6 +332,8 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Returns new Arr with elements of arr passing the filtering function fn
+     * @param $callback the function for filtering
+     * @return Arr
      */
     public function filter($callback): Arr
     {
@@ -322,17 +341,21 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * Returns new array with the results of running fn on every element
+     * Returns a new Arr populated with the results of
+     * calling a provided function on every element in the calling array
+     * @param callable $callback
+     * @return Arr
      */
-    public function map($callback)
+    public function map(callable $callback): Arr
     {
         return $this->forEach($callback);
     }
 
     /**
-     * Returns a flatten array with subarrays concatenated
+     * Returns a new Arr object as flatten array with subarrays concatenated
+     * @return Arr
      */
-    public function flat()
+    public function flat(): self
     {
         $array = array_reduce(
             $this->arr,
@@ -346,8 +369,9 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * The flatMap method is identical to a map followed by a call to flat of depth 1
+     * @param callable $callback
      */
-    public function flatMap($callback)
+    public function flatMap(callable $callback): self
     {
         $array = [];
         foreach ($this->arr as $key => $element) {
@@ -380,25 +404,39 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * Returns a single value which is the function's accumulated result L2R
+     * Executes a user-supplied $callback callback function on each element of the array,
+     * in order, passing in the return value from the calculation on the preceding element.
+     * The final result of running the reducer across all elements of the array
+     * is a single value.
+     * @param callable $callback
+     * @param mixed $initialValue
+     * @return mixed the result
      */
-    public function reduce($callback, $initialValue = 0): mixed
+    public function reduce(callable $callback, mixed $initialValue = 0): mixed
     {
         return array_reduce($this->arr, $callback, $initialValue);
     }
 
     /**
-     * Returns a single value which is the function's accumulated result R2L
+     * Applies a function against an accumulator and each value of the array
+     * (from right-to-left) to reduce it to a single value.
+     * @param callable $callback
+     * @param mixed $initialValue
+     * @return mixed
      */
-    public function reduceRight($callback, $initial = 0): mixed
+    public function reduceRight(callable $callback, mixed $initialValue = 0): mixed
     {
-        return array_reduce(array_reverse($this->arr), $callback, $initial);
+        return array_reduce(array_reverse($this->arr), $callback, $initialValue);
     }
 
     /**
-     * Reverse order of arr
+     * Reverses an array in place, and it returns also a new instance of Arr
+     * The first array element becomes the last,
+     * and the last array element becomes the first.
+     * @param bool $preserve_keys if set to true keys are preserved
+     * @return Arr
      */
-    public function reverse($preserve_keys = false): Arr
+    public function reverse(bool $preserve_keys = false): Arr
     {
         $this->arr = array_reverse($this->arr, $preserve_keys);
 
@@ -433,6 +471,8 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Returns true if the input is an array
+     * @param mixed $input the input value, to test if it is an array
+     * @return bool true if $input is an array, false otherwise
      */
     public static function isArray(mixed $input): bool
     {
