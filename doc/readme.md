@@ -15,7 +15,7 @@ Reference: [List of JS Array Object methods](https://developer.mozilla.org/en-US
 - [x] flatMap()
 - [x] forEach()
 - [ ] TODO from(), static
-- [ ] TODO includes()
+- [x] includes()
 - [x] indexOf()
 - [x] isArray(), static
 - [x] join()
