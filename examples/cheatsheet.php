@@ -154,6 +154,16 @@ print_result($arr->at(20000));
 // NULL
 
 
+// check element via include() method
+echo "include()" . PHP_EOL;
+$arr = Arr::make([1, 2, 3]);
+print_result($arr->includes(2));
+print_result($arr->includes('2'));
+print_result($arr->includes(3,3));
+print_result($arr->includes(3,2));
+
+
+
 /**
  * Print a line for string, integer, array, boolean.
  */

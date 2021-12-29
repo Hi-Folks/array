@@ -227,3 +227,18 @@ echo $arr->at(-2);
 var_dump($arr->at(20000));
 // NULL
 ```
+
+## Check if it includes a certain value
+
+The includes() method determines whether an array includes a certain value among its entries, returning true or false as appropriate.
+
+```php
+use HiFolks\DataType\Arr;
+$arr = Arr::make([1, 2, 3]);
+$check = $arr->includes(2); // true
+$check = $arr->includes('2'); // false
+$check = $arr->includes(3,3); // false
+$check = $arr->includes(3,2); // true
+
+
+```
