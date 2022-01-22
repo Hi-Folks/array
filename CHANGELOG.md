@@ -1,9 +1,9 @@
 # Changelog
 
-## 0.0.5 - WIP
+## 0.0.5 - 2022-01-22
 ### Add
 - *includes()* method;
-- *values()* method extre values from current Arr and creates new one (without keys and generating numeric keys starting from 0).
+- *values()* method extracts values from current Arr and creates new one (without keys and generating numeric keys starting from 0).
 
 ## 0.0.4 - 2021-12-28
 ### Add

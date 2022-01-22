@@ -231,14 +231,16 @@ var_dump($arr->at(20000));
 ## Check if it includes a certain value
 
 The includes() method determines whether an array includes a certain value among its entries, returning true or false as appropriate.
+The first parameter is the value to search for.
+The second parameter (optional) is the position in this array at which to begin searching for the search element.
 
 ```php
 use HiFolks\DataType\Arr;
 $arr = Arr::make([1, 2, 3]);
-$check = $arr->includes(2); // true
-$check = $arr->includes('2'); // false
-$check = $arr->includes(3,3); // false
-$check = $arr->includes(3,2); // true
+$check = $arr->includes(2); // true (found 2 -number- in array)
+$check = $arr->includes('2'); // false (not found '2' -char- in array)
+$check = $arr->includes(3,3); // false (not found 3 starting from index 3)
+$check = $arr->includes(3,2); // true (found 3 starting from index 2)
 ```
 
 ## Extract values

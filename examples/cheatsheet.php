@@ -27,10 +27,10 @@ print_result($arr->join());
 // Returns a section of arr from start to end
 print_result($arr->slice(1, 2));
 
-//Returns index of first occurence of element in arr
+//Returns index of first occurrence of element in arr
 print_result($arr->indexOf(5));
 
-// Returns index of last occurence of element in arr
+// Returns index of last occurrence of element in arr
 $arr2 = Arr::make([1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1]);
 print_result($arr->lastIndexOf(5));
 
@@ -59,7 +59,7 @@ print_result($arr2);
 $arr2 = $arr->map(fn ($element) => $element + 1);
 print_result($arr2);
 
-// Returns a flatten array with subarrays concatenated
+// Returns a flat array with sub-arrays concatenated
 $arr = Arr::make([ 1, [2,3], 4 , [5,6,7]]);
 $arr2 = $arr->flat();
 print_result($arr2);
@@ -69,7 +69,7 @@ $arr = Arr::make([ 1,2,3,4,5,6,7]);
 $arr2 = $arr->flatMap(fn ($element) => [$element, $element * 2]);
 print_result($arr2);
 
-// Changes all elements in range to a the specified value
+// Changes all elements in range to at the specified value
 $arr = Arr::make([1,2,3,4,5,6,7,8,9]);
 $arr->fill(88, 2, 6);
 print_result($arr);
@@ -178,8 +178,8 @@ print_result($arr->at(20000));
 // NULL
 
 
-// check element via include() method
-echo "include()" . PHP_EOL;
+// check element via includes() method
+echo "includes()" . PHP_EOL;
 $arr = Arr::make([1, 2, 3]);
 print_result($arr->includes(2));
 print_result($arr->includes('2'));
