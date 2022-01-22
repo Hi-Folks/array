@@ -567,4 +567,14 @@ class Arr implements \Iterator, \ArrayAccess
     {
         unset($this->arr[$offset]);
     }
+
+    /**
+     * It creates a new Arr object with the values of the current one (keys are skipped)
+     *
+     * @return Arr an array containing only the values (not keys)
+     */
+    public function values(): self
+    {
+        return new self(array_values($this->arr));
+    }
 }

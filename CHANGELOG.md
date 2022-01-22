@@ -2,8 +2,9 @@
 
 ## 0.0.5 - WIP
 ### Add
-- *includes()* method
-- 
+- *includes()* method;
+- *values()* method extre values from current Arr and creates new one (without keys and generating numeric keys starting from 0).
+
 ## 0.0.4 - 2021-12-28
 ### Add
 - *of()* static method, for creating Arr instance from parameters;
