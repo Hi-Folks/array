@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1642859888">
-  <project timestamp="1642859888">
+<coverage generated="1642860483">
+  <project timestamp="1642860483">
     <file name="/home/runner/work/array/array/src/Arr.php">
       <class name="HiFolks\DataType\Arr" namespace="global">
         <metrics complexity="73" methods="48" coveredmethods="48" conditionals="0" coveredconditionals="0" statements="111" coveredstatements="111" elements="159" coveredelements="159"/>
