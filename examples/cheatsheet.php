@@ -87,6 +87,19 @@ $arr = Arr::make([ 1,2,3,4,5,6,7]);
 $value = $arr->reduceRight(fn($previousValue, $currentValue) => $previousValue + $currentValue);
 print_result($value);
 
+// extract only values
+$fruits = Arr::make([
+    7 => '🥝',
+    -1 => '🍓',
+    1 => '🍋',
+    'mango' => '🥭',
+    'apple' => '🍎',
+    'banana' => '🍌',
+    '🍊',
+    '🍍', ]);
+$onlyFruits = $fruits->values();
+print_result($onlyFruits);
+
 // Add element to start of arr and return new length
 $arr = Arr::make([ 1,2,3,4,5,6,7]);
 print_result($arr->unshift(0));

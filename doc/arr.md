@@ -239,6 +239,35 @@ $check = $arr->includes(2); // true
 $check = $arr->includes('2'); // false
 $check = $arr->includes(3,3); // false
 $check = $arr->includes(3,2); // true
-
-
 ```
+
+## Extract values
+The *values()* method extract values from the current Arr and create new one with values only and numeric keys generated automatically starting from 0 index.
+
+```php
+use HiFolks\DataType\Arr;
+$fruits = Arr::make([
+    7 => '🥝',
+    -1 => '🍓',
+    1 => '🍋',
+    'mango' => '🥭',
+    'apple' => '🍎',
+    'banana' => '🍌',
+    '🍊',
+    '🍍', ]);
+$onlyFruits = $fruits->values();
+/*
+ * $onlyFruits->arr();
+[
+    0 => "🥝"
+    1 => "🍓"
+    2 => "🍋"
+    3 => "🥭"
+    4 => "🍎"
+    5 => "🍌"
+    6 => "🍊"
+    7 => "🍍"
+  ]
+ */
+```
+

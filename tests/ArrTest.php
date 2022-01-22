@@ -465,3 +465,27 @@ it('includes element from index', function () {
     expect($arr->includes('c', -100))->toBeTrue();
     expect($arr->includes('a', -2))->toBeFalse();
 });
+
+it(' extract values', function () {
+    $fruits = Arr::make([
+        7 => '🥝',
+        -1 => '🍓',
+        1 => '🍋',
+        'mango' => '🥭',
+        'apple' => '🍎',
+        'banana' => '🍌',
+        '🍊',
+        '🍍', ]);
+
+
+    expect($fruits->arr())->toBeArray();
+    expect($fruits->length())->toEqual(8);
+    expect($fruits['mango'])->toEqual('🥭');
+    expect($fruits[9])->toEqual('🍍');
+
+    $onlyFruits = $fruits->values();
+    expect($onlyFruits->arr())->toBeArray();
+    expect($onlyFruits->length())->toEqual(8);
+    expect($onlyFruits[3])->toEqual('🥭');
+    expect($onlyFruits[7])->toEqual('🍍');
+});
