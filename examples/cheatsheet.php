@@ -1,4 +1,5 @@
 <?php
+
 require "./vendor/autoload.php";
 
 use HiFolks\DataType\Arr;
@@ -43,19 +44,19 @@ $x = $arr->forEach(
 print_result($x->arr());
 
 // Returns true if all elements in arr pass the test in fn
-$bool = $arr->every(fn($element) => $element > 1);
+$bool = $arr->every(fn ($element) => $element > 1);
 print_result($bool);
 
 // Returns true if at least one element in arr pass the test in fn
-$bool = $arr->some(fn($element, $key) => $element > 2);
+$bool = $arr->some(fn ($element, $key) => $element > 2);
 print_result($bool);
 
 // Returns new array with elements of arr passing the filtering function fn
-$arr2 = $arr->filter(fn($element) => $element > 3);
+$arr2 = $arr->filter(fn ($element) => $element > 3);
 print_result($arr2);
 
 // Returns new array with the results of running fn on every element
-$arr2 = $arr->map(fn($element) => $element + 1);
+$arr2 = $arr->map(fn ($element) => $element + 1);
 print_result($arr2);
 
 // Returns a flatten array with subarrays concatenated
@@ -65,7 +66,7 @@ print_result($arr2);
 
 // Returns a Arr same as ->map() with a successive ->flat()
 $arr = Arr::make([ 1,2,3,4,5,6,7]);
-$arr2 = $arr->flatMap(fn($element) => [$element, $element*2]);
+$arr2 = $arr->flatMap(fn ($element) => [$element, $element * 2]);
 print_result($arr2);
 
 // Changes all elements in range to a the specified value
@@ -79,12 +80,12 @@ print_result($arr);
 
 // Returns a single value which is the function's accumulated result L2R
 $arr = Arr::make([ 1,2,3,4,5,6,7]);
-$value = $arr->reduce(fn($previousValue, $currentValue) => $previousValue + $currentValue);
+$value = $arr->reduce(fn ($previousValue, $currentValue) => $previousValue + $currentValue);
 print_result($value);
 
 // Returns a single value which is the function's accumulated result R2L
 $arr = Arr::make([ 1,2,3,4,5,6,7]);
-$value = $arr->reduceRight(fn($previousValue, $currentValue) => $previousValue + $currentValue);
+$value = $arr->reduceRight(fn ($previousValue, $currentValue) => $previousValue + $currentValue);
 print_result($value);
 
 // extract only values
@@ -146,8 +147,8 @@ $arr = Arr::fromValue(0, 3);
 print_result($arr);
 
 $arr = Arr::fromValue(0, 3);
-$arr[0]= 1001;
-$arr[1]= 2002;
+$arr[0] = 1001;
+$arr[1] = 2002;
 print_result($arr[1] + $arr[0]);
 print_result($arr);
 
@@ -155,12 +156,12 @@ print_result($arr);
 
 // Extract keys with keys()
 $fruits = Arr::make([
-    'kiwi' =>'🥝',
+    'kiwi' => '🥝',
     'fragola' => '🍓',
     'lemon' => '🍋',
     'mango' => '🥭',
     'apple' => '🍎',
-    'banana' => '🍌']);
+    'banana' => '🍌', ]);
 // keys as array
 $arrayOfKeys = $fruits->keys();
 print_result($arrayOfKeys);
@@ -182,8 +183,8 @@ echo "include()" . PHP_EOL;
 $arr = Arr::make([1, 2, 3]);
 print_result($arr->includes(2));
 print_result($arr->includes('2'));
-print_result($arr->includes(3,3));
-print_result($arr->includes(3,2));
+print_result($arr->includes(3, 3));
+print_result($arr->includes(3, 2));
 
 
 
@@ -195,19 +196,23 @@ function print_result(mixed $something): void
     switch (gettype($something)) {
     case 'string':
         echo "STRING  : " . $something . PHP_EOL;
+
         break;
     case 'integer':
         echo "INTEGER : " . $something . PHP_EOL;
+
         break;
     case 'array':
         echo "ARRAY   : " . implode(",", $something) . PHP_EOL;
+
         break;
     case 'boolean':
         echo "BOOLEAN : " . (($something) ? "true" : "false") . PHP_EOL;
+
         break;
     default:
         var_dump($something);
+
         break;
     }
 }
-
