@@ -100,13 +100,13 @@ Get and remove the first element **from the beginning** of the array with *shift
 use HiFolks\DataType\Arr;
 // Create some fruits
 $fruits = Arr::make(['🥝','🍓','🍋','🥭','🍎','🍌']);
-// pop (retrieve and remove) last elements
-first = $fruits->first();
+// shift() (retrieve and remove) first element
+$first = $fruits->shift();
 // Loop over fruits
 $fruits->forEach(function ($element, $key) {
     echo $key . " " . $element . PHP_EOL;
 });
-echo "First fruit: " . $first . PHP_EOL; // kiwi
+echo "First fruit: " . $first . PHP_EOL; // 🥝
 ```
 
 ## Add a new element to the beginning of the array
