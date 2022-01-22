@@ -114,6 +114,21 @@ it('concats more types', function () {
     $arr3 = $arr->concat($arr2);
     expect($arr3->length())->toEqual(18);
 });
+it('concats indexed/associative arrays', function () {
+    $fruits = Arr::make([
+        3 => '🥝',
+        -1 => '🍓',
+        1 => '🍋',
+        'mango' => '🥭',
+        'apple' => '🍎',
+        'banana' => '🍌', ]);
+    $fruits2 = $fruits->concat(['🍊','🍍']);
+
+    expect($fruits2->arr())->toBeArray();
+    expect($fruits2->length())->toEqual(8);
+    expect($fruits2['mango'])->toEqual('🥭');
+    expect($fruits2[4])->toEqual('🍍');
+});
 it('slices arrays', function () {
     $arr = Arr::make([99,98, 97])->append([1,2,3]);
     $arr2 = $arr->slice(1, 2);

@@ -10,6 +10,16 @@ print_result($arr->concat([10,11,12]));
 print_result($arr->concat([10,11,12], 13, [14,15]));
 print_result($arr->concat($arr, $arr));
 
+$fruits = Arr::make([
+    3 => '🥝',
+    -1 => '🍓',
+    1 => '🍋',
+    'mango' => '🥭',
+    'apple' => '🍎',
+    'banana' => '🍌', ]);
+$fruits2 = $fruits->concat(['🍊','🍍']);
+print_result($fruits2);
+
 // Joins all elements into a string separated by separator
 print_result($arr->join());
 
