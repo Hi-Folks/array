@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1642860483">
-  <project timestamp="1642860483">
+<coverage generated="1647892830">
+  <project timestamp="1647892830">
     <file name="/home/runner/work/array/array/src/Arr.php">
       <class name="HiFolks\DataType\Arr" namespace="global">
-        <metrics complexity="73" methods="48" coveredmethods="48" conditionals="0" coveredconditionals="0" statements="111" coveredstatements="111" elements="159" coveredelements="159"/>
+        <metrics complexity="73" methods="48" coveredmethods="48" conditionals="0" coveredconditionals="0" statements="104" coveredstatements="104" elements="152" coveredelements="152"/>
       </class>
       <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="44"/>
       <line num="16" type="stmt" count="44"/>
-      <line num="17" type="stmt" count="44"/>
       <line num="19" type="method" name="fromFunction" visibility="public" complexity="2" crap="2" count="1"/>
       <line num="21" type="stmt" count="1"/>
       <line num="22" type="stmt" count="1"/>
@@ -35,7 +34,6 @@
       <line num="105" type="stmt" count="3"/>
       <line num="113" type="method" name="next" visibility="public" complexity="1" crap="1" count="3"/>
       <line num="115" type="stmt" count="3"/>
-      <line num="116" type="stmt" count="3"/>
       <line num="118" type="method" name="prev" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="120" type="stmt" count="1"/>
       <line num="128" type="method" name="key" visibility="public" complexity="1" crap="1" count="2"/>
@@ -44,7 +42,6 @@
       <line num="141" type="stmt" count="2"/>
       <line num="149" type="method" name="rewind" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="151" type="stmt" count="2"/>
-      <line num="152" type="stmt" count="2"/>
       <line num="159" type="method" name="forEach" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="161" type="stmt" count="2"/>
       <line num="163" type="stmt" count="2"/>
@@ -116,7 +113,6 @@
       <line num="401" type="method" name="flat" visibility="public" complexity="2" crap="2" count="1"/>
       <line num="403" type="stmt" count="1"/>
       <line num="404" type="stmt" count="1"/>
-      <line num="405" type="stmt" count="1"/>
       <line num="406" type="stmt" count="1"/>
       <line num="407" type="stmt" count="1"/>
       <line num="410" type="stmt" count="1"/>
@@ -133,7 +129,6 @@
       <line num="442" type="stmt" count="1"/>
       <line num="444" type="stmt" count="1"/>
       <line num="445" type="stmt" count="1"/>
-      <line num="447" type="stmt" count="1"/>
       <line num="458" type="method" name="reduce" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="460" type="stmt" count="1"/>
       <line num="470" type="method" name="reduceRight" visibility="public" complexity="1" crap="1" count="1"/>
@@ -158,13 +153,11 @@
       <line num="556" type="stmt" count="3"/>
       <line num="557" type="stmt" count="1"/>
       <line num="559" type="stmt" count="3"/>
-      <line num="561" type="stmt" count="3"/>
       <line num="566" type="method" name="offsetUnset" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="568" type="stmt" count="1"/>
-      <line num="569" type="stmt" count="1"/>
       <line num="576" type="method" name="values" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="578" type="stmt" count="1"/>
-      <metrics loc="580" ncloc="349" classes="1" methods="48" coveredmethods="48" conditionals="0" coveredconditionals="0" statements="111" coveredstatements="111" elements="159" coveredelements="159"/>
+      <metrics loc="581" ncloc="350" classes="1" methods="48" coveredmethods="48" conditionals="0" coveredconditionals="0" statements="104" coveredstatements="104" elements="152" coveredelements="152"/>
     </file>
     <file name="/home/runner/work/array/array/src/Traits/Calculable.php">
       <class name="HiFolks\DataType\Traits\Calculable" namespace="global">
@@ -176,8 +169,8 @@
       <line num="22" type="stmt" count="1"/>
       <line num="23" type="stmt" count="1"/>
       <line num="26" type="stmt" count="1"/>
-      <metrics loc="28" ncloc="20" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+      <metrics loc="29" ncloc="21" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
     </file>
-    <metrics files="2" loc="608" ncloc="369" classes="2" methods="50" coveredmethods="50" conditionals="0" coveredconditionals="0" statements="115" coveredstatements="115" elements="165" coveredelements="165"/>
+    <metrics files="2" loc="610" ncloc="371" classes="2" methods="50" coveredmethods="50" conditionals="0" coveredconditionals="0" statements="108" coveredstatements="108" elements="158" coveredelements="158"/>
   </project>
 </coverage>
