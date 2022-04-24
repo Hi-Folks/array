@@ -8,8 +8,8 @@ class Arr implements \Iterator, \ArrayAccess
 {
     use Calculable;
 
-    private array $arr;
-    private int $idx;
+    protected array $arr;
+    protected int $idx;
 
     public function __construct(array $arr = [])
     {

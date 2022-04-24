@@ -7,7 +7,12 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/hi-folks/array.svg?style=flat-square)](https://packagist.org/packages/hi-folks/array)
 [![Test Coverage](https://raw.githubusercontent.com/Hi-Folks/array/main/badge-coverage.svg)](https://packagist.org/packages/hi-folks/array)
 
-**Arr** class is built on top of the PHP array functions.
+This package provides 2 classes:
+
+- **Arr** class is built on top of the PHP array functions.
+- **Table** class allow you to manage bidimensional associative array (like a table or tuple).
+
+## Arr class
 
 **Arr** exposes methods to create, manage, access the data structure of the array.
 
@@ -48,6 +53,21 @@ The Arr class provides some methods:
 - splice(): changes content of arr removing, replacing and adding elements;
 - toString(): the string representing the array (same as join(','));
 - isArray(): check if the input is an array.
+
+## Table class
+Table class allows you to manage bi dimensional array, something like:
+```
+[
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+]
+```
+
+Table class allows you to filter, select some fields, create calculated fields.
+
 
 ## Installation
 
@@ -96,6 +116,60 @@ $count = $arr->length();
 $arr->reverse();
 echo $arr[0];
 // output: Second element
+```
+## Usage of Table class
+
+Starting from:
+
+```
+[
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+] 
+```
+I would like to **filter** the rows with price greater than 100, **select** only "product" and "price" fields, and for each rows **create a new field** named "new_filed" that is a calculated field (doubling the price):
+```php
+$dataTable = [
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+];
+$table = Table::make($dataTable);
+$arr = $table
+    ->select(['product' , 'price'])
+    ->where('price', 100, ">")
+    ->calc('new_field', fn ($item) => $item['price'] * 2)
+    ->arr();
+
+```
+
+The result is
+```
+array (
+  0 =>
+  array (
+    'product' => 'Desk',
+    'price' => 200,
+    'new_field' => 400,
+  ),
+  2 =>
+  array (
+    'product' => 'Door',
+    'price' => 300,
+    'new_field' => 600,
+  ),
+  3 =>
+  array (
+    'product' => 'Bookcase',
+    'price' => 150,
+    'new_field' => 300,
+  ),
+)
 ```
 
 ## Testing
