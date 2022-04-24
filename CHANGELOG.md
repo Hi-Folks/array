@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.6 - WIP
+## 0.0.6 - 2022-04-24
 - Creating Table class
 - updating composer.json removing unused package
 
