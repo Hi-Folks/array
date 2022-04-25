@@ -46,6 +46,10 @@ class Table extends Arr
         return $lastRow[$field];
     }
 
+    /**
+     * @param $columns
+     * @return $this
+     */
     public function select($columns): self
     {
         $filteredArray = array_map(fn ($item) => array_intersect_key($item, array_flip($columns)), $this->arr);
@@ -53,6 +57,25 @@ class Table extends Arr
         return new self($filteredArray);
     }
 
+    /**
+     * It returns a new Table instance with data, excluding the attributes listed in
+     * $columns
+     * @param $columns
+     * @return $this
+     */
+    public function except($columns): self
+    {
+        $filteredArray = array_map(fn ($item) => array_diff_key($item, array_flip($columns)), $this->arr);
+
+        return new self($filteredArray);
+    }
+
+    /**
+     * @param $field
+     * @param $operator
+     * @param $value
+     * @return $this
+     */
     public function where($field, $operator = null, $value = null): self
     {
         if (func_num_args() === 1) {
@@ -80,6 +103,11 @@ class Table extends Arr
         return new self($filteredArray);
     }
 
+    /**
+     * @param $destinationField
+     * @param $function
+     * @return $this
+     */
     public function calc($destinationField, $function): self
     {
         foreach ($this->arr as $key => $value) {

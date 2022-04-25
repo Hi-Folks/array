@@ -40,6 +40,20 @@ it('can select', function () use ($dataTable) {
     expect($table->select(['product' , 'active'])->last())->toHaveKeys(["product","active"]);
 });
 
+it('can except', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    expect($table->arr())->toBeArray();
+    expect($table->except(['price'])->last())->toBeArray();
+    expect($table->except(['price'])->last())->toHaveCount(2);
+    expect($table->except(['price'])->last())->toHaveKeys(["product","active"]);
+
+    $table = Table::make($dataTable);
+    expect($table->arr())->toBeArray();
+    expect($table->except(['field_not_exist'])->last())->toBeArray();
+    expect($table->except(['field_not_exist'])->last())->toHaveCount(3);
+    expect($table->except(['field_not_exists'])->last())->toHaveKeys(["product","active", "price"]);
+});
+
 it('can filter', function () use ($dataTable) {
     $table = Table::make($dataTable);
     expect($table->arr())->toBeArray();
