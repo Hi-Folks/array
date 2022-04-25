@@ -71,6 +71,8 @@ class Table extends Arr
             "<" => fn ($element) => $element[$field] < $value,
             ">=" => fn ($element) => $element[$field] >= $value,
             "<=" => fn ($element) => $element[$field] <= $value,
+            "!=" => fn ($element) => $element[$field] != $value,
+            "!==" => fn ($element) => $element[$field] !== $value,
             default => fn ($element) => $element[$field] == $value
         };
         $filteredArray = array_filter($this->arr, $function);

@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.8 - WIP
+- 
+
 ## 0.0.7 - 2022-04-25
 - Review where method, where(price, '>', 100)
 

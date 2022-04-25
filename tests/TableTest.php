@@ -67,6 +67,38 @@ it('can filter greater than', function () use ($dataTable) {
     expect($arr)->toHaveCount(5);
     expect($arr)->toHaveKeys([0,1,2,3,4]);
 });
+it('can filter true', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    $arr = $table->where('active')->select(['product' , 'price'])->arr();
+    expect($arr)->toHaveCount(4);
+    expect($arr)->toHaveKeys([0,1,3,4]);
+});
+it('can filter smaller', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    $arr = $table->select(['product' , 'price'])->where('price', "<=", 100)->arr();
+    expect($arr)->toHaveCount(2);
+    expect($arr)->toHaveKeys([1,4]);
+
+    $table = Table::make($dataTable);
+    $arr = $table->select(['product' , 'price'])->where('price', "<", 100)->arr();
+    expect($arr)->toHaveCount(0);
+});
+it('can filter not equal', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    $arr = $table->select(['product' , 'price'])->where('price', "!=", "100")->arr();
+    expect($arr)->toHaveCount(3);
+    expect($arr)->toHaveKeys([0,2,3]);
+
+    $table = Table::make($dataTable);
+    $arr = $table->select(['product' , 'price'])->where('price', "!==", 100)->arr();
+    expect($arr)->toHaveCount(3);
+    expect($arr)->toHaveKeys([0,2,3]);
+
+    $table = Table::make($dataTable);
+    $arr = $table->select(['product' , 'price'])->where('price', "!==", "100")->arr();
+    expect($arr)->toHaveCount(5);
+});
+
 it('can create calculated field', function () use ($dataTable) {
     $table = Table::make($dataTable);
     $arr = $table
