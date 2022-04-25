@@ -60,4 +60,15 @@ array (
 )
  */
 echo PHP_EOL . "-------" . PHP_EOL;
+var_export(
+    $table
+        ->select(['product' , 'price'])
+        ->arr()
+);
+echo PHP_EOL . "-------" . PHP_EOL;
+var_export(
+    $table
+        ->except(['active' , 'price'])
+        ->arr()
+);
 

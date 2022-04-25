@@ -2,6 +2,7 @@
 
 ## 0.0.8 - WIP
 - not equal operator for where method
+- Table::except() method to exclude some data
 
 ## 0.0.7 - 2022-04-25
 - Review where method, where(price, '>', 100)
