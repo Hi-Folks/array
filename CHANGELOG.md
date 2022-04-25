@@ -1,7 +1,7 @@
 # Changelog
 
 ## 0.0.8 - WIP
-- 
+- not equal operator for where method
 
 ## 0.0.7 - 2022-04-25
 - Review where method, where(price, '>', 100)
