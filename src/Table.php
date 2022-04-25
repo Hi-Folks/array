@@ -53,8 +53,17 @@ class Table extends Arr
         return new self($filteredArray);
     }
 
-    public function where($field, $value, string $operator = "==="): self
+    public function where($field, $operator = null, $value = null): self
     {
+        if (func_num_args() === 1) {
+            $value = true;
+            $operator = '==';
+        }
+        if (func_num_args() === 2) {
+            $value = $operator;
+            $operator = '===';
+        }
+
         $function = match ($operator) {
             "==" => fn ($element) => $element[$field] == $value,
             "===" => fn ($element) => $element[$field] === $value,

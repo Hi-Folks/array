@@ -1,7 +1,7 @@
 # Changelog
 
-## 0.0.7 - WIP
-- 
+## 0.0.7 - 2022-04-25
+- Review where method, where(price, '>', 100)
 
 ## 0.0.6 - 2022-04-24
 - Creating Table class

@@ -58,12 +58,12 @@ it('can filter as array', function () use ($dataTable) {
 });
 it('can filter greater than', function () use ($dataTable) {
     $table = Table::make($dataTable);
-    $arr = $table->select(['product' , 'price'])->where('price', 100, ">")->arr();
+    $arr = $table->select(['product' , 'price'])->where('price', ">", 100)->arr();
     expect($arr)->toHaveCount(3);
     expect($arr)->toHaveKeys([0,2,3]);
 
     $table = Table::make($dataTable);
-    $arr = $table->select(['product' , 'price'])->where('price', 100, ">=")->arr();
+    $arr = $table->select(['product' , 'price'])->where('price', ">=", 100)->arr();
     expect($arr)->toHaveCount(5);
     expect($arr)->toHaveKeys([0,1,2,3,4]);
 });
@@ -71,7 +71,7 @@ it('can create calculated field', function () use ($dataTable) {
     $table = Table::make($dataTable);
     $arr = $table
         ->select(['product' , 'price'])
-        ->where('price', 100, ">")
+        ->where('price', ">", 100, )
         ->calc('new_field', fn ($item) => $item['price'] * 2)
         ->arr();
     expect($arr)->toHaveCount(3);

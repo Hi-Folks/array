@@ -33,7 +33,7 @@ array (
 var_export(
     $table
         ->select(['product' , 'price'])
-        ->where('price', 100, '>')
+        ->where('price', '>', 100)
         ->calc("new_field", fn ($item) => $item['price'] * 2)
         ->arr()
 );
