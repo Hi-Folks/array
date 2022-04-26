@@ -47,10 +47,10 @@ class Table extends Arr
     }
 
     /**
-     * @param $columns
-     * @return $this
+     * @param array $columns
+     * @return self
      */
-    public function select($columns): self
+    public function select(array $columns): self
     {
         $filteredArray = array_map(fn ($item) => array_intersect_key($item, array_flip($columns)), $this->arr);
 
@@ -60,10 +60,10 @@ class Table extends Arr
     /**
      * It returns a new Table instance with data, excluding the attributes listed in
      * $columns
-     * @param $columns
-     * @return $this
+     * @param array $columns
+     * @return self
      */
-    public function except($columns): self
+    public function except(array $columns): self
     {
         $filteredArray = array_map(fn ($item) => array_diff_key($item, array_flip($columns)), $this->arr);
 
@@ -71,12 +71,12 @@ class Table extends Arr
     }
 
     /**
-     * @param $field
-     * @param $operator
-     * @param $value
-     * @return $this
+     * @param string|int $field
+     * @param mixed $operator
+     * @param mixed $value
+     * @return self
      */
-    public function where($field, $operator = null, $value = null): self
+    public function where(string|int $field, mixed $operator = null, mixed $value = null): self
     {
         if (func_num_args() === 1) {
             $value = true;
@@ -104,11 +104,11 @@ class Table extends Arr
     }
 
     /**
-     * @param $destinationField
-     * @param $function
+     * @param string|int $destinationField
+     * @param callable $function
      * @return $this
      */
-    public function calc($destinationField, $function): self
+    public function calc(string|int $destinationField, callable $function): self
     {
         foreach ($this->arr as $key => $value) {
             $this->arr[$key][$destinationField] = $function($value);

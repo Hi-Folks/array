@@ -27,9 +27,9 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * @param $value
-     * @param $count
-     * @return static
+     * @param mixed $value
+     * @param int $count
+     * @return self
      */
     public static function fromValue(mixed $value, int $count): self
     {
@@ -44,10 +44,10 @@ class Arr implements \Iterator, \ArrayAccess
     /**
      * Creates a new Arr instance from a variable number of arguments,
      * regardless of number or type of the arguments.
-     * @param ...$elements
+     * @param mixed ...$elements
      * @return Arr object
      */
-    public static function of(...$elements): self
+    public static function of(mixed ...$elements): self
     {
         return self::make($elements);
     }
@@ -232,7 +232,7 @@ class Arr implements \Iterator, \ArrayAccess
      * Returns new Arr joining more elements: array, Arr, scalar type.
      * This method does not change the existing Arr object,
      * but instead returns a new Arr object
-     * @param ...$elements
+     * @param mixed ...$elements
      * @return Arr object
      */
     public function concat(mixed ...$elements): Arr
@@ -320,10 +320,10 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Returns true if all elements in Arr pass the test in fn.
-     * @param $callback
+     * @param callable $callback
      * @return bool
      */
-    public function every($callback)
+    public function every(callable $callback): bool
     {
         foreach ($this->arr as $key => $element) {
             if (! $callback($element, $key)) {
@@ -375,10 +375,10 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Returns new Arr with elements of arr passing the filtering function fn
-     * @param $callback the function for filtering
+     * @param callable $callback the function for filtering
      * @return Arr
      */
-    public function filter($callback): Arr
+    public function filter(callable $callback): Arr
     {
         return Arr::make(array_filter($this->arr, $callback));
     }
