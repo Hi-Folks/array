@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650999959">
-  <project timestamp="1650999959">
+<coverage generated="1651042330">
+  <project timestamp="1651042330">
     <file name="/home/runner/work/array/array/src/Arr.php">
       <class name="HiFolks\DataType\Arr" namespace="global">
         <metrics complexity="73" methods="48" coveredmethods="48" conditionals="0" coveredconditionals="0" statements="104" coveredstatements="104" elements="152" coveredelements="152"/>
       </class>
-      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="56"/>
-      <line num="16" type="stmt" count="56"/>
+      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="57"/>
+      <line num="16" type="stmt" count="57"/>
       <line num="19" type="method" name="fromFunction" visibility="public" complexity="2" crap="2" count="1"/>
       <line num="21" type="stmt" count="1"/>
       <line num="22" type="stmt" count="1"/>
@@ -159,12 +159,20 @@
       <line num="578" type="stmt" count="1"/>
       <metrics loc="581" ncloc="350" classes="1" methods="48" coveredmethods="48" conditionals="0" coveredconditionals="0" statements="104" coveredstatements="104" elements="152" coveredelements="152"/>
     </file>
+    <file name="/home/runner/work/array/array/src/Classes/Operation.php">
+      <class name="HiFolks\DataType\Classes\Operation" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+      </class>
+      <line num="7" type="method" name="sum" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="9" type="stmt" count="1"/>
+      <metrics loc="12" ncloc="12" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+    </file>
     <file name="/home/runner/work/array/array/src/Table.php">
       <class name="HiFolks\DataType\Table" namespace="global">
-        <metrics complexity="13" methods="10" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="29" elements="45" coveredelements="35"/>
+        <metrics complexity="18" methods="12" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="47" coveredstatements="41" elements="59" coveredelements="49"/>
       </class>
-      <line num="11" type="method" name="make" visibility="public" complexity="1" crap="1" count="12"/>
-      <line num="13" type="stmt" count="12"/>
+      <line num="11" type="method" name="make" visibility="public" complexity="1" crap="1" count="13"/>
+      <line num="13" type="stmt" count="13"/>
       <line num="16" type="method" name="insert" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="18" type="stmt" count="0"/>
       <line num="21" type="method" name="first" visibility="public" complexity="1" crap="1" count="1"/>
@@ -208,7 +216,21 @@
       <line num="113" type="stmt" count="1"/>
       <line num="114" type="stmt" count="1"/>
       <line num="117" type="stmt" count="1"/>
-      <metrics loc="120" ncloc="99" classes="1" methods="10" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="29" elements="45" coveredelements="35"/>
+      <line num="120" type="method" name="groupBy" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="122" type="stmt" count="1"/>
+      <line num="123" type="stmt" count="1"/>
+      <line num="124" type="stmt" count="1"/>
+      <line num="125" type="stmt" count="1"/>
+      <line num="127" type="stmt" count="1"/>
+      <line num="130" type="stmt" count="1"/>
+      <line num="133" type="method" name="groupThenApply" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="135" type="stmt" count="1"/>
+      <line num="136" type="stmt" count="1"/>
+      <line num="137" type="stmt" count="1"/>
+      <line num="138" type="stmt" count="1"/>
+      <line num="139" type="stmt" count="1"/>
+      <line num="145" type="stmt" count="1"/>
+      <metrics loc="148" ncloc="127" classes="1" methods="12" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="47" coveredstatements="41" elements="59" coveredelements="49"/>
     </file>
     <file name="/home/runner/work/array/array/src/Traits/Calculable.php">
       <class name="HiFolks\DataType\Traits\Calculable" namespace="global">
@@ -222,6 +244,6 @@
       <line num="26" type="stmt" count="1"/>
       <metrics loc="29" ncloc="21" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
     </file>
-    <metrics files="3" loc="730" ncloc="470" classes="3" methods="60" coveredmethods="56" conditionals="0" coveredconditionals="0" statements="143" coveredstatements="137" elements="203" coveredelements="193"/>
+    <metrics files="4" loc="770" ncloc="510" classes="4" methods="63" coveredmethods="59" conditionals="0" coveredconditionals="0" statements="156" coveredstatements="150" elements="219" coveredelements="209"/>
   </project>
 </coverage>
