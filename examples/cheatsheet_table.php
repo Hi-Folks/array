@@ -12,11 +12,11 @@ $table = Table::make([
     ['product' => 'Bookcase', 'price' => 150, 'active' => true],
     ['product' => 'Door', 'price' => 100, 'active' => true],
 ]);
+echo PHP_EOL . "------- Filter price > 100" . PHP_EOL;
 var_export($table
     ->select(['product' , 'price'])
-    ->where('price', 100)
+    ->where('price', '>', 100)
     ->arr());
-echo PHP_EOL . "-------" . PHP_EOL;
 /*
 array (
   1 => array (
@@ -30,7 +30,7 @@ array (
 )
 */
 
-
+echo PHP_EOL . "------- Filter and calculate new field" . PHP_EOL;
 var_export(
     $table
         ->select(['product' , 'price'])

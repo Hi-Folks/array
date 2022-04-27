@@ -33,33 +33,6 @@ $dataTable = [
 $table = Table::make($dataTable);
 ```
 
-## Select some data
-
-```php
-use HiFolks\DataType\Table;
-
-$dataTable = [
-['product' => 'Desk', 'price' => 200, 'active' => true],
-['product' => 'Chair', 'price' => 100, 'active' => true]
-];
-
-$table = Table::make($dataTable)->select(['product', 'price']);
-
-/*
-array (
-  0 =>
-  array (
-    'product' => 'Desk',
-    'price' => 200,
-  ),
-  1 =>
-  array (
-    'product' => 'Chair',
-    'price' => 100,
-  )
-)
- */
-```
 
 ## Select some data
 
@@ -119,6 +92,46 @@ array (
 )
  */
 ```
+## Filter data
+You can filter data with *where()* method.
+You can specify:
+- $field: the field name to filter (for example price);
+- $operator: the operator "==", "===", ">", ">=", "<", "<=", "!==", "!=";
+- the value
+
+```php 
+use HiFolks\DataType\Classes\Operation;
+use HiFolks\DataType\Table;
+
+$table = Table::make([
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+]);
+var_export($table
+    ->select(['product' , 'price'])
+    ->where('price', '>', 100)
+    ->arr());
+
+/*
+array (
+  0 => array (
+    'product' => 'Desk',
+    'price' => 200,
+  ),
+  2 => array (
+    'product' => 'Door',
+    'price' => 300,
+  ),
+  3 => array (
+    'product' => 'Bookcase',
+    'price' => 150,
+  ),
+)*/
+```
+
 
 ## Group data and apply a function
 For example if you want to calculate the total price for each product you can use *groupThenApply()* method.
