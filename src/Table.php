@@ -116,4 +116,32 @@ class Table extends Arr
 
         return $this;
     }
+
+    public function groupBy(string|int $field): array
+    {
+        $result = [];
+        foreach ($this->arr as $key => $value) {
+            if (! array_key_exists($value[$field], $result)) {
+                $result[$value[$field]] = [];
+            }
+            $result[$value[$field]][] = $value;
+        }
+
+        return $result;
+    }
+
+    public function groupThenApply(string|int $field, string|int $calcField, callable $function, $initial = 0): array
+    {
+        $groups = $this->groupBy($field);
+        $result = [];
+        foreach ($groups as $key => $arrays) {
+            $calc = array_reduce($arrays, $function, $initial);
+            $result[$key] = [
+                $field => $key,
+                $calcField => $calc,
+            ];
+        }
+
+        return $result;
+    }
 }
