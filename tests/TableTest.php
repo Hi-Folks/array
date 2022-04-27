@@ -1,5 +1,6 @@
 <?php
 
+use HiFolks\DataType\Classes\Operation;
 use HiFolks\DataType\Table;
 
 $dataTable = [
@@ -124,4 +125,19 @@ it('can create calculated field', function () use ($dataTable) {
     expect($arr)->toHaveKeys([0,2,3]);
     expect($arr[2]['price'])->toEqual(300);
     expect($arr[2]['new_field'])->toEqual(600);
+});
+
+it('can group and sum', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    $arr = $table
+        ->groupThenApply(
+            'product',
+            'total',
+            Operation::sum('price'),
+            0
+        );
+
+    expect($arr)->toHaveCount(4);
+    expect($arr)->toHaveKeys(['Desk','Chair','Door', 'Bookcase']);
+    expect($arr['Door']['total'])->toEqual(400);
 });

@@ -2,6 +2,7 @@
 
 require "./vendor/autoload.php";
 
+use HiFolks\DataType\Classes\Operation;
 use HiFolks\DataType\Table;
 
 $table = Table::make([
@@ -71,4 +72,22 @@ var_export(
         ->except(['active' , 'price'])
         ->arr()
 );
+echo PHP_EOL . "-------" . PHP_EOL;
+var_export(
+    $table
+        ->groupBy('product')
+);
 
+echo PHP_EOL . "-------" . PHP_EOL;
+var_export(
+    $table
+        //->where('active')
+        ->groupThenApply(
+            'product',
+            'total',
+            Operation::sum('price'),
+            0
+        )
+);
+
+echo PHP_EOL . "-------" . PHP_EOL;
