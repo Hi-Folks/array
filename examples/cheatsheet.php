@@ -1,14 +1,14 @@
 <?php
 
-require "./vendor/autoload.php";
+require './vendor/autoload.php';
 
 use HiFolks\DataType\Arr;
 
-$arr = Arr::make([1,2,3,4,5,6]);
+$arr = Arr::make([1, 2, 3, 4, 5, 6]);
 
 // Returns new Arr joining 2 arrays together (the current one and a new one)
-print_result($arr->concat([10,11,12]));
-print_result($arr->concat([10,11,12], 13, [14,15]));
+print_result($arr->concat([10, 11, 12]));
+print_result($arr->concat([10, 11, 12], 13, [14, 15]));
 print_result($arr->concat($arr, $arr));
 
 $fruits = Arr::make([
@@ -18,7 +18,7 @@ $fruits = Arr::make([
     'mango' => '🥭',
     'apple' => '🍎',
     'banana' => '🍌', ]);
-$fruits2 = $fruits->concat(['🍊','🍍']);
+$fruits2 = $fruits->concat(['🍊', '🍍']);
 print_result($fruits2);
 
 // Joins all elements into a string separated by separator
@@ -31,9 +31,8 @@ print_result($arr->slice(1, 2));
 print_result($arr->indexOf(5));
 
 // Returns index of last occurrence of element in arr
-$arr2 = Arr::make([1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1]);
+$arr2 = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
 print_result($arr->lastIndexOf(5));
-
 
 // Calls function fn for each element in the array
 $x = $arr->forEach(
@@ -60,17 +59,17 @@ $arr2 = $arr->map(fn ($element) => $element + 1);
 print_result($arr2);
 
 // Returns a flat array with sub-arrays concatenated
-$arr = Arr::make([ 1, [2,3], 4 , [5,6,7]]);
+$arr = Arr::make([1, [2, 3], 4, [5, 6, 7]]);
 $arr2 = $arr->flat();
 print_result($arr2);
 
 // Returns a Arr same as ->map() with a successive ->flat()
-$arr = Arr::make([ 1,2,3,4,5,6,7]);
+$arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
 $arr2 = $arr->flatMap(fn ($element) => [$element, $element * 2]);
 print_result($arr2);
 
 // Changes all elements in range to at the specified value
-$arr = Arr::make([1,2,3,4,5,6,7,8,9]);
+$arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 $arr->fill(88, 2, 6);
 print_result($arr);
 // Fills array
@@ -79,12 +78,12 @@ $arr->fill(99, 0, 5);
 print_result($arr);
 
 // Returns a single value which is the function's accumulated result L2R
-$arr = Arr::make([ 1,2,3,4,5,6,7]);
+$arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
 $value = $arr->reduce(fn ($previousValue, $currentValue) => $previousValue + $currentValue);
 print_result($value);
 
 // Returns a single value which is the function's accumulated result R2L
-$arr = Arr::make([ 1,2,3,4,5,6,7]);
+$arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
 $value = $arr->reduceRight(fn ($previousValue, $currentValue) => $previousValue + $currentValue);
 print_result($value);
 
@@ -102,21 +101,21 @@ $onlyFruits = $fruits->values();
 print_result($onlyFruits);
 
 // Add element to start of arr and return new length
-$arr = Arr::make([ 1,2,3,4,5,6,7]);
+$arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
 print_result($arr->unshift(0));
 print_result($arr);
 
 // Adds element to the end of arr and returns new length
-$arr = Arr::make([ 1,2,3,4,5,6,7]);
+$arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
 print_result($arr->push(9999));
 print_result($arr);
 
 // Reverse order of arr
-$arr = Arr::make([ 1,2,3,4,5,6,7]);
+$arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
 print_result($arr->reverse());
 
 // Sort the elements of arr
-$arr = Arr::make([ 6,2,4,2,1,9,7]);
+$arr = Arr::make([6, 2, 4, 2, 1, 9, 7]);
 print_result($arr->sort());
 
 // Changes content of arr removing, replacing and adding elements
@@ -152,8 +151,6 @@ $arr[1] = 2002;
 print_result($arr[1] + $arr[0]);
 print_result($arr);
 
-
-
 // Extract keys with keys()
 $fruits = Arr::make([
     'kiwi' => '🥝',
@@ -169,7 +166,7 @@ $arrOfKeys = $fruits->keys(true);
 print_result($arrOfKeys->join());
 
 // get element by index, via at() method
-$arr = Arr::make([1001,1002,1003,1004,1005,1006]);
+$arr = Arr::make([1001, 1002, 1003, 1004, 1005, 1006]);
 print_result($arr->at(1));
 // 1002
 print_result($arr->at(-2));
@@ -177,16 +174,13 @@ print_result($arr->at(-2));
 print_result($arr->at(20000));
 // NULL
 
-
 // check element via includes() method
-echo "includes()" . PHP_EOL;
+echo 'includes()'.PHP_EOL;
 $arr = Arr::make([1, 2, 3]);
 print_result($arr->includes(2));
 print_result($arr->includes('2'));
 print_result($arr->includes(3, 3));
 print_result($arr->includes(3, 2));
-
-
 
 /**
  * Print a line for string, integer, array, boolean.
@@ -195,19 +189,19 @@ function print_result(mixed $something): void
 {
     switch (gettype($something)) {
     case 'string':
-        echo "STRING  : " . $something . PHP_EOL;
+        echo 'STRING  : '.$something.PHP_EOL;
 
         break;
     case 'integer':
-        echo "INTEGER : " . $something . PHP_EOL;
+        echo 'INTEGER : '.$something.PHP_EOL;
 
         break;
     case 'array':
-        echo "ARRAY   : " . implode(",", $something) . PHP_EOL;
+        echo 'ARRAY   : '.implode(',', $something).PHP_EOL;
 
         break;
     case 'boolean':
-        echo "BOOLEAN : " . (($something) ? "true" : "false") . PHP_EOL;
+        echo 'BOOLEAN : '.(($something) ? 'true' : 'false').PHP_EOL;
 
         break;
     default:

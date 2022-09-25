@@ -47,7 +47,7 @@ it('is Array length 1', function () {
 });
 
 it('is Array forEach', function () {
-    $arr = Arr::make([99,98]);
+    $arr = Arr::make([99, 98]);
     expect($arr->arr())->toBeArray();
     expect(count($arr->arr()))->toEqual(2);
     expect($arr->count())->toEqual(2);
@@ -55,21 +55,21 @@ it('is Array forEach', function () {
     expect($arr->push(100))->toEqual(3);
     expect($arr->length())->toEqual(3);
     $x = $arr->forEach(function ($element, $key) {
-        return $key * $element . PHP_EOL;
+        return $key * $element.PHP_EOL;
     });
     expect($x->length())->toEqual(3);
     expect($x->get(2))->toEqual(200);
 });
 
 it('shift array', function () {
-    $arr = Arr::make([99,98, 97]);
+    $arr = Arr::make([99, 98, 97]);
     expect($arr->length())->toEqual(3);
     expect($arr->shift())->toEqual(99);
     expect($arr->length())->toEqual(2);
 });
 
 it('unshift array', function () {
-    $arr = Arr::make([99,98, 97]);
+    $arr = Arr::make([99, 98, 97]);
     expect($arr->length())->toEqual(3);
     expect($arr->unshift(200))->toEqual(4);
     expect($arr->get(0))->toEqual(200);
@@ -77,14 +77,14 @@ it('unshift array', function () {
 
     $arr = Arr::make([1, 2]);
     $arr->unshift(0);
-    expect($arr->toString())->toEqual("0,1,2");
+    expect($arr->toString())->toEqual('0,1,2');
     $arr->unshift(-2, -1);
-    expect($arr->toString())->toEqual("-2,-1,0,1,2");
+    expect($arr->toString())->toEqual('-2,-1,0,1,2');
 });
 it('append array', function () {
-    $arr = Arr::make([99,98, 97])->append([1,2,3]);
+    $arr = Arr::make([99, 98, 97])->append([1, 2, 3]);
     expect($arr->length())->toEqual(6);
-    $arr->append([12], [13,14]);
+    $arr->append([12], [13, 14]);
     expect($arr->length())->toEqual(9);
     $arr = Arr::make();
     $arr->append([11]);
@@ -94,19 +94,19 @@ it('append array', function () {
     expect($number)->toEqual(11);
 });
 it('joins arrays', function () {
-    $arr = Arr::make([99,98, 97])->append([1,2,3]);
-    expect($arr->join())->toEqual("99,98,97,1,2,3");
+    $arr = Arr::make([99, 98, 97])->append([1, 2, 3]);
+    expect($arr->join())->toEqual('99,98,97,1,2,3');
 });
 
 it('concats arrays', function () {
-    $arr = Arr::make([99,98, 97])->append([1,2,3]);
-    $arr2 = $arr->concat([1000,1001]);
+    $arr = Arr::make([99, 98, 97])->append([1, 2, 3]);
+    $arr2 = $arr->concat([1000, 1001]);
     expect($arr2->arr())->toBeArray();
     expect($arr2->length())->toEqual(8);
     expect($arr->length())->toEqual(6);
 });
 it('concats more types', function () {
-    $arr = Arr::make([99,98, 97])->concat([1,2,3], [1000,1001]);
+    $arr = Arr::make([99, 98, 97])->concat([1, 2, 3], [1000, 1001]);
     expect($arr->arr())->toBeArray();
     expect($arr->length())->toEqual(8);
     $arr2 = $arr->concat(9, true);
@@ -122,7 +122,7 @@ it('concats indexed/associative arrays', function () {
         'mango' => '🥭',
         'apple' => '🍎',
         'banana' => '🍌', ]);
-    $fruits2 = $fruits->concat(['🍊','🍍']);
+    $fruits2 = $fruits->concat(['🍊', '🍍']);
 
     expect($fruits2->arr())->toBeArray();
     expect($fruits2->length())->toEqual(8);
@@ -130,7 +130,7 @@ it('concats indexed/associative arrays', function () {
     expect($fruits2[4])->toEqual('🍍');
 });
 it('slices arrays', function () {
-    $arr = Arr::make([99,98, 97])->append([1,2,3]);
+    $arr = Arr::make([99, 98, 97])->append([1, 2, 3]);
     $arr2 = $arr->slice(1, 2);
     expect($arr2->arr())->toBeArray();
     expect($arr2->length())->toEqual(1);
@@ -196,33 +196,33 @@ it('slices arrays', function () {
 });
 
 it('searches arrays', function () {
-    $arr = Arr::make([99,98, 97])->append([1,2,3]);
+    $arr = Arr::make([99, 98, 97])->append([1, 2, 3]);
     $index = $arr->indexOf(1);
     expect($index)->toBeInt();
     expect($index)->toEqual(3);
     expect($arr->length())->toEqual(6);
-    $arr = Arr::make(["L" => "Leon","T" => "Tiger", "B" => "Bird"]);
-    $index = $arr->indexOf("Tiger");
+    $arr = Arr::make(['L' => 'Leon', 'T' => 'Tiger', 'B' => 'Bird']);
+    $index = $arr->indexOf('Tiger');
     expect($index)->toBeString();
-    expect($index)->toEqual("T");
+    expect($index)->toEqual('T');
     expect($arr->length())->toEqual(3);
 });
 
 it('searches last occurrence arrays', function () {
-    $arr = Arr::make([1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1]);
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
     $index = $arr->lastIndexOf(5);
     expect($index)->toBeInt();
     expect($index)->toEqual(12);
     expect($arr->length())->toEqual(17);
-    $arr = Arr::make(["L1" => "Leon","T1" => "Tiger", "B1" => "Bird", "T2" => "Tiger","B2" => "Bird"]);
-    $index = $arr->lastIndexOf("Tiger");
+    $arr = Arr::make(['L1' => 'Leon', 'T1' => 'Tiger', 'B1' => 'Bird', 'T2' => 'Tiger', 'B2' => 'Bird']);
+    $index = $arr->lastIndexOf('Tiger');
     expect($index)->toBeString();
-    expect($index)->toEqual("T2");
+    expect($index)->toEqual('T2');
     expect($arr->length())->toEqual(5);
 });
 
 it('matches every element', function () {
-    $arr = Arr::make([1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1]);
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
     $bool = $arr->every(fn ($element) => $element > 0);
     expect($bool)->toEqual(true);
     $bool = $arr->every(fn ($element) => $element > 1);
@@ -232,7 +232,7 @@ it('matches every element', function () {
 });
 
 it('matches some element', function () {
-    $arr = Arr::make([1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1]);
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
     $bool = $arr->some(fn ($element) => $element > 0);
     expect($bool)->toEqual(true);
     $bool = $arr->some(fn ($element) => $element > 1);
@@ -249,7 +249,7 @@ it('matches some element', function () {
 });
 
 it('filters some element', function () {
-    $arr = Arr::make([1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1]);
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
     $arr2 = $arr->filter(fn ($element) => $element > 3);
     expect($arr->length())->toEqual(17);
     expect($arr2->length())->toEqual(11);
@@ -258,7 +258,7 @@ it('filters some element', function () {
     expect($arr2->every(fn ($element) => $element > 3))->toBeTrue();
 });
 it('maps elements', function () {
-    $arr = Arr::make([1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1]);
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
     $arr2 = $arr->map(fn ($element) => $element + 1);
 
     expect($arr->length())->toEqual(17);
@@ -269,15 +269,15 @@ it('maps elements', function () {
 });
 
 it('flats array', function () {
-    $arr = Arr::make([ 1, [2,3], 4 , [5,6,7]]);
-    ;
+    $arr = Arr::make([1, [2, 3], 4, [5, 6, 7]]);
+
     $arr2 = $arr->flat();
     expect($arr->length())->toEqual(4);
     expect($arr2->length())->toEqual(7);
 });
 
 it('flats and maps array', function () {
-    $arr = Arr::make([ 1,2,3,4,5,6,7]);
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
 
     $arr2 = $arr->flatMap(fn ($element) => [$element, $element * 2]);
     expect($arr->length())->toEqual(7);
@@ -288,7 +288,7 @@ it('flats and maps array', function () {
 });
 
 it('fills array', function () {
-    $arr = Arr::make([ 1,2,3,4,5,6,7]);
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
     expect($arr->length())->toEqual(7);
     $arr->fill(0, 0, 3);
     expect($arr->length())->toEqual(7);
@@ -301,7 +301,7 @@ it('fills array', function () {
     expect($arr[6])->toEqual(7);
     $arr2 = $arr->filter(fn ($element) => $element == 0);
     expect($arr2->length())->toEqual(4);
-    $arr = Arr::make([ 1,2,3,4,5,6,7]);
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
     $arr->fill(0);
     $allAreZeros = $arr->every(fn ($element) => $element === 0);
     expect($arr->length())->toEqual(7);
@@ -309,46 +309,46 @@ it('fills array', function () {
 });
 
 it('reduces Arr', function () {
-    $arr = Arr::make([ 1,2,3,4,5,6,7]);
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
     $value = $arr->reduce(fn ($previousValue, $currentValue) => $previousValue + $currentValue);
     expect($value)->toBeInt();
     expect($value)->toEqual(28);
 });
 
 it('reduces Arr in reverse way', function () {
-    $arr = Arr::make([ 1,2,3,4,5,6,7]);
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
     $value = $arr->reduceRight(fn ($previousValue, $currentValue) => $previousValue + $currentValue);
     expect($value)->toBeInt();
     expect($value)->toEqual(28);
 });
 
 it('reverses Arr', function () {
-    $arr = Arr::make([1,2,3,4,5,6,7]);
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
     $arr2 = $arr->reverse();
     expect($arr2->length())->toEqual(7);
-    expect($arr2->join())->toEqual("7,6,5,4,3,2,1");
-    expect($arr->join())->toEqual("7,6,5,4,3,2,1");
+    expect($arr2->join())->toEqual('7,6,5,4,3,2,1');
+    expect($arr->join())->toEqual('7,6,5,4,3,2,1');
     $arr->push(0);
-    expect($arr2->join())->toEqual("7,6,5,4,3,2,1");
-    expect($arr->join())->toEqual("7,6,5,4,3,2,1,0");
+    expect($arr2->join())->toEqual('7,6,5,4,3,2,1');
+    expect($arr->join())->toEqual('7,6,5,4,3,2,1,0');
 });
 
 it('sorts Arr', function () {
-    $arr = Arr::make([ 6,2,4,2,1,9,7]);
-    expect($arr->join())->toEqual("6,2,4,2,1,9,7");
+    $arr = Arr::make([6, 2, 4, 2, 1, 9, 7]);
+    expect($arr->join())->toEqual('6,2,4,2,1,9,7');
     $arr->sort();
     expect($arr->length())->toEqual(7);
-    expect($arr->join())->toEqual("1,2,2,4,6,7,9");
+    expect($arr->join())->toEqual('1,2,2,4,6,7,9');
 });
 it('sorts and change Arr', function () {
     $months = Arr::make(['March', 'Jan', 'Feb', 'Dec']);
     $monthsSorted = $months->sort();
     expect($months->length())->toEqual(4);
     expect($monthsSorted->length())->toEqual(4);
-    expect($months[3])->toEqual("March");
-    expect($monthsSorted[3])->toEqual("March");
+    expect($months[3])->toEqual('March');
+    expect($monthsSorted[3])->toEqual('March');
     $month = $months->pop();
-    expect($month)->toEqual("March");
+    expect($month)->toEqual('March');
     expect($months[3])->toBeNull();
     expect($monthsSorted[3])->toBeNull();
 });
@@ -356,19 +356,19 @@ it('sorts and change Arr', function () {
 it('splices Arr', function () {
     $months = Arr::make(['Jan', 'March', 'April', 'June']);
     $months->splice(1, 0, 'Feb');
-    expect($months->join())->toEqual("Jan,Feb,March,April,June");
+    expect($months->join())->toEqual('Jan,Feb,March,April,June');
     $months->splice(4, 1, 'May');
-    expect($months->join())->toEqual("Jan,Feb,March,April,May");
+    expect($months->join())->toEqual('Jan,Feb,March,April,May');
     $months->splice(1);
-    expect($months->join())->toEqual("Jan");
+    expect($months->join())->toEqual('Jan');
 });
 
 it('stringifies an Arr', function () {
     $months = Arr::make(['Jan', 'Feb', 'March', 'April', 'May']);
-    expect($months->toString())->toEqual("Jan,Feb,March,April,May");
+    expect($months->toString())->toEqual('Jan,Feb,March,April,May');
 
     $arr = Arr::make([1, 2, 'a', '1a']);
-    expect($arr->toString())->toEqual("1,2,a,1a");
+    expect($arr->toString())->toEqual('1,2,a,1a');
 });
 
 it('checks is array', function () {
@@ -404,12 +404,12 @@ it('tests keys() method', function () {
     $arrKeys = $arr->keys(true);
     expect($arrKeys)->toBeObject();
     expect($arrKeys->length())->toEqual(12);
-    expect($arrKeys[4])->toEqual("05");
+    expect($arrKeys[4])->toEqual('05');
 
     $keys = $arr->keys();
     expect($keys)->toBeArray();
     expect(count($keys))->toEqual(12);
-    expect($keys[4])->toEqual("05");
+    expect($keys[4])->toEqual('05');
 
     foreach ($arrKeys as $key => $value) {
         expect($arrKeys[$key])->toEqual($keys[$key]);
@@ -476,7 +476,6 @@ it(' extract values', function () {
         'banana' => '🍌',
         '🍊',
         '🍍', ]);
-
 
     expect($fruits->arr())->toBeArray();
     expect($fruits->length())->toEqual(8);

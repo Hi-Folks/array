@@ -9,6 +9,7 @@ class Arr implements \Iterator, \ArrayAccess
     use Calculable;
 
     protected array $arr;
+
     protected int $idx;
 
     public function __construct(array $arr = [])
@@ -27,8 +28,8 @@ class Arr implements \Iterator, \ArrayAccess
     }
 
     /**
-     * @param mixed $value
-     * @param int $count
+     * @param  mixed  $value
+     * @param  int  $count
      * @return self
      */
     public static function fromValue(mixed $value, int $count): self
@@ -44,7 +45,8 @@ class Arr implements \Iterator, \ArrayAccess
     /**
      * Creates a new Arr instance from a variable number of arguments,
      * regardless of number or type of the arguments.
-     * @param mixed ...$elements
+     *
+     * @param  mixed  ...$elements
      * @return Arr object
      */
     public static function of(mixed ...$elements): self
@@ -83,7 +85,8 @@ class Arr implements \Iterator, \ArrayAccess
      * allowing for positive and negative integers.
      * Negative integers count back from the last item in the array.
      * For lists, map, associative array, uses get() method.
-     * @param int $index the index of the element of the array  (negative cont back from last item
+     *
+     * @param  int  $index the index of the element of the array  (negative cont back from last item
      * @return mixed item value (null if $index is not existent
      */
     public function at(int $index): mixed
@@ -97,7 +100,9 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Return the current element
+     *
      * @link https://php.net/manual/en/iterator.current.php
+     *
      * @return mixed Can return any type.
      */
     public function current(): mixed
@@ -107,7 +112,9 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Move forward to next element
+     *
      * @link https://php.net/manual/en/iterator.next.php
+     *
      * @return void Any returned value is ignored.
      */
     public function next(): void
@@ -122,7 +129,9 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Return the key of the current element
+     *
      * @link https://php.net/manual/en/iterator.key.php
+     *
      * @return string|float|int|bool|null scalar on success, or null on failure.
      */
     public function key(): mixed
@@ -132,7 +141,9 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Checks if current position is valid
+     *
      * @link https://php.net/manual/en/iterator.valid.php
+     *
      * @return bool The return value will be casted to boolean and then evaluated.
      * Returns true on success or false on failure.
      */
@@ -143,7 +154,9 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Rewind the Iterator to the first element
+     *
      * @link https://php.net/manual/en/iterator.rewind.php
+     *
      * @return void Any returned value is ignored.
      */
     public function rewind(): void
@@ -153,7 +166,8 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * It executes a provided function ($callback) once for each element.
-     * @param callable $callback
+     *
+     * @param  callable  $callback
      * @return Arr
      */
     public function forEach(callable $callback): self
@@ -167,7 +181,8 @@ class Arr implements \Iterator, \ArrayAccess
      * Returns a new array [] or a new Arr object that contains the keys
      * for each index in the Arr object
      * It returns Arr or [] depending on $returnArrClass value
-     * @param bool $returnArrClass true if you need Arr object
+     *
+     * @param  bool  $returnArrClass true if you need Arr object
      * @return int[]|string[]|Arr
      */
     public function keys($returnArrClass = false): array|Arr
@@ -190,6 +205,7 @@ class Arr implements \Iterator, \ArrayAccess
     /**
      * It removes the last element from an array and returns that element.
      * This method changes the length of the Arr
+     *
      * @return mixed the element removed
      */
     public function pop(): mixed
@@ -199,7 +215,8 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Add element to start of Arr and return new length
-     * @param mixed $element the elements to add to the front of the array
+     *
+     * @param  mixed  $element the elements to add to the front of the array
      * @return int the new length of the array upon which the method was called.
      */
     public function unshift(mixed ...$element): int
@@ -211,6 +228,7 @@ class Arr implements \Iterator, \ArrayAccess
      * Removes the first element from an array and
      * returns that removed element.
      * This method changes the length of the array.
+     *
      * @return mixed the removed element
      */
     public function shift(): mixed
@@ -232,7 +250,8 @@ class Arr implements \Iterator, \ArrayAccess
      * Returns new Arr joining more elements: array, Arr, scalar type.
      * This method does not change the existing Arr object,
      * but instead returns a new Arr object
-     * @param mixed ...$elements
+     *
+     * @param  mixed  ...$elements
      * @return Arr object
      */
     public function concat(mixed ...$elements): Arr
@@ -240,18 +259,18 @@ class Arr implements \Iterator, \ArrayAccess
         $array = $this->arr;
         foreach ($elements as $element) {
             switch (gettype($element)) {
-                case "array":
+                case 'array':
                     $array = array_merge($array, $element);
 
                     break;
-                case "string":
-                case "integer":
-                case "boolean":
-                case "double":
+                case 'string':
+                case 'integer':
+                case 'boolean':
+                case 'double':
                     $array = array_merge($array, [$element]);
 
                     break;
-                case "object":
+                case 'object':
                     if (get_class($element) === get_class($this)) {
                         $array = array_merge($array, $element->arr());
                     }
@@ -265,10 +284,11 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Joins all elements into a string, separated by $separator
-     * @param string $separator the separator, could be also a string with more than 1 char
+     *
+     * @param  string  $separator the separator, could be also a string with more than 1 char
      * @return string
      */
-    public function join(string $separator = ","): string
+    public function join(string $separator = ','): string
     {
         return implode($separator, $this->arr);
     }
@@ -278,8 +298,9 @@ class Arr implements \Iterator, \ArrayAccess
      * selected from $start to $end ($end not included)
      * where start and end represent the index of items in that array.
      * The original array will not be modified
-     * @param int $start start index (array start from 0, start included)
-     * @param int $end end index (array starts from 0, end not included)
+     *
+     * @param  int  $start start index (array start from 0, start included)
+     * @param  int  $end end index (array starts from 0, end not included)
      * @return Arr
      */
     public function slice(int $start, int $end = null): Arr
@@ -299,7 +320,8 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Returns index of first occurrence of element in arr
-     * @param mixed $searchElement the element to search
+     *
+     * @param  mixed  $searchElement the element to search
      * @return string|int|bool the index of element found. If it is not found, false is returned
      */
     public function indexOf(mixed $searchElement): string|int|bool
@@ -309,9 +331,9 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Returns index of last occurrence of element in Arr
-     * @param mixed $searchElement the element to search
+     *
+     * @param  mixed  $searchElement the element to search
      * @return string|int|bool the index of element found. If it is not found, false is returned
-
      */
     public function lastIndexOf(mixed $searchElement): string|int|bool
     {
@@ -320,7 +342,8 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Returns true if all elements in Arr pass the test in fn.
-     * @param callable $callback
+     *
+     * @param  callable  $callback
      * @return bool
      */
     public function every(callable $callback): bool
@@ -342,9 +365,9 @@ class Arr implements \Iterator, \ArrayAccess
      * the provided function returns true;
      * otherwise it returns false.
      * It doesn't modify the array.
-     * @param callable $callback
-     * @return bool
      *
+     * @param  callable  $callback
+     * @return bool
      */
     public function some(callable $callback): bool
     {
@@ -360,8 +383,9 @@ class Arr implements \Iterator, \ArrayAccess
     /**
      * Determines whether the array includes a certain value $element among its entries,
      * returning true or false as appropriate
-     * @param mixed $element
-     * @param int|null $fromIndex
+     *
+     * @param  mixed  $element
+     * @param  int|null  $fromIndex
      * @return bool
      */
     public function includes(mixed $element, int $fromIndex = null): bool
@@ -375,7 +399,8 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Returns new Arr with elements of arr passing the filtering function fn
-     * @param callable $callback the function for filtering
+     *
+     * @param  callable  $callback the function for filtering
      * @return Arr
      */
     public function filter(callable $callback): Arr
@@ -386,7 +411,8 @@ class Arr implements \Iterator, \ArrayAccess
     /**
      * Returns a new Arr populated with the results of
      * calling a provided function on every element in the calling array
-     * @param callable $callback
+     *
+     * @param  callable  $callback
      * @return Arr
      */
     public function map(callable $callback): Arr
@@ -396,14 +422,14 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Returns a new Arr object as flatten array with subarrays concatenated
+     *
      * @return Arr
      */
     public function flat(): self
     {
         $array = array_reduce(
             $this->arr,
-            fn ($result, $element) =>
-                array_merge($result, is_array($element) ? [...$element] : [$element]),
+            fn ($result, $element) => array_merge($result, is_array($element) ? [...$element] : [$element]),
             []
         );
 
@@ -412,7 +438,8 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * The flatMap method is identical to a map followed by a call to flat of depth 1
-     * @param callable $callback
+     *
+     * @param  callable  $callback
      */
     public function flatMap(callable $callback): self
     {
@@ -431,9 +458,10 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Changes all elements in range from $start for $count, to the specified value
-     * @param mixed $value the value to fill the array with
-     * @param int $start start index (from 0)
-     * @param int|null $end end index (default, the end of array)
+     *
+     * @param  mixed  $value the value to fill the array with
+     * @param  int  $start start index (from 0)
+     * @param  int|null  $end end index (default, the end of array)
      * @return void
      */
     public function fill(mixed $value, int $start = 0, int $end = null)
@@ -451,8 +479,9 @@ class Arr implements \Iterator, \ArrayAccess
      * in order, passing in the return value from the calculation on the preceding element.
      * The final result of running the reducer across all elements of the array
      * is a single value.
-     * @param callable $callback
-     * @param mixed $initialValue
+     *
+     * @param  callable  $callback
+     * @param  mixed  $initialValue
      * @return mixed the result
      */
     public function reduce(callable $callback, mixed $initialValue = 0): mixed
@@ -463,8 +492,9 @@ class Arr implements \Iterator, \ArrayAccess
     /**
      * Applies a function against an accumulator and each value of the array
      * (from right-to-left) to reduce it to a single value.
-     * @param callable $callback
-     * @param mixed $initialValue
+     *
+     * @param  callable  $callback
+     * @param  mixed  $initialValue
      * @return mixed
      */
     public function reduceRight(callable $callback, mixed $initialValue = 0): mixed
@@ -476,7 +506,8 @@ class Arr implements \Iterator, \ArrayAccess
      * Reverses an array in place, and it returns also a new instance of Arr
      * The first array element becomes the last,
      * and the last array element becomes the first.
-     * @param bool $preserve_keys if set to true keys are preserved
+     *
+     * @param  bool  $preserve_keys if set to true keys are preserved
      * @return Arr
      */
     public function reverse(bool $preserve_keys = false): Arr
@@ -489,6 +520,7 @@ class Arr implements \Iterator, \ArrayAccess
     /**
      * Sorts the elements of an Arr object in place and returns the sorted Arr object.
      * The default sort order is ascending
+     *
      * @return Arr
      */
     public function sort(): Arr
@@ -503,9 +535,10 @@ class Arr implements \Iterator, \ArrayAccess
      * Changes the contents of an array by removing or replacing existing elements
      * and/or adding new elements in place.
      * To access part of an array without modifying it, see slice().
-     * @param int $start the index at which to start changing the array
-     * @param int|null $deleteCount an integer indicating the number of elements in the array to remove from $start
-     * @param mixed $newElements The elements to add to the array, beginning from $start
+     *
+     * @param  int  $start the index at which to start changing the array
+     * @param  int|null  $deleteCount an integer indicating the number of elements in the array to remove from $start
+     * @param  mixed  $newElements The elements to add to the array, beginning from $start
      * @return Arr an array containing the deleted elements
      */
     public function splice(int $start, int $deleteCount = null, mixed $newElements = []): Arr
@@ -515,6 +548,7 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Returns a string representing arr its elements (same as arr.join(','))
+     *
      * @return string
      */
     public function toString(): string
@@ -524,7 +558,8 @@ class Arr implements \Iterator, \ArrayAccess
 
     /**
      * Returns true if the input is an array
-     * @param mixed $input the input value, to test if it is an array
+     *
+     * @param  mixed  $input the input value, to test if it is an array
      * @return bool true if $input is an array, false otherwise
      */
     public static function isArray(mixed $input): bool

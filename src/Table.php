@@ -47,7 +47,7 @@ class Table extends Arr
     }
 
     /**
-     * @param array $columns
+     * @param  array  $columns
      * @return self
      */
     public function select(array $columns): self
@@ -60,7 +60,8 @@ class Table extends Arr
     /**
      * It returns a new Table instance with data, excluding the attributes listed in
      * $columns
-     * @param array $columns
+     *
+     * @param  array  $columns
      * @return self
      */
     public function except(array $columns): self
@@ -71,9 +72,9 @@ class Table extends Arr
     }
 
     /**
-     * @param string|int $field
-     * @param mixed $operator
-     * @param mixed $value
+     * @param  string|int  $field
+     * @param  mixed  $operator
+     * @param  mixed  $value
      * @return self
      */
     public function where(string|int $field, mixed $operator = null, mixed $value = null): self
@@ -88,14 +89,14 @@ class Table extends Arr
         }
 
         $function = match ($operator) {
-            "==" => fn ($element) => $element[$field] == $value,
-            "===" => fn ($element) => $element[$field] === $value,
-            ">" => fn ($element) => $element[$field] > $value,
-            "<" => fn ($element) => $element[$field] < $value,
-            ">=" => fn ($element) => $element[$field] >= $value,
-            "<=" => fn ($element) => $element[$field] <= $value,
-            "!=" => fn ($element) => $element[$field] != $value,
-            "!==" => fn ($element) => $element[$field] !== $value,
+            '==' => fn ($element) => $element[$field] == $value,
+            '===' => fn ($element) => $element[$field] === $value,
+            '>' => fn ($element) => $element[$field] > $value,
+            '<' => fn ($element) => $element[$field] < $value,
+            '>=' => fn ($element) => $element[$field] >= $value,
+            '<=' => fn ($element) => $element[$field] <= $value,
+            '!=' => fn ($element) => $element[$field] != $value,
+            '!==' => fn ($element) => $element[$field] !== $value,
             default => fn ($element) => $element[$field] == $value
         };
         $filteredArray = array_filter($this->arr, $function);
@@ -104,8 +105,8 @@ class Table extends Arr
     }
 
     /**
-     * @param string|int $destinationField
-     * @param callable $function
+     * @param  string|int  $destinationField
+     * @param  callable  $function
      * @return $this
      */
     public function calc(string|int $destinationField, callable $function): self
