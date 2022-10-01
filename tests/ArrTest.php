@@ -498,7 +498,8 @@ it('creates entries', function () {
         'apple' => '🍎',
         'banana' => '🍌',
         '🍊',
-        '🍍', ]);
+        '🍍',
+    ]);
 
     $entries = $fruits->entries();
     expect($entries->arr())->toBeArray();
