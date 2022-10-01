@@ -289,3 +289,33 @@ $onlyFruits = $fruits->values();
  */
 ```
 
+## Extract entries
+The *entries()* method returns a new Arr object that contains the key/value pairs for each index in the array.
+
+```php
+use HiFolks\DataType\Arr;
+$fruits = Arr::make([
+    7 => '🥝',
+    -1 => '🍓',
+    1 => '🍋',
+    'mango' => '🥭',
+    'apple' => '🍎',
+    'banana' => '🍌',
+    '🍊',
+    '🍍', ]);
+$entries = $fruits->entries();
+var_dump($entries->arr());
+/*
+[
+    [7, '🥝'],
+    [-1, '🍓'],
+    [1, '🍋'],
+    ['mango', '🥭'],
+    ['apple', '🍎'],
+    ['banana', '🍌'],
+    [8, '🍊'],
+    [9, '🍍']
+]
+*/
+```
+

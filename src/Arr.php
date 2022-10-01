@@ -642,4 +642,17 @@ class Arr implements Iterator, ArrayAccess
     {
         return new self(array_values($this->arr));
     }
+
+    /**
+     * @return Arr object that contains the key/value pairs for each index in the array
+     */
+    public function entries(): self
+    {
+        $pairs = [];
+        foreach ($this->arr as $k => $v) {
+            $pairs[] = [$k, $v];
+        }
+
+        return self::make($pairs);
+    }
 }

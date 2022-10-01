@@ -190,6 +190,18 @@ print_result($arr->includes('2'));
 print_result($arr->includes(3, 3));
 print_result($arr->includes(3, 2));
 
+// Extract entries with entries()
+$fruits = Arr::make([
+    'kiwi' => '🥝',
+    'fragola' => '🍓',
+    'lemon' => '🍋',
+    'mango' => '🥭',
+    'apple' => '🍎',
+    'banana' => '🍌', ]);
+// entries as array
+$entries = $fruits->entries();
+print_result($entries);
+
 /**
  * Print a line for string, integer, array, boolean.
  */
