@@ -257,6 +257,20 @@ it('filters some element', function () {
     expect($arr->every(fn ($element) => $element <= 3))->toBeFalse();
     expect($arr2->every(fn ($element) => $element > 3))->toBeTrue();
 });
+
+it('finds the first index of some element', function () {
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
+    $index = $arr->findIndex(fn ($element) => $element > 0);
+    expect($index)->toBeInt();
+    expect($index)->toEqual(0);
+    $index = $arr->findIndex(fn ($element) => $element > 1);
+    expect($index)->toEqual(1);
+    $index = $arr->findIndex(fn ($element) => $element > 10000);
+    expect($index)->toEqual(-1);
+    $index = $arr->findIndex(fn ($element, $index) => $element > 1 && $index > 1);
+    expect($index)->toEqual(2);
+});
+
 it('maps elements', function () {
     $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
     $arr2 = $arr->map(fn ($element) => $element + 1);

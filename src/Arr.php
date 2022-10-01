@@ -439,6 +439,23 @@ class Arr implements Iterator, ArrayAccess
     }
 
     /**
+     * Returns index of the first element in arr passing the callback function
+     *
+     * @param  callable  $callback the function for finding the index
+     * @return int
+     */
+    public function findIndex(callable $callback): int
+    {
+        foreach ($this->arr as $key => $element) {
+            if ($callback($element, $key, $this->arr)) {
+                return $key;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
      * Returns a new Arr populated with the results of
      * calling a provided function on every element in the calling array
      *

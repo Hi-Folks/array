@@ -5,6 +5,7 @@
 - Table::except() method to exclude some data
 - Table::groupThenApply() method to apply aggregate functions
 - Arr::from() method for creating new Arr from a string or array-like object;
+- Arr::findIndex() method for finding the index of some element
 
 ## 0.0.7 - 2022-04-25
 - Review where method, where(price, '>', 100)
