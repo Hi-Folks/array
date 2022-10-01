@@ -1,11 +1,17 @@
 # Changelog
 
-## 0.0.8 - WIP
+## 0.0.8 - 2022-10-01
 - not equal operator for where method
 - Table::except() method to exclude some data
 - Table::groupThenApply() method to apply aggregate functions
-- Arr::from() method for creating new Arr from a string or array-like object;
-- Arr::findIndex() method for finding the index of some element
+
+From Hacktoberfest:
+- Add Pint as style checker by @tharun634
+- Arr::from() method for creating new Arr from a string or array-like object by @nuernbergerA
+- Arr::findIndex() method for finding the index of some element by @martijnengler
+- Arr::entries() method returns a new Arr object that contains the key/value pairs for each index in the array by @LeoVie
+
+
 
 ## 0.0.7 - 2022-04-25
 - Review where method, where(price, '>', 100)
