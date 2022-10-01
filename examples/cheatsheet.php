@@ -188,25 +188,25 @@ print_result($arr->includes(3, 2));
 function print_result(mixed $something): void
 {
     switch (gettype($something)) {
-    case 'string':
-        echo 'STRING  : '.$something.PHP_EOL;
+        case 'string':
+            echo 'STRING  : '.$something.PHP_EOL;
 
-        break;
-    case 'integer':
-        echo 'INTEGER : '.$something.PHP_EOL;
+            break;
+        case 'integer':
+            echo 'INTEGER : '.$something.PHP_EOL;
 
-        break;
-    case 'array':
-        echo 'ARRAY   : '.implode(',', $something).PHP_EOL;
+            break;
+        case 'array':
+            echo 'ARRAY   : '.implode(',', $something).PHP_EOL;
 
-        break;
-    case 'boolean':
-        echo 'BOOLEAN : '.(($something) ? 'true' : 'false').PHP_EOL;
+            break;
+        case 'boolean':
+            echo 'BOOLEAN : '.(($something) ? 'true' : 'false').PHP_EOL;
 
-        break;
-    default:
-        var_dump($something);
+            break;
+        default:
+            var_dump($something);
 
-        break;
+            break;
     }
 }
