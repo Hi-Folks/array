@@ -502,3 +502,30 @@ it(' extract values', function () {
     expect($onlyFruits[3])->toEqual('🥭');
     expect($onlyFruits[7])->toEqual('🍍');
 });
+
+it('creates entries', function () {
+    $fruits = Arr::make([
+        7 => '🥝',
+        -1 => '🍓',
+        1 => '🍋',
+        'mango' => '🥭',
+        'apple' => '🍎',
+        'banana' => '🍌',
+        '🍊',
+        '🍍',
+    ]);
+
+    $entries = $fruits->entries();
+    expect($entries->arr())->toBeArray();
+    expect($entries->length())->toEqual(8);
+    expect($entries)->toEqual(Arr::make([
+        [7, '🥝'],
+        [-1, '🍓'],
+        [1, '🍋'],
+        ['mango', '🥭'],
+        ['apple', '🍎'],
+        ['banana', '🍌'],
+        [8, '🍊'],
+        [9, '🍍'],
+    ]));
+});
