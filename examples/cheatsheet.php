@@ -137,6 +137,14 @@ print_result($arr->length());
 $isArray = Arr::isArray(['Jan', 'Feb', 'March', 'April', 'May']);
 print_result($isArray);
 
+// Create Arr from a string
+$arr = Arr::from('foo');
+print_result($arr);
+
+// Create Arr from array-like object
+$arr = Arr::from([1, 2, 3], fn ($x) => $x + $x);
+print_result($arr);
+
 // Create Arr from a function
 $arr = Arr::fromFunction(fn () => random_int(0, 10), 5);
 print_result($arr);
