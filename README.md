@@ -52,7 +52,11 @@ The Arr class provides some methods:
 - sort(): sort the array;
 - splice(): changes content of arr removing, replacing and adding elements;
 - toString(): the string representing the array (same as join(','));
-- isArray(): check if the input is an array.
+- isArray(): check if the input is an array;
+- from(): for creating new Arr from a string or array-like object;
+- findIndex(): for finding the index of some element;
+- entries(): eturns a new Arr object that contains the key/value pairs for each index in the array.
+
 
 ## Table class
 Table class allows you to manage bi dimensional array, something like:
