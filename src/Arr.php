@@ -2,9 +2,13 @@
 
 namespace HiFolks\DataType;
 
+use ArrayAccess;
+use Closure;
 use HiFolks\DataType\Traits\Calculable;
+use Iterator;
+use Traversable;
 
-class Arr implements \Iterator, \ArrayAccess
+class Arr implements Iterator, ArrayAccess
 {
     use Calculable;
 
@@ -35,6 +39,32 @@ class Arr implements \Iterator, \ArrayAccess
     public static function fromValue(mixed $value, int $count): self
     {
         return self::make(array_fill(0, $count, $value));
+    }
+
+    /**
+     * Creates a new Arr instance from a string or array-like object.
+     *
+     * @param iterable|string $arrayLike
+     * @param \Closure|null $mapFn
+     * @return self
+     */
+    public static function from(iterable|string $arrayLike, ?Closure $mapFn = null): self
+    {
+        if (is_string($arrayLike)) {
+            $arrayLike = str_split($arrayLike);
+        }
+
+        if (is_a($arrayLike, Traversable::class)) {
+            $arrayLike = iterator_to_array($arrayLike);
+        }
+
+        $array = self::make((array) $arrayLike);
+
+        if (! is_callable($mapFn)) {
+            return $array;
+        }
+
+        return $array->map($mapFn);
     }
 
     public static function make(array $arr = []): self

@@ -193,6 +193,22 @@ echo $arr[4];
 // 🍎
 ```
 
+## Create array from astring or array-like object
+The `Arr::from()` method creates a new Arr instance from a string or array-like object.
+You can pass an optional Closure as 2nd parameter to map over the array. 
+
+```php
+use HiFolks\DataType\Arr;
+
+$arr = Arr::from('foo');
+var_dump($arr->arr());
+// ['f', 'o', 'o']
+
+$arr = Arr::from([1, 2, 3], , fn ($x) => $x + $x)->arr());
+var_dump($arr->arr());
+// [2, 4, 6]
+```
+
 ## Extract keys
 The keys() method returns a new array [] or Arr object that contains the keys for each index in the array.
 
