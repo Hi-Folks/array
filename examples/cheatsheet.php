@@ -202,6 +202,18 @@ $fruits = Arr::make([
 $entries = $fruits->entries();
 print_result($entries);
 
+// Returns index of the first element in the array that satisfies the testing function
+$arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
+print_result($arr->findIndex(fn ($element) => $element > 0));
+// 0
+print_result($arr->findIndex(fn ($element) => $element > 1));
+// 1
+print_result($arr->findIndex(fn ($element) => $element > 10000));
+// -1
+print_result($arr->findIndex(fn ($element, $index) => $element > 1 && $index > 1));
+// 2
+
+
 /**
  * Print a line for string, integer, array, boolean.
  */

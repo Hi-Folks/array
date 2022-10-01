@@ -289,6 +289,7 @@ $onlyFruits = $fruits->values();
  */
 ```
 
+
 ## Extract entries
 The *entries()* method returns a new Arr object that contains the key/value pairs for each index in the array.
 
@@ -317,5 +318,24 @@ var_dump($entries->arr());
     [9, '🍍']
 ]
 */
+```
+
+
+## Get index of element  that satisfies testing function
+Takes a testing function as an argument, and returns the index of the first item that satisfies the testing function.
+
+Parameters passed to the testing function are $index, $element, $arr
+
+```php
+use HiFolks\DataType\Arr;
+$arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
+var_dump($arr->findIndex(fn ($element) => $element > 0));
+// 0
+var_dump($arr->findIndex(fn ($element) => $element > 1));
+// 1
+var_dump($arr->findIndex(fn ($element) => $element > 10000));
+// -1
+var_dump($arr->findIndex(fn ($element, $index) => $element > 1 && $index > 1));
+// 2
 ```
 
