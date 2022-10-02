@@ -1,4 +1,10 @@
 # Changelog
+## 0.0.9 - 2022-10-02
+From Hacktoberfest:
+- Arr::find() method that returns the first element in the array that satisfies the testing function by @tombenevides
+- Arr::copyWithin() method that copies part of the array to a location but keeps the original length by @RoadSigns
+- Improved code style by adding missing return types, removing unused variables, improving phpdocs, removing default values by @Tautve
+- PHP Stan level 5
 
 ## 0.0.8 - 2022-10-01
 - not equal operator for where method

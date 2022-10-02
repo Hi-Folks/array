@@ -4,16 +4,12 @@ namespace HiFolks\DataType;
 
 class Table extends Arr
 {
-    private $schema = [
-
-    ];
-
     public static function make(array $arr = []): self
     {
         return new self($arr);
     }
 
-    public function insert(array $row)
+    public function insert(array $row): void
     {
         $this->append($row);
     }
@@ -121,7 +117,7 @@ class Table extends Arr
     public function groupBy(string|int $field): array
     {
         $result = [];
-        foreach ($this->arr as $key => $value) {
+        foreach ($this->arr as $value) {
             if (! array_key_exists($value[$field], $result)) {
                 $result[$value[$field]] = [];
             }

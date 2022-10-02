@@ -560,3 +560,43 @@ it('creates entries', function () {
         [9, '🍍'],
     ]));
 });
+
+it('tests copyWithin() method with one parameter', function () {
+    $arr = Arr::make([1, 2, 3, 4, 5]);
+
+    $result = $arr->copyWithin(-2);
+    expect($result)
+        ->toBeArray()
+//        ->toHaveCount(5)
+        ->toEqual([1, 2, 3, 1, 2]);
+});
+
+it('tests copyWithin() method with two parameters', function () {
+    $arr = Arr::make([1, 2, 3, 4, 5]);
+
+    $result = $arr->copyWithin(0, 3);
+    expect($result)
+        ->toBeArray()
+        ->toHaveCount(5)
+        ->toEqual([4, 5, 3, 4, 5]);
+});
+
+it('tests copyWithin() method with all the parameters', function () {
+    $arr = Arr::make([1, 2, 3, 4, 5]);
+
+    $result = $arr->copyWithin(0, 3, 4);
+    expect($result)
+        ->toBeArray()
+        ->toHaveCount(5)
+        ->toEqual([4, 2, 3, 4, 5]);
+});
+
+it('tests copyWithin() method with all the parameters negative', function () {
+    $arr = Arr::make([1, 2, 3, 4, 5]);
+
+    $result = $arr->copyWithin(-2, -3, -1);
+    expect($result)
+        ->toBeArray()
+        ->toHaveCount(5)
+        ->toEqual([1, 2, 3, 3, 4]);
+});

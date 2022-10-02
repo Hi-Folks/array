@@ -1,6 +1,6 @@
 {
     "name": "hi-folks/array",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "Arr class for managing arrays, built on top of the PHP array functions.",
     "keywords": [
         "Hi-Folks",
@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "laravel/pint": "^1.2",
-        "pestphp/pest": "^1.20",
+        "pestphp/pest": "^1.22",
         "phpstan/phpstan": "^1.6"
     },
     "autoload": {
@@ -45,7 +45,7 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": false
+            "pestphp/pest-plugin": true
         }
     },
     "minimum-stability": "dev",

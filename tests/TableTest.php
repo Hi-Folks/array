@@ -62,6 +62,9 @@ it('can filter', function () use ($dataTable) {
     expect($table->select(['product', 'price'])->where('price', 100)->last())->toHaveCount(2);
     expect($table->select(['product', 'price'])->where('price', 100))->toHaveCount(2);
     expect($table->select(['product', 'price'])->where('price', 100)->last())->toHaveKeys(['product', 'price']);
+    expect($table->select(['product', 'price'])->where('price', "IDONTKNOW", 100)->last())->toHaveKeys(['product', 'price']);
+    expect($table->select(['product', 'price'])->where('price', "IDONTKNOW", 200)->getFromLast("price"))->toEqual(200);
+    expect($table->select(['product', 'price'])->where('price', "IDONTKNOW", 100)->getFromLast("price"))->toEqual(100);
 });
 
 it('can filter as array', function () use ($dataTable) {
@@ -117,7 +120,7 @@ it('can create calculated field', function () use ($dataTable) {
     $table = Table::make($dataTable);
     $arr = $table
         ->select(['product', 'price'])
-        ->where('price', '>', 100, )
+        ->where('price', '>', 100)
         ->calc('new_field', fn ($item) => $item['price'] * 2)
         ->arr();
     expect($arr)->toHaveCount(3);
@@ -132,11 +135,49 @@ it('can group and sum', function () use ($dataTable) {
         ->groupThenApply(
             'product',
             'total',
-            Operation::sum('price'),
-            0
+            Operation::sum('price')
         );
 
     expect($arr)->toHaveCount(4);
     expect($arr)->toHaveKeys(['Desk', 'Chair', 'Door', 'Bookcase']);
     expect($arr['Door']['total'])->toEqual(400);
+});
+
+it('insert', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    expect($table->arr())->toHaveCount(5);
+    $table->insert([
+        ["product" => "Door", "price" => 5],
+        ["product" => "Door", "price" => 6],
+    ]);
+    expect($table->arr())->toHaveCount(7);
+    $arr = $table
+        ->groupThenApply(
+            'product',
+            'total',
+            Operation::sum('price')
+        );
+    expect($arr['Door']['total'])->toEqual(411);
+});
+
+it('get from last', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    expect($table->arr())->toHaveCount(5);
+    $table->insert([
+        ["product" => "Door", "price" => 5],
+        ["product" => "Door", "price" => 6],
+    ]);
+    expect($table->arr())->toHaveCount(7);
+    expect($table->getFromLast("price"))->toEqual(6);
+});
+
+it('get from first', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    expect($table->arr())->toHaveCount(5);
+    $table->insert([
+        ["product" => "Door", "price" => 5],
+        ["product" => "Door", "price" => 6],
+    ]);
+    expect($table->arr())->toHaveCount(7);
+    expect($table->getFromFirst("price"))->toEqual(200);
 });
