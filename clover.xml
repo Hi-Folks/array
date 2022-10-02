@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1664736728">
-  <project timestamp="1664736728">
+<coverage generated="1664737131">
+  <project timestamp="1664737131">
     <file name="/home/runner/work/array/array/src/Arr.php">
       <class name="HiFolks\DataType\Arr" namespace="global">
         <metrics complexity="89" methods="54" coveredmethods="54" conditionals="0" coveredconditionals="0" statements="134" coveredstatements="134" elements="188" coveredelements="188"/>
       </class>
-      <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="70"/>
-      <line num="19" type="stmt" count="70"/>
+      <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="71"/>
+      <line num="19" type="stmt" count="71"/>
       <line num="22" type="method" name="fromFunction" visibility="public" complexity="2" crap="2" count="1"/>
       <line num="24" type="stmt" count="1"/>
       <line num="25" type="stmt" count="1"/>
@@ -23,14 +23,14 @@
       <line num="61" type="stmt" count="3"/>
       <line num="62" type="stmt" count="2"/>
       <line num="65" type="stmt" count="1"/>
-      <line num="68" type="method" name="make" visibility="public" complexity="1" crap="1" count="54"/>
-      <line num="70" type="stmt" count="54"/>
+      <line num="68" type="method" name="make" visibility="public" complexity="1" crap="1" count="55"/>
+      <line num="70" type="stmt" count="55"/>
       <line num="80" type="method" name="of" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="82" type="stmt" count="1"/>
-      <line num="85" type="method" name="count" visibility="public" complexity="1" crap="1" count="38"/>
-      <line num="87" type="stmt" count="38"/>
-      <line num="90" type="method" name="length" visibility="public" complexity="1" crap="1" count="35"/>
-      <line num="92" type="stmt" count="35"/>
+      <line num="85" type="method" name="count" visibility="public" complexity="1" crap="1" count="39"/>
+      <line num="87" type="stmt" count="39"/>
+      <line num="90" type="method" name="length" visibility="public" complexity="1" crap="1" count="36"/>
+      <line num="92" type="stmt" count="36"/>
       <line num="98" type="method" name="arr" visibility="public" complexity="1" crap="1" count="30"/>
       <line num="100" type="stmt" count="30"/>
       <line num="106" type="method" name="get" visibility="public" complexity="1" crap="1" count="21"/>
@@ -115,8 +115,8 @@
       <line num="421" type="stmt" count="2"/>
       <line num="422" type="stmt" count="2"/>
       <line num="425" type="stmt" count="1"/>
-      <line num="434" type="method" name="filter" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="436" type="stmt" count="2"/>
+      <line num="434" type="method" name="filter" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="436" type="stmt" count="3"/>
       <line num="445" type="method" name="findIndex" visibility="public" complexity="3" crap="3" count="1"/>
       <line num="447" type="stmt" count="1"/>
       <line num="448" type="stmt" count="1"/>
@@ -191,8 +191,8 @@
       <line num="705" type="stmt" count="4"/>
       <line num="708" type="stmt" count="4"/>
       <line num="709" type="stmt" count="4"/>
-      <line num="716" type="method" name="isEmpty" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="718" type="stmt" count="1"/>
+      <line num="716" type="method" name="isEmpty" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="718" type="stmt" count="2"/>
       <metrics loc="721" ncloc="425" classes="1" methods="54" coveredmethods="54" conditionals="0" coveredconditionals="0" statements="134" coveredstatements="134" elements="188" coveredelements="188"/>
     </file>
     <file name="/home/runner/work/array/array/src/Classes/Operation.php">
