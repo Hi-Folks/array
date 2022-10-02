@@ -1,4 +1,11 @@
 # Changelog
+
+## 0.0.10 - WIP
+From Hacktoberfest:
+- Test coverage at 100%
+- Arr::isEmpty() methods thanks to @Tautve for the implementation and @RoadSigns for the review
+- Allow Arr::flatMap() to support multidimensional arrays by @RoadSigns
+
 ## 0.0.9 - 2022-10-02
 From Hacktoberfest:
 - Arr::find() method that returns the first element in the array that satisfies the testing function by @tombenevides
