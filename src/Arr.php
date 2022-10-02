@@ -672,4 +672,20 @@ class Arr implements Iterator, ArrayAccess
 
         return self::make($pairs);
     }
+
+    /**
+     * @param Callable $callback the function to find the matching element
+     * @return mixed the first element in the array that satisfies
+     * the provided function
+     */
+    public function find(callable $callback): mixed
+    {
+        foreach ($this->arr as $key => $element) {
+            if ($callback($element, $key, $this->arr)) {
+                return $element;
+            }
+        }
+
+        return null;
+    }
 }
