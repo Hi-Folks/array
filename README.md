@@ -55,7 +55,8 @@ The Arr class provides some methods:
 - isArray(): check if the input is an array;
 - from(): for creating new Arr from a string or array-like object;
 - findIndex(): for finding the index of some element;
-- entries(): eturns a new Arr object that contains the key/value pairs for each index in the array.
+- find(): returns the first element in the array that satisfies the testing function;
+- entries(): returns a new Arr object that contains the key/value pairs for each index in the array;
 - copyWithin(): copies part of the array to a location but keeps the original length.
 
 
