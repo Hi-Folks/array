@@ -4,17 +4,17 @@ Reference: [List of JS Array Object methods](https://developer.mozilla.org/en-US
 
 - [x] at()
 - [x] concat()
-- [ ] TODO copyWithin()
-- [ ] TODO entries()
+- [x] copyWithin()
+- [x] entries()
 - [x] every()
 - [x] fill()
 - [x] filter()
-- [ ] TODO find()
-- [ ] TODO findIndex()
+- [x] find()
+- [x] findIndex()
 - [x] flat()
 - [x] flatMap()
 - [x] forEach()
-- [ ] TODO from(), static
+- [x] from(), static
 - [x] includes()
 - [x] indexOf()
 - [x] isArray(), static
