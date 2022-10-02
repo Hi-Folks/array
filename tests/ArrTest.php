@@ -538,6 +538,11 @@ it(' extract values', function () {
     expect($onlyFruits->length())->toEqual(8);
     expect($onlyFruits[3])->toEqual('🥭');
     expect($onlyFruits[7])->toEqual('🍍');
+    $i = 0;
+    foreach ($fruits->values() as $value) {
+        $i++;
+    }
+    expect($i)->toEqual(8);
 });
 
 it('creates entries', function () {

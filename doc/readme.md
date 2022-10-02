@@ -36,5 +36,5 @@ Reference: [List of JS Array Object methods](https://developer.mozilla.org/en-US
 - [ ] toSource() it is deprecated in JS, so we don't need to implement it
 - [x] toString()
 - [x] unshift()
-- [ ] TODO values()
+- [x] values()
 
