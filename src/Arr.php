@@ -14,14 +14,12 @@ class Arr implements Iterator, ArrayAccess
 
     protected array $arr;
 
-    protected int $idx;
-
     public function __construct(array $arr = [])
     {
         $this->arr = $arr;
     }
 
-    public static function fromFunction($callable, $count)
+    public static function fromFunction($callable, $count): Arr
     {
         $array = [];
         for ($i = 0; $i < $count; $i++) {
@@ -45,7 +43,7 @@ class Arr implements Iterator, ArrayAccess
      * Creates a new Arr instance from a string or array-like object.
      *
      * @param iterable|string $arrayLike
-     * @param \Closure|null $mapFn
+     * @param Closure|null $mapFn
      * @return self
      */
     public static function from(iterable|string $arrayLike, ?Closure $mapFn = null): self
@@ -162,9 +160,9 @@ class Arr implements Iterator, ArrayAccess
      *
      * @link https://php.net/manual/en/iterator.key.php
      *
-     * @return string|float|int|bool|null scalar on success, or null on failure.
+     * @return string|int|null scalar on success, or null on failure.
      */
-    public function key(): mixed
+    public function key(): string|int|null
     {
         return key($this->arr);
     }
@@ -212,13 +210,13 @@ class Arr implements Iterator, ArrayAccess
      * for each index in the Arr object
      * It returns Arr or [] depending on $returnArrClass value
      *
-     * @param  bool  $returnArrClass true if you need Arr object
+     * @param bool $returnArrClass true if you need Arr object
      * @return int[]|string[]|Arr
      */
-    public function keys($returnArrClass = false): array|Arr
+    public function keys(bool $returnArrClass = false): int|string|Arr
     {
         if ($returnArrClass) {
-            return Arr::make(array_keys($this->arr));
+            return self::make(array_keys($this->arr));
         }
 
         return array_keys($this->arr);
@@ -309,7 +307,7 @@ class Arr implements Iterator, ArrayAccess
             }
         }
 
-        return Arr::make($array);
+        return self::make($array);
     }
 
     /**
@@ -329,8 +327,8 @@ class Arr implements Iterator, ArrayAccess
      * where start and end represent the index of items in that array.
      * The original array will not be modified
      *
-     * @param  int  $start start index (array start from 0, start included)
-     * @param  int  $end end index (array starts from 0, end not included)
+     * @param int $start start index (array start from 0, start included)
+     * @param int|null $end end index (array starts from 0, end not included)
      * @return Arr
      */
     public function slice(int $start, int $end = null): Arr
@@ -345,7 +343,7 @@ class Arr implements Iterator, ArrayAccess
             $start = $this->length() + $start;
         }
 
-        return Arr::make(array_slice($this->arr, $start, $end - $start));
+        return self::make(array_slice($this->arr, $start, $end - $start));
     }
 
     /**
@@ -356,7 +354,7 @@ class Arr implements Iterator, ArrayAccess
      */
     public function indexOf(mixed $searchElement): string|int|bool
     {
-        return array_search($searchElement, $this->arr);
+        return array_search($searchElement, $this->arr, true);
     }
 
     /**
@@ -367,7 +365,7 @@ class Arr implements Iterator, ArrayAccess
      */
     public function lastIndexOf(mixed $searchElement): string|int|bool
     {
-        return array_search($searchElement, array_reverse($this->arr, true));
+        return array_search($searchElement, array_reverse($this->arr, true), true);
     }
 
     /**
@@ -435,7 +433,7 @@ class Arr implements Iterator, ArrayAccess
      */
     public function filter(callable $callback): Arr
     {
-        return Arr::make(array_filter($this->arr, $callback));
+        return self::make(array_filter($this->arr, $callback));
     }
 
     /**
@@ -480,13 +478,14 @@ class Arr implements Iterator, ArrayAccess
             []
         );
 
-        return Arr::make($array);
+        return self::make($array);
     }
 
     /**
      * The flatMap method is identical to a map followed by a call to flat of depth 1
      *
-     * @param  callable  $callback
+     * @param callable $callback
+     * @return Arr
      */
     public function flatMap(callable $callback): self
     {
@@ -500,7 +499,7 @@ class Arr implements Iterator, ArrayAccess
             }
         }
 
-        return Arr::make($array);
+        return self::make($array);
     }
 
     /**
@@ -511,7 +510,7 @@ class Arr implements Iterator, ArrayAccess
      * @param  int|null  $end end index (default, the end of array)
      * @return void
      */
-    public function fill(mixed $value, int $start = 0, int $end = null)
+    public function fill(mixed $value, int $start = 0, int $end = null): void
     {
         if (is_null($end)) {
             $end = $this->length() - 1;
@@ -561,7 +560,7 @@ class Arr implements Iterator, ArrayAccess
     {
         $this->arr = array_reverse($this->arr, $preserve_keys);
 
-        return Arr::make($this->arr);
+        return self::make($this->arr);
     }
 
     /**
@@ -590,7 +589,7 @@ class Arr implements Iterator, ArrayAccess
      */
     public function splice(int $start, int $deleteCount = null, mixed $newElements = []): Arr
     {
-        return Arr::make(array_splice($this->arr, $start, $deleteCount, $newElements));
+        return self::make(array_splice($this->arr, $start, $deleteCount, $newElements));
     }
 
     /**
@@ -600,7 +599,7 @@ class Arr implements Iterator, ArrayAccess
      */
     public function toString(): string
     {
-        return $this->join(',');
+        return $this->join();
     }
 
     /**

@@ -117,7 +117,7 @@ it('can create calculated field', function () use ($dataTable) {
     $table = Table::make($dataTable);
     $arr = $table
         ->select(['product', 'price'])
-        ->where('price', '>', 100, )
+        ->where('price', '>', 100)
         ->calc('new_field', fn ($item) => $item['price'] * 2)
         ->arr();
     expect($arr)->toHaveCount(3);
@@ -132,8 +132,7 @@ it('can group and sum', function () use ($dataTable) {
         ->groupThenApply(
             'product',
             'total',
-            Operation::sum('price'),
-            0
+            Operation::sum('price')
         );
 
     expect($arr)->toHaveCount(4);
