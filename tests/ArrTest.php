@@ -421,10 +421,10 @@ it('checks is array', function () {
 });
 
 it('tests if array is empty', function () {
-    $isEmptyArray = Arr::isEmpty([]);
-    expect($isEmptyArray)->toEqual(true);
-    $isEmptyArray = Arr::isEmpty(['one']);
-    expect($isEmptyArray)->toEqual(false);
+    $emptyArr = Arr::make([]);
+    expect($emptyArr->isEmpty())->toEqual(true);
+    $notEmptyArr = Arr::make([1]);
+    expect($notEmptyArr->isEmpty())->toEqual(false);
 });
 
 it('implements of() method', function () {
