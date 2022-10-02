@@ -427,6 +427,12 @@ it('tests if array is empty', function () {
     expect($notEmptyArr->isEmpty())->toEqual(false);
 });
 
+it('chainable empty array', function () {
+    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
+    expect($arr->filter(fn ($element) => $element > 100)->isEmpty())->toBeTrue();
+    expect($arr->filter(fn ($element) => $element < 100)->isEmpty())->toBeFalse();
+});
+
 it('implements of() method', function () {
     $arr = Arr::of('Jan', 'Feb', 'March', 'April', 'May');
     expect($arr->length())->toEqual(5);
