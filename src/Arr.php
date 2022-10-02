@@ -225,9 +225,9 @@ class Arr implements Iterator, ArrayAccess
     /**
      * Add an $element to the end of an array and returns new length
      */
-    public function push($element): int
+    public function push(...$element): int
     {
-        return array_push($this->arr, $element);
+        return array_push($this->arr, ...$element);
     }
 
     /**
@@ -489,17 +489,26 @@ class Arr implements Iterator, ArrayAccess
      */
     public function flatMap(callable $callback): self
     {
-        $array = [];
+        $array = Arr::make([]);
+
         foreach ($this->arr as $key => $element) {
+            if (is_array($element)) {
+                $array->push(...self::make($element)
+                    ->forEach($callback)
+                    ->arr());
+                continue;
+            }
+
             $a = $callback($element, $key);
+
             if (is_array($a)) {
-                $array = array_merge($array, [...$a]);
+                $array->push(...$a);
             } else {
-                $array[] = $a;
+                $array->push($a);
             }
         }
 
-        return self::make($array);
+        return $array;
     }
 
     /**
