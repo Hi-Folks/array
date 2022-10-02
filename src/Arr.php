@@ -615,6 +615,17 @@ class Arr implements Iterator, ArrayAccess
     }
 
     /**
+     * Returns true if the input array is empty
+     *
+     * @param  array  $input the array value, to test if it is an empty array
+     * @return bool true if $input is an empty array, false otherwise
+     */
+    public static function isEmpty(array $input): bool
+    {
+        return [] === $input;
+    }
+
+    /**
      * This method is executed when using isset() or empty()
      */
     public function offsetExists(mixed $offset): bool
