@@ -603,3 +603,14 @@ it('tests copyWithin() method with all the parameters negative', function () {
         ->toHaveCount(5)
         ->toEqual([1, 2, 3, 3, 4]);
 });
+
+it('tests flatMap can handle an array of arrays', function () {
+    $arr = Arr::make([
+        [1, 2],
+        [3, 4]
+    ]);
+
+    $result = $arr->flatMap(fn ($element) => $element * 2);
+    expect($result->length())->toEqual(4);
+    expect($result->arr())->toEqual([2, 4, 6, 8]);
+});
