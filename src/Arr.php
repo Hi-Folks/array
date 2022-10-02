@@ -213,7 +213,7 @@ class Arr implements Iterator, ArrayAccess
      * @param bool $returnArrClass true if you need Arr object
      * @return int[]|string[]|Arr
      */
-    public function keys(bool $returnArrClass = false): int|string|Arr
+    public function keys(bool $returnArrClass = false): int|string|array|Arr
     {
         if ($returnArrClass) {
             return self::make(array_keys($this->arr));
