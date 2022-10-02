@@ -339,3 +339,25 @@ var_dump($arr->findIndex(fn ($element, $index) => $element > 1 && $index > 1));
 // 2
 ```
 
+## Get the first element that satisfies testing function
+Takes a testing function as an argument, and returns the first item that satisfies the testing function.
+
+Parameters passed to the testing function are $index, $element, $arr
+
+```php
+use HiFolks\DataType\Arr;
+$arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 8, 5, 14]);
+var_dump($arr->find(fn ($element) => $element > 5));
+// 6
+var_dump($arr->find(fn ($element) => $element < 5));
+// 1
+var_dump($arr->find(fn ($element) => $element > 10000));
+// null
+var_dump($arr->find(fn ($element, $index) => $element > 1 && $index > 1));
+// 3
+
+$arr = Arr::make(['some', 'string', 'to', 'test']);
+var_dump($arr->find(fn ($element) => str_contains($element, 'es')));
+// 'test'
+```
+
