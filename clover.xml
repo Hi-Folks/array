@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1664737131">
-  <project timestamp="1664737131">
+<coverage generated="1664738625">
+  <project timestamp="1664738625">
     <file name="/home/runner/work/array/array/src/Arr.php">
       <class name="HiFolks\DataType\Arr" namespace="global">
         <metrics complexity="89" methods="54" coveredmethods="54" conditionals="0" coveredconditionals="0" statements="134" coveredstatements="134" elements="188" coveredelements="188"/>
@@ -39,18 +39,18 @@
       <line num="122" type="stmt" count="1"/>
       <line num="123" type="stmt" count="1"/>
       <line num="126" type="stmt" count="1"/>
-      <line num="136" type="method" name="current" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="138" type="stmt" count="7"/>
-      <line num="148" type="method" name="next" visibility="public" complexity="1" crap="1" count="8"/>
-      <line num="150" type="stmt" count="8"/>
+      <line num="136" type="method" name="current" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="138" type="stmt" count="8"/>
+      <line num="148" type="method" name="next" visibility="public" complexity="1" crap="1" count="9"/>
+      <line num="150" type="stmt" count="9"/>
       <line num="153" type="method" name="prev" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="155" type="stmt" count="1"/>
-      <line num="165" type="method" name="key" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="167" type="stmt" count="7"/>
-      <line num="178" type="method" name="valid" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="180" type="stmt" count="7"/>
-      <line num="190" type="method" name="rewind" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="192" type="stmt" count="7"/>
+      <line num="165" type="method" name="key" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="167" type="stmt" count="8"/>
+      <line num="178" type="method" name="valid" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="180" type="stmt" count="8"/>
+      <line num="190" type="method" name="rewind" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="192" type="stmt" count="8"/>
       <line num="201" type="method" name="forEach" visibility="public" complexity="1" crap="1" count="3"/>
       <line num="203" type="stmt" count="3"/>
       <line num="205" type="stmt" count="3"/>
