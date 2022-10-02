@@ -688,4 +688,25 @@ class Arr implements Iterator, ArrayAccess
 
         return null;
     }
+
+    /**
+     * The copyWithin() method shallow copies part of an array to another location in the same array and returns it without modifying its length.
+     * @return array
+     */
+    public function copyWithin(int $target, int $start = 0, int $end = null): array
+    {
+        $arrayLength = $this->length();
+        $chuck = $this->slice($start, $end);
+        if ($target < 0) {
+            $target = $arrayLength - (int) abs($target);
+        }
+
+        foreach ($chuck as $value) {
+            $this->arr[$target] = $value;
+            $target++;
+        }
+
+        $this->arr = $this->slice(0, $arrayLength)->arr;
+        return $this->arr;
+    }
 }
