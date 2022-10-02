@@ -320,9 +320,12 @@ it('flats and maps array', function () {
     $arr2 = $arr->flatMap(fn ($element) => [$element, $element * 2]);
     expect($arr->length())->toEqual(7);
     expect($arr2->length())->toEqual(14);
+    expect($arr2->arr())->toEqual([1, 2, 2, 4, 3, 6, 4, 8, 5, 10, 6, 12, 7, 14]);
+
     $arr2 = $arr->flatMap(fn ($element) => $element);
     expect($arr->length())->toEqual(7);
     expect($arr2->length())->toEqual(7);
+    expect($arr2->arr())->toEqual([1, 2, 3, 4, 5, 6, 7]);
 });
 
 it('fills array', function () {
@@ -567,7 +570,7 @@ it('tests copyWithin() method with one parameter', function () {
     $result = $arr->copyWithin(-2);
     expect($result)
         ->toBeArray()
-//        ->toHaveCount(5)
+        ->toHaveCount(5)
         ->toEqual([1, 2, 3, 1, 2]);
 });
 
