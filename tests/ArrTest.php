@@ -258,6 +258,30 @@ it('filters some element', function () {
     expect($arr2->every(fn ($element) => $element > 3))->toBeTrue();
 });
 
+it('finds the first element')
+    ->with([
+        'string|int arrays' => (object)[
+            'intArr' => Arr::make([1,2,3,4,5,6,7,8,9,0,11]),
+            'strArr' => Arr::make(['begin','middle','end'])
+        ],
+    ])
+    ->expect(fn ($dataset) => $dataset->intArr->find(fn ($element) => $element > 0))
+        ->toBeInt()->toEqual(1)
+    ->expect(fn ($dataset) => $dataset->intArr->find(fn ($element) => $element < 5))
+        ->toBeInt()->toEqual(1)
+    ->expect(fn ($dataset) => $dataset->intArr->find(fn ($element) => $element > 5))
+        ->toBeInt()->toEqual(6)
+    ->expect(fn ($dataset) => $dataset->intArr->find(fn ($element, $index) => $element > 1 && $index > 1))
+        ->toBeInt()->toEqual(3)
+    ->expect(fn ($dataset) => $dataset->intArr->find(fn ($element) => $element > 50))
+        ->toBeNull()
+    ->expect(fn ($dataset) => $dataset->strArr->find(fn ($element) => $element == 'end'))
+        ->toBeString()->toBe('end')
+    ->expect(fn ($dataset) => $dataset->strArr->find(fn ($element) => str_contains($element, 'e')))
+        ->toBeString()->toBe('begin')
+    ->expect(fn ($dataset) => $dataset->strArr->find(fn ($element) => $element == 'prefix'))
+        ->toBeNull();
+
 it('finds the first index of some element', function () {
     $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
     $index = $arr->findIndex(fn ($element) => $element > 0);
