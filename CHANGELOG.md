@@ -10,7 +10,7 @@ From Hacktoberfest:
 - Arr::from() method for creating new Arr from a string or array-like object by @nuernbergerA
 - Arr::findIndex() method for finding the index of some element by @martijnengler
 - Arr::entries() method returns a new Arr object that contains the key/value pairs for each index in the array by @LeoVie
-
+- Arr::find() method for finding some element by @tombenevides
 
 
 ## 0.0.7 - 2022-04-25

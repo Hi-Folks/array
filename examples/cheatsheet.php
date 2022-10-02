@@ -241,4 +241,20 @@ function print_result(mixed $something): void
 
             break;
     }
+
+// Returns the first element in the array that satisfies the testing function
+$arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 8, 5, 14]);
+
+print_result($arr->find(fn ($element) => $element > 5));
+// 6
+print_result($arr->find(fn ($element) => $element < 5));
+// 1
+print_result($arr->find(fn ($element) => $element > 10000));
+// null
+print_result($arr->find(fn ($element, $index) => $element > 1 && $index > 1));
+// 3
+$arr = Arr::make(['foo', 'bar', 'baz']);
+print_result($arr->find(fn ($element) => str_contains($element,'a')));
+// 'bar'
+
 }
