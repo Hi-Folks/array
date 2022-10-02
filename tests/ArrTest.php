@@ -420,6 +420,13 @@ it('checks is array', function () {
     expect($isArray)->toEqual(false);
 });
 
+it('tests if array is empty', function () {
+    $emptyArr = Arr::make([]);
+    expect($emptyArr->isEmpty())->toEqual(true);
+    $notEmptyArr = Arr::make([1]);
+    expect($notEmptyArr->isEmpty())->toEqual(false);
+});
+
 it('implements of() method', function () {
     $arr = Arr::of('Jan', 'Feb', 'March', 'April', 'May');
     expect($arr->length())->toEqual(5);

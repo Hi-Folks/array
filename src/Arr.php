@@ -708,4 +708,13 @@ class Arr implements Iterator, ArrayAccess
         $this->arr = $this->slice(0, $arrayLength)->arr;
         return $this->arr;
     }
+
+    /**
+     * Returns true if the input array is empty
+     * @return bool true if $input is an empty array, false otherwise
+     */
+    public function isEmpty(): bool
+    {
+        return $this->length() === 0;
+    }
 }
