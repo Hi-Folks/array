@@ -4,10 +4,6 @@ namespace HiFolks\DataType;
 
 class Table extends Arr
 {
-    private $schema = [
-
-    ];
-
     public static function make(array $arr = []): self
     {
         return new self($arr);
