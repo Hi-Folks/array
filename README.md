@@ -56,6 +56,7 @@ The Arr class provides some methods:
 - from(): for creating new Arr from a string or array-like object;
 - findIndex(): for finding the index of some element;
 - entries(): eturns a new Arr object that contains the key/value pairs for each index in the array.
+- copyWithin(): copies part of the array to a location but keeps the original length.
 
 
 ## Table class

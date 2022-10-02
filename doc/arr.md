@@ -361,3 +361,26 @@ var_dump($arr->find(fn ($element) => str_contains($element, 'es')));
 // 'test'
 ```
 
+## Shadow copy part of the array to another location and keep the length
+
+```php
+use HiFolks\DataType\Arr;
+
+$arr = Arr::make([1, 2, 3, 4, 5]);
+var_dump($arr->copyWithin(-2));
+// [1, 2, 3, 1, 2]
+
+$arr = Arr::make([1, 2, 3, 4, 5]);
+var_dump($arr->copyWithin(0, 3));
+// [4, 5, 3, 4, 5]
+
+$arr = Arr::make([1, 2, 3, 4, 5]);
+var_dump($arr->copyWithin(0, 3, 4));
+// [4, 2, 3, 4, 5]
+
+$arr = Arr::make([1, 2, 3, 4, 5]);
+var_dump($arr->copyWithin(-2, -3, -1));
+// [1, 2, 3, 3, 4]
+
+```
+

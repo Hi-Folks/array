@@ -256,4 +256,18 @@ function print_result(mixed $something): void
     $arr = Arr::make(['foo', 'bar', 'baz']);
     print_result($arr->find(fn ($element) => str_contains($element, 'a')));
     // 'bar'
+
+    // Returns the shadow copied part of the array to another location and keeps its length
+    $arr = Arr::make([1, 2, 3, 4, 5]);
+    print_result($arr->copyWithin(-2));
+    // [1, 2, 3, 1, 2]
+    $arr = Arr::make([1, 2, 3, 4, 5]);
+    print_result($arr->copyWithin(0, 3));
+    // [4, 5, 3, 4, 5]
+    $arr = Arr::make([1, 2, 3, 4, 5]);
+    print_result($arr->copyWithin(0, 3, 4));
+    // [4, 2, 3, 4, 5]
+    $arr = Arr::make([1, 2, 3, 4, 5]);
+    print_result($arr->copyWithin(-2, -3, -1));
+    // [1, 2, 3, 3, 4]
 }
