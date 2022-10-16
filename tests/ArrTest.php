@@ -625,3 +625,48 @@ it('tests flatMap can handle an array of arrays', function () {
     expect($result->length())->toEqual(4);
     expect($result->arr())->toEqual([2, 4, 6, 8]);
 });
+
+it('tests setLocaleString() returns an empty string for empty array', function () {
+    $arr = Arr::make([]);
+
+    $result = $arr->toLocaleString();
+    expect($result)
+        ->toBeString()
+        ->toEqual('');
+});
+
+it("tests setLocaleString() returns a string representing the elements of the array", function () {
+    $arr = Arr::make(['🥝', '🍎', 'I_DONT_KNOW', 1, 2, 3]);
+
+    $result = $arr->toLocaleString();
+    expect($result)
+        ->toBeString()
+        ->toEqual('🥝,🍎,I_DONT_KNOW,1,2,3');
+});
+
+it("tests setLocaleString() transforms dates and numbers using default locale and timezone", function () {
+    $arr = Arr::make([-123897.23, +123456.03, 'a', '2022-10-01']);
+
+    $result = $arr->toLocaleString(); // 'en_US.utf8', 'UTC'
+    expect($result)
+        ->toBeString()
+        ->toEqual('-123,897.23,123,456.03,a,Sat 01 Oct 2022 12:00:00 AM UTC');
+});
+
+it("tests setLocaleString() transforms dates and numbers using provided locale and timezone", function () {
+    $arr = Arr::make([-123897.23, +123456.03, 'a', '2022-10-01']);
+
+    $result = $arr->toLocaleString('fr_FR.utf8', 'Europe/Paris');
+    expect($result)
+            ->toBeString()
+            ->toEqual('-123 897,23,123 456,03,a,sam. 01 oct. 2022 00:00:00');
+});
+
+it("tests setLocaleString() skips nulls and invalid dates", function () {
+    $arr = Arr::make(['product', 123456.4, null, '2020-14-14']);
+
+    $result = $arr->toLocaleString();
+    expect($result)
+        ->toBeString()
+        ->toEqual('product,123,456.40,,2020-14-14');
+});
