@@ -276,4 +276,4 @@ function print_result(mixed $something): void
 $arr = Arr::make([1, 2, 3, 'a', 'abc', 123456.4, '2022/10/01']);
 
 print_r($arr->toLocaleString()); // Default locale and timezone
-print_r($arr->toLocaleString('fr_FR.utf8', 'Europe/Paris')); // Provided locale and timezone
+print_r($arr->toLocaleString('fr_FR', 'Europe/Paris')); // Provided locale and timezone
