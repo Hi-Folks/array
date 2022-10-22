@@ -731,14 +731,20 @@ class Arr implements Iterator, ArrayAccess
      * Returns a string representing the elements of the array
      * @return string the string representation
      */
-    public function toLocaleString(string $locale = 'en_US.utf8', string $timezone = 'UTC'): string
+    public function toLocaleString(string $locale = 'en_US', string $timezone = 'UTC'): string
     {
         if ($this->isEmpty()) {
             return '';
         }
 
+        $fallbackLocale = 'en_US';
         date_default_timezone_set($timezone);
-        $currentLocale = setlocale(LC_ALL, $locale);
+        $currentLocale = setlocale(LC_ALL, $locale.'.utf8');
+
+        if (!$currentLocale) {
+          $currentLocale = setlocale(LC_ALL, $fallbackLocale.'.utf8');
+        }
+
         $localeConfig = localeconv();
 
         $result = $this->map(function ($item) use ($localeConfig) {
