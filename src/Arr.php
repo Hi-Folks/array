@@ -733,7 +733,7 @@ class Arr implements Iterator, ArrayAccess
      */
     public function toLocaleString($locale = 'en_US.utf8', $timezone = 'UTC'): string
     {
-        if ($this->length() <= 0) {
+        if ($this->isEmpty()) {
             return '';
         }
 
