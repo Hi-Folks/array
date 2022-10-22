@@ -731,7 +731,7 @@ class Arr implements Iterator, ArrayAccess
      * Returns a string representing the elements of the array
      * @return string the string representation
      */
-    public function toLocaleString($locale = 'en_US.utf8', $timezone = 'UTC'): string
+    public function toLocaleString(string $locale = 'en_US.utf8', string $timezone = 'UTC'): string
     {
         if ($this->isEmpty()) {
             return '';
