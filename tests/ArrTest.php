@@ -1,6 +1,6 @@
 <?php
 
-use HiFolks\DataType\Arr;
+namespace HiFolks\DataType;
 
 it('is Array', function () {
     $arr = Arr::make();
@@ -638,7 +638,7 @@ it('tests setLocaleString() returns an empty string for empty array', function (
 it("tests setLocaleString() returns a string representing the elements of the array", function () {
     $arr = Arr::make(['🥝', '🍎', 'I_DONT_KNOW', 1, 2, 3]);
 
-    $result = $arr->toLocaleString();
+    $result = $arr->toLocaleString(); // 'en_US', 'UTC'
     expect($result)
         ->toBeString()
         ->toEqual('🥝,🍎,I_DONT_KNOW,1,2,3');
@@ -647,19 +647,32 @@ it("tests setLocaleString() returns a string representing the elements of the ar
 it("tests setLocaleString() transforms dates and numbers using default locale and timezone", function () {
     $arr = Arr::make([-123897.23, +123456.03, 'a', '2022-10-01']);
 
-    $result = $arr->toLocaleString(); // 'en_US.utf8', 'UTC'
+    $result = $arr->toLocaleString(); // 'en_US', 'UTC'
     expect($result)
         ->toBeString()
         ->toEqual('-123,897.23,123,456.03,a,Sat 01 Oct 2022 12:00:00 AM UTC');
 });
 
-it("tests setLocaleString() transforms dates and numbers using provided locale and timezone", function () {
+it("tests setLocaleString() transforms dates and numbers using provided locale and timezone when available", function () {
     $arr = Arr::make([-123897.23, +123456.03, 'a', '2022-10-01']);
 
-    $result = $arr->toLocaleString('fr_FR.utf8', 'Europe/Paris');
-    expect($result)
+    $envLocale = setlocale(LC_ALL, 'fr_FR.utf8');
+    $result = $arr->toLocaleString('fr_FR', 'Europe/Paris');
+
+    if ($envLocale) {
+        expect($result)
             ->toBeString()
             ->toEqual('-123 897,23,123 456,03,a,sam. 01 oct. 2022 00:00:00');
+    }
+});
+
+it("tests setLocaleString() transforms dates and numbers using default locale if provided locale is not available", function () {
+    $arr = Arr::make([-123897.23, +123456.03, 'a', '2022-10-01']);
+
+    $result = $arr->toLocaleString('foo_BAR', 'Europe/Paris');
+    expect($result)
+        ->toBeString()
+        ->toEqual('-123,897.23,123,456.03,a,Sat 01 Oct 2022 12:00:00 AM CEST');
 });
 
 it("tests setLocaleString() skips nulls and invalid dates", function () {
