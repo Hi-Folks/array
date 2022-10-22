@@ -773,7 +773,7 @@ class Arr implements Iterator, ArrayAccess
      * Checks whether a value is a valid date
      * @return boolean true if value is a valid date, false otherwise
      */
-    protected function isDate($value): bool
+    private function isDate($value): bool
     {
         if (!$value) {
             return false;
