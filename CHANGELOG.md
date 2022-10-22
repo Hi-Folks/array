@@ -5,6 +5,7 @@ From Hacktoberfest:
 - Test coverage at 100%
 - Arr::isEmpty() methods thanks to @Tautve for the implementation and @RoadSigns for the review
 - Allow Arr::flatMap() to support multidimensional arrays by @RoadSigns
+- Add toLocaleString() to get the string representation of the elements in the array
 
 ## 0.0.9 - 2022-10-02
 From Hacktoberfest:

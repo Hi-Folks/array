@@ -384,3 +384,23 @@ var_dump($arr->copyWithin(-2, -3, -1));
 
 ```
 
+## Return a string representing the elements in the array using a locale and timezone
+
+Default locale is en_US, and the timezone is UTC, in order to use a different locale make sure it is installed.
+
+To check available locales in linux based systems run `locale -a`
+
+To install a missing locale in linux based systems run `sudo apt-get install language-pack-XX`
+
+```php
+use HiFolks\DataType\Arr;
+
+$arr = Arr::make([1, 2, 3, 'a', 'abc', 123456.4, '2022/10/01']);
+var_dump($arr->toLocaleString()); // Using en_US as default locale and UTC as default timezone
+// 1,2,3,a,abc,123,456.40,Sat 01 Oct 2022 12:00:00 AM UTC
+
+$arr = Arr::make([1, 2, 3, 'a', 'abc', 123456.4, '2022/10/01']);
+var_dump($arr->toLocaleString('fr_FR', 'Europe/Paris')); // Using provided locale and timezone
+// [1,2,3,a,abc,123 456,40,sam. 01 oct. 2022 00:00:00]
+```
+

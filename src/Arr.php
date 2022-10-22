@@ -726,4 +726,63 @@ class Arr implements Iterator, ArrayAccess
     {
         return $this->length() === 0;
     }
+
+    /**
+     * Returns a string representing the elements of the array
+     * @return string the string representation
+     */
+    public function toLocaleString(string $locale = 'en_US', string $timezone = 'UTC'): string
+    {
+        if ($this->isEmpty()) {
+            return '';
+        }
+
+        $fallbackLocale = 'en_US';
+        date_default_timezone_set($timezone);
+        $currentLocale = setlocale(LC_ALL, $locale.'.utf8');
+
+        if (!$currentLocale) {
+            $currentLocale = setlocale(LC_ALL, $fallbackLocale.'.utf8');
+        }
+
+        $localeConfig = localeconv();
+
+        $result = $this->map(function ($item) use ($localeConfig) {
+            if (is_numeric($item)) {
+                $item = number_format(
+                    $item,
+                    is_float($item) ? 2 : 0,
+                    $localeConfig['decimal_point'] ?? '.',
+                    $localeConfig["thousands_sep"] ?? ','
+                );
+            } elseif ($this->isDate($item)) {
+                $date = date_parse($item);
+                $item = strftime(
+                    '%c',
+                    mktime($date['hour'], $date['minute'], $date['second'], $date['month'], $date['day'], $date['year'])
+                );
+            }
+
+            return $item;
+        });
+
+        return $result->toString();
+    }
+
+    /**
+     * Checks whether a value is a valid date
+     * @return boolean true if value is a valid date, false otherwise
+     */
+    private function isDate($value): bool
+    {
+        if (!$value) {
+            return false;
+        }
+
+        $date = date_parse($value);
+
+        return $date['error_count'] == 0
+            && $date['warning_count'] == 0
+            && checkdate($date['month'], $date['day'], $date['year']);
+    }
 }

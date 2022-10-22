@@ -271,3 +271,9 @@ function print_result(mixed $something): void
     print_result($arr->copyWithin(-2, -3, -1));
     // [1, 2, 3, 3, 4]
 }
+
+// Return a string representing the elements of the array
+$arr = Arr::make([1, 2, 3, 'a', 'abc', 123456.4, '2022/10/01']);
+
+print_r($arr->toLocaleString()); // Default locale and timezone
+print_r($arr->toLocaleString('fr_FR', 'Europe/Paris')); // Provided locale and timezone
