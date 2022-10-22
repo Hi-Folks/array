@@ -742,7 +742,7 @@ class Arr implements Iterator, ArrayAccess
         $currentLocale = setlocale(LC_ALL, $locale.'.utf8');
 
         if (!$currentLocale) {
-          $currentLocale = setlocale(LC_ALL, $fallbackLocale.'.utf8');
+            $currentLocale = setlocale(LC_ALL, $fallbackLocale.'.utf8');
         }
 
         $localeConfig = localeconv();
