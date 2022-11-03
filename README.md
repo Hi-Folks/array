@@ -73,7 +73,7 @@ Table class allows you to manage bi dimensional array, something like:
 ]
 ```
 
-Table class allows you to filter, select some fields, create calculated fields.
+Table class allows you to filter, order, select some fields, create calculated fields.
 
 
 ## Installation

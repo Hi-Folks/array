@@ -177,3 +177,31 @@ array (
 )
 */
 ```
+
+## Order By a column
+For example if you want to order the price for each product you can use *orderBy()* method.
+
+```php
+use HiFolks\DataType\Table;
+use HiFolks\DataType\Classes\Operation;
+
+$table = Table::make([
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+]);
+var_export(
+    $table->orderBy('price')
+);
+/*
+[
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+]
+*/
+```

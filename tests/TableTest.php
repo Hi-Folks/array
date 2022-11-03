@@ -181,3 +181,33 @@ it('get from first', function () use ($dataTable) {
     expect($table->arr())->toHaveCount(7);
     expect($table->getFromFirst("price"))->toEqual(200);
 });
+
+it('orders by desc', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    $orderedTable = $table->orderBy('price');
+    expect($table->arr())->toHaveCount(5);
+    expect($orderedTable->arr())->toMatchArray(
+        [
+            ['product' => 'Door', 'price' => 300, 'active' => false],
+            ['product' => 'Desk', 'price' => 200, 'active' => true],
+            ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+            ['product' => 'Chair', 'price' => 100, 'active' => true],
+            ['product' => 'Door', 'price' => 100, 'active' => true],
+        ]
+    );
+});
+
+it('orders by asc', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    $orderedTable = $table->orderBy('product', 'asc');
+    expect($table->arr())->toHaveCount(5);
+    expect($orderedTable->arr())->toMatchArray(
+        [
+            ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+            ['product' => 'Chair', 'price' => 100, 'active' => true],
+            ['product' => 'Desk', 'price' => 200, 'active' => true],
+            ['product' => 'Door', 'price' => 300, 'active' => false],
+            ['product' => 'Door', 'price' => 100, 'active' => true],
+        ]
+    );
+});

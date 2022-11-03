@@ -91,3 +91,7 @@ var_export(
 );
 
 echo PHP_EOL.'-------'.PHP_EOL;
+var_export(
+    $table
+        ->orderBy('product')
+);
