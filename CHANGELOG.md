@@ -5,6 +5,7 @@ From Hacktoberfest:
 - Test coverage at 100%
 - Arr::isEmpty() methods thanks to @Tautve for the implementation and @RoadSigns for the review
 - Allow Arr::flatMap() to support multidimensional arrays by @RoadSigns
+- Add Table::orderBy() to sort the order of rows in the table by @RoadSigns
 
 ## 0.0.9 - 2022-10-02
 From Hacktoberfest:

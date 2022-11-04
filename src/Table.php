@@ -101,6 +101,30 @@ class Table extends Arr
     }
 
     /**
+     * @param string|int $field
+     * @param string $order
+     * @return Table
+     */
+    public function orderBy(string|int $field, string $order = 'desc'): self
+    {
+        $array = $this->arr();
+
+        if ($order !== 'asc') {
+            $closure = static function ($item1, $item2) use ($field) {
+                return $item2[$field] <=> $item1[$field];
+            };
+        } else {
+            $closure = static function ($item1, $item2) use ($field) {
+                return $item1[$field] <=> $item2[$field];
+            };
+        }
+
+        usort($array, $closure);
+
+        return new self($array);
+    }
+
+    /**
      * @param  string|int  $destinationField
      * @param  callable  $function
      * @return $this
