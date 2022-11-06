@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.10 - WIP
+## 0.0.10 - 2022-11-06
 From Hacktoberfest:
 - Test coverage at 100%
 - Arr::isEmpty() methods thanks to @Tautve for the implementation and @RoadSigns for the review
