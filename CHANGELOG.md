@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.11 - WIP
+- Update doc
+
+
 ## 0.0.10 - 2022-11-06
 From Hacktoberfest:
 - Test coverage at 100%
