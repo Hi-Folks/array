@@ -138,31 +138,39 @@ class Table extends Arr
         return $this;
     }
 
-    public function groupBy(string|int $field): array
+    /**
+     * This will only return the values for the first time it a unique row within that group
+     * @param string|int $field
+     * @return Table
+     */
+    public function groupBy(string|int $field): Table
     {
         $result = [];
+
         foreach ($this->arr as $value) {
-            if (! array_key_exists($value[$field], $result)) {
-                $result[$value[$field]] = [];
+            if (array_key_exists($value[$field], $result)) {
+                continue;
             }
-            $result[$value[$field]][] = $value;
+            $result[$value[$field]] = $value;
         }
 
-        return $result;
+        return new self(array_values($result));
     }
 
-    public function groupThenApply(string|int $field, string|int $calcField, callable $function, $initial = 0): array
-    {
-        $groups = $this->groupBy($field);
-        $result = [];
-        foreach ($groups as $key => $arrays) {
-            $calc = array_reduce($arrays, $function, $initial);
-            $result[$key] = [
-                $field => $key,
-                $calcField => $calc,
-            ];
+    /**
+     * Transform allows you to run a function over an entire table on a specific row
+     */
+    public function transform(
+        string|int $field,
+        callable $function,
+    ): self {
+        $array = $this->arr();
+        foreach ($array as $row) {
+            if (array_key_exists($field, $row)) {
+                $row[$field] = $function($row[$field]);
+            }
         }
 
-        return $result;
+        return new self($array);
     }
 }
