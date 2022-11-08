@@ -1,6 +1,6 @@
 {
     "name": "hi-folks/array",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "description": "Arr class for managing arrays, built on top of the PHP array functions.",
     "keywords": [
         "Hi-Folks",

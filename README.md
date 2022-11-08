@@ -9,8 +9,8 @@
 
 This package provides 2 classes:
 
-- **Arr** class is built on top of the PHP array functions.
-- **Table** class allow you to manage bidimensional associative array (like a table or tuple).
+- **[Arr](#arr-class)** class is built on top of the PHP array functions.
+- **[Table](#table-class)** class allow you to manage bidimensional associative array (like a table or tuple).
 
 ## Arr class
 
@@ -73,8 +73,13 @@ Table class allows you to manage bi dimensional array, something like:
 ]
 ```
 
-Table class allows you to filter, order, select some fields, create calculated fields.
-
+**Table class** allows you to filter, order, select some fields, create calculated fields.
+The methods:
+- select(): select some fields
+- except(): exclude some fields
+- where(): filter data
+- groupThenApply(): group data applying a function
+- orderBy(): sorting data (ascending or descending)
 
 ## Installation
 
