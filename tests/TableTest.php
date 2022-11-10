@@ -1,6 +1,5 @@
 <?php
 
-use HiFolks\DataType\Classes\Operation;
 use HiFolks\DataType\Table;
 
 $dataTable = [
@@ -234,5 +233,3 @@ it('can transform all of the elements in a specific column', function () use ($d
         ['product' => 'Door', 'price' => '100.00', 'active' => true],
     ]);
 });
-
-
