@@ -145,6 +145,7 @@ Starting from:
 ```
 I would like to **filter** the rows with price greater than 100, **select** only "product" and "price" fields, and for each rows **create a new field** named "new_filed" that is a calculated field (doubling the price):
 ```php
+use HiFolks\DataType\Table;
 $dataTable = [
     ['product' => 'Desk', 'price' => 200, 'active' => true],
     ['product' => 'Chair', 'price' => 100, 'active' => true],
@@ -155,10 +156,9 @@ $dataTable = [
 $table = Table::make($dataTable);
 $arr = $table
     ->select(['product' , 'price'])
-    ->where('price', 100, ">")
+    ->where('price', ">", 100)
     ->calc('new_field', fn ($item) => $item['price'] * 2)
     ->arr();
-
 ```
 
 The result is

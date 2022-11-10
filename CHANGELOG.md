@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.11 - WIP
+## 0.0.11 - 2022-11-10
 - Refactor groupBy to return Table instances to allow for chaining @RoadSigns
 - Table::transform to allow people to run specific functions on a column @RoadSigns
 - Update doc
