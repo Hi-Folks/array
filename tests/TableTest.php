@@ -129,18 +129,18 @@ it('can create calculated field', function () use ($dataTable) {
     expect($arr[2]['new_field'])->toEqual(600);
 });
 
-it('can group and sum', function () use ($dataTable) {
+it('can group', function () use ($dataTable) {
     $table = Table::make($dataTable);
-    $arr = $table
-        ->groupThenApply(
-            'product',
-            'total',
-            Operation::sum('price')
-        );
+    $arr = $table->groupBy('product');
 
     expect($arr)->toHaveCount(4);
-    expect($arr)->toHaveKeys(['Desk', 'Chair', 'Door', 'Bookcase']);
-    expect($arr['Door']['total'])->toEqual(400);
+    expect($arr->arr())->toMatchArray([
+        ['product' => 'Desk', 'price' => 200, 'active' => true],
+        ['product' => 'Chair', 'price' => 100, 'active' => true],
+        ['product' => 'Door', 'price' => 300, 'active' => false],
+        ['product' => 'Bookcase', 'price' => 150, 'active' => true]
+    ]);
+    expect($arr->count())->toEqual(4);
 });
 
 it('insert', function () use ($dataTable) {
@@ -151,13 +151,6 @@ it('insert', function () use ($dataTable) {
         ["product" => "Door", "price" => 6],
     ]);
     expect($table->arr())->toHaveCount(7);
-    $arr = $table
-        ->groupThenApply(
-            'product',
-            'total',
-            Operation::sum('price')
-        );
-    expect($arr['Door']['total'])->toEqual(411);
 });
 
 it('get from last', function () use ($dataTable) {
@@ -211,3 +204,35 @@ it('orders by asc', function () use ($dataTable) {
         ]
     );
 });
+
+it('can get the cheapest of all products that are active', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    $cheapestOfEachProduct = $table
+        ->where('active', '=', true)
+        ->orderBy('price', 'asc')
+        ->groupBy('product');
+
+    expect($cheapestOfEachProduct->arr())->toMatchArray([
+        ['product' => 'Chair', 'price' => 100, 'active' => true],
+        ['product' => 'Door', 'price' => 100, 'active' => true],
+        ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+        ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ]);
+});
+
+it('can transform all of the elements in a specific column', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    $cheapestOfEachProduct = $table->transform('price', function ($price) {
+        return number_format($price, 2);
+    });
+
+    expect($cheapestOfEachProduct->arr())->toMatchArray([
+        ['product' => 'Desk', 'price' => '200.00', 'active' => true],
+        ['product' => 'Chair', 'price' => '100.00', 'active' => true],
+        ['product' => 'Door', 'price' => '300.00', 'active' => false],
+        ['product' => 'Bookcase', 'price' => '150.00', 'active' => true],
+        ['product' => 'Door', 'price' => '100.00', 'active' => true],
+    ]);
+});
+
+

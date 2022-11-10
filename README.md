@@ -78,7 +78,8 @@ The methods:
 - select(): select some fields
 - except(): exclude some fields
 - where(): filter data
-- groupThenApply(): group data applying a function
+- groupBy(): grouping data
+- transform(): transforms a specific field with the provided function
 - orderBy(): sorting data (ascending or descending)
 
 ## Installation
