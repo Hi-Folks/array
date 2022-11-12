@@ -1,70 +1,130 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HiFolks\DataType;
 
-class Table extends Arr
+use Countable;
+use Iterator;
+
+/**
+ * @implements Iterator<int|string, Arr>
+ */
+final class Table implements Countable, Iterator
 {
-    public static function make(array $arr = []): self
+    /**
+     * @var array<int|string, Arr> $rows
+     */
+    private array $rows = [];
+
+    /**
+     * @param array<int|string, array<int|string, mixed>|Arr> $array
+     * @return Table
+     */
+    public static function make(array $array): self
     {
-        return new self($arr);
-    }
+        $table = new self();
+        foreach ($array as $value) {
+            $table->append($value);
+        }
 
-    public function insert(array $row): void
-    {
-        $this->append($row);
-    }
-
-    public function first()
-    {
-        $firstKey = array_key_first($this->arr);
-
-        return $this->get($firstKey);
-    }
-
-    public function last()
-    {
-        $lastKey = array_key_last($this->arr);
-
-        return $this->get($lastKey);
-    }
-
-    public function getFromFirst(int|string $field)
-    {
-        $firstRow = $this->first();
-
-        return $firstRow[$field];
-    }
-
-    public function getFromLast(int|string $field)
-    {
-        $lastRow = $this->last();
-
-        return $lastRow[$field];
+        return $table;
     }
 
     /**
-     * @param  array  $columns
+     * @return Arr[]
+     */
+    public function rows(): array
+    {
+        return $this->rows;
+    }
+
+    /**
+     * @param array<int|string, mixed>|Arr $arr
+     * @return $this
+     */
+    public function append(array|Arr $arr): self
+    {
+        $this->rows[] = $this->getArr($arr);
+        return $this;
+    }
+
+    /**
+     * @return Arr|null
+     */
+    public function first(): ?Arr
+    {
+        $array = array_reverse($this->rows);
+        return array_pop($array);
+    }
+
+    /**
+     * @return Arr|null
+     */
+    public function last(): ?Arr
+    {
+        $reference = $this->rows;
+        return array_pop($reference);
+    }
+
+    /**
+     * @param int|string $field
+     * @return mixed
+     */
+    public function getFromFirst(int|string $field): mixed
+    {
+        return $this->first()?->get($field);
+    }
+
+    /**
+     * @param int|string $field
+     * @return mixed
+     */
+    public function getFromLast(int|string $field): mixed
+    {
+        return $this->last()?->get($field);
+    }
+
+    /**
+     * @param int|string ...$columns
      * @return self
      */
-    public function select(array $columns): self
+    public function select(int|string ...$columns): self
     {
-        $filteredArray = array_map(fn ($item) => array_intersect_key($item, array_flip($columns)), $this->arr);
+        $table = self::make([]);
+        foreach ($this->rows as $row) {
+            $newRow = [];
+            foreach ($columns as $column) {
+                $value = $row->get($column);
+                if ($column !== null) {
+                    $newRow[$column] = $value;
+                }
+            }
+            $table->append(Arr::make($newRow));
+        }
 
-        return new self($filteredArray);
+        return $table;
     }
 
     /**
      * It returns a new Table instance with data, excluding the attributes listed in
      * $columns
      *
-     * @param  array  $columns
+     * @param  int|string ...$columns
      * @return self
      */
-    public function except(array $columns): self
+    public function except(int|string ...$columns): self
     {
-        $filteredArray = array_map(fn ($item) => array_diff_key($item, array_flip($columns)), $this->arr);
+        $table = self::make([]);
+        foreach ($this->rows as $row) {
+            $newRow = $row;
+            foreach ($columns as $column) {
+                $newRow->unset($column);
+            }
+            $table->append($newRow);
+        }
 
-        return new self($filteredArray);
+        return $table;
     }
 
     /**
@@ -85,19 +145,18 @@ class Table extends Arr
         }
 
         $function = match ($operator) {
-            '==' => fn ($element) => $element[$field] == $value,
-            '===' => fn ($element) => $element[$field] === $value,
-            '>' => fn ($element) => $element[$field] > $value,
-            '<' => fn ($element) => $element[$field] < $value,
-            '>=' => fn ($element) => $element[$field] >= $value,
-            '<=' => fn ($element) => $element[$field] <= $value,
-            '!=' => fn ($element) => $element[$field] != $value,
-            '!==' => fn ($element) => $element[$field] !== $value,
-            default => fn ($element) => $element[$field] == $value
+            '==' => fn ($element) => $element->get($field) == $value,
+            '>' => fn ($element) => $element->get($field) > $value,
+            '<' => fn ($element) => $element->get($field) < $value,
+            '>=' => fn ($element) => $element->get($field) >= $value,
+            '<=' => fn ($element) => $element->get($field) <= $value,
+            '!=' => fn ($element) => $element->get($field) != $value,
+            '!==' => fn ($element) => $element->get($field) !== $value,
+            default => fn ($element) => $element->get($field) === $value
         };
-        $filteredArray = array_filter($this->arr, $function);
+        $filteredArray = array_filter($this->rows, $function);
 
-        return new self($filteredArray);
+        return self::make($filteredArray);
     }
 
     /**
@@ -107,21 +166,20 @@ class Table extends Arr
      */
     public function orderBy(string|int $field, string $order = 'desc'): self
     {
-        $array = $this->arr();
+        $array = $this->rows();
 
         if ($order !== 'asc') {
-            $closure = static function ($item1, $item2) use ($field) {
-                return $item2[$field] <=> $item1[$field];
+            $closure = static function (Arr $item1, Arr $item2) use ($field) {
+                return $item2->get($field) <=> $item1->get($field);
             };
         } else {
             $closure = static function ($item1, $item2) use ($field) {
-                return $item1[$field] <=> $item2[$field];
+                return $item1->get($field) <=> $item2->get($field);
             };
         }
 
         usort($array, $closure);
-
-        return new self($array);
+        return self::make($array);
     }
 
     /**
@@ -131,8 +189,8 @@ class Table extends Arr
      */
     public function calc(string|int $destinationField, callable $function): self
     {
-        foreach ($this->arr as $key => $value) {
-            $this->arr[$key][$destinationField] = $function($value);
+        foreach ($this->rows as $key => $value) {
+            $this->rows[$key][$destinationField] = $function($value);
         }
 
         return $this;
@@ -147,14 +205,15 @@ class Table extends Arr
     {
         $result = [];
 
-        foreach ($this->arr as $value) {
-            if (array_key_exists($value[$field], $result)) {
+        foreach ($this->rows as $value) {
+            $property = $value->get($field);
+            if (array_key_exists(strval($property), $result)) {
                 continue;
             }
-            $result[$value[$field]] = $value;
+            $result[$property] = $value;
         }
 
-        return new self(array_values($result));
+        return self::make(array_values($result));
     }
 
     /**
@@ -164,13 +223,64 @@ class Table extends Arr
         string|int $field,
         callable $function,
     ): self {
-        $array = $this->arr();
+        $array = $this->rows();
+
         foreach ($array as $row) {
-            if (array_key_exists($field, $row)) {
-                $row[$field] = $function($row[$field]);
+            /** @var array<int, mixed> $keys */
+            $keys = $row->keys();
+            if (in_array($field, $keys, true)) {
+                $result = $function($row->get($field));
+                $row->set($field, $result);
             }
         }
 
-        return new self($array);
+        return self::make($array);
+    }
+
+    public function count(): int
+    {
+        return count($this->rows());
+    }
+
+    /**
+     * @param array<int|string, mixed>|Arr $value
+     * @return Arr
+     */
+    private function getArr(array|Arr $value): Arr
+    {
+        if (!$value instanceof Arr) {
+            $value = Arr::make($value);
+        }
+        return $value;
+    }
+
+    public function current(): Arr|false
+    {
+        return current($this->rows);
+    }
+
+    public function next(): void
+    {
+        next($this->rows);
+    }
+
+    public function prev(): void
+    {
+        prev($this->rows);
+    }
+
+    public function key(): string|int|null
+    {
+        return key($this->rows);
+    }
+
+    public function valid(): bool
+    {
+        return ! is_null($this->key());
+    }
+
+    public function rewind(): void
+    {
+        reset($this->rows);
     }
 }

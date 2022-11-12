@@ -1,7 +1,12 @@
 # Changelog
 
-## 0.1.0 - WIP
-- Ability to set and unset elements within Arr @RoadSigns
+## 0.1.0/0.0.12 - WIP
+- Ability to set and unset elements within Arr by @RoadSigns
+- Remove the extension of Arr within Table by @RoadSigns
+- Implement each row within in the Table object as Arr objects by @RoadSigns
+- Implement Countable on the Table object to allow for easy counting of number of rows by @RoadSigns
+- Implement Iterator on the Table object to allow for easy looping over the rows by @RoadSigns
+- Each the method signature of the Table::select from array to spread `int|string` by @RoadSigns
 
 ## 0.0.11 - 2022-11-10
 - Refactor groupBy to return Table instances to allow for chaining @RoadSigns
