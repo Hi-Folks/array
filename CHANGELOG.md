@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.0 - WIP
+- Ability to set and unset elements within Arr @RoadSigns
+
 ## 0.0.11 - 2022-11-10
 - Refactor groupBy to return Table instances to allow for chaining @RoadSigns
 - Table::transform to allow people to run specific functions on a column @RoadSigns

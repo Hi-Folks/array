@@ -625,3 +625,46 @@ it('tests flatMap can handle an array of arrays', function () {
     expect($result->length())->toEqual(4);
     expect($result->arr())->toEqual([2, 4, 6, 8]);
 });
+
+it('can unset array elements by their keys', function () {
+    $arr = Arr::make([
+        'mango' => '🥭',
+        'apple' => '🍎',
+        'banana' => '🍌'
+    ]);
+
+    $arr->unset('apple');
+    expect($arr)
+        ->toHaveCount(2)
+        ->and($arr->arr())
+        ->toMatchArray([
+            'mango' => '🥭',
+            'banana' => '🍌'
+        ])
+        ->and($arr->unset('orange'))
+        ->toBeFalse()
+        ->and($arr)
+        ->toHaveCount(2)
+        ->and($arr->arr())
+        ->toMatchArray([
+            'mango' => '🥭',
+            'banana' => '🍌'
+        ]);
+});
+
+it('can set array key', function () {
+    $arr = Arr::make([
+        'mango' => '🥭',
+        'banana' => '🍌'
+    ]);
+
+    $arr->set('apple', '🍎');
+    expect($arr)
+        ->toHaveCount(3)
+        ->and($arr->arr())
+        ->toMatchArray([
+            'mango' => '🥭',
+            'banana' => '🍌',
+            'apple' => '🍎'
+        ]);
+});

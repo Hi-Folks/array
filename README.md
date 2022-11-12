@@ -60,6 +60,8 @@ The Arr class provides some methods:
 - copyWithin(): copies part of the array to a location but keeps the original length.
 - isEmpty(): checks if provided array is empty or not;
 - values(): it creates a new Arr object with the values of the current one (keys are skipped)
+- set(): ability to set an element to the array with a specific key
+- unset(): ability to unset an element by the key
 
 ## Table class
 Table class allows you to manage bi dimensional array, something like:

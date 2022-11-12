@@ -270,4 +270,13 @@ function print_result(mixed $something): void
     $arr = Arr::make([1, 2, 3, 4, 5]);
     print_result($arr->copyWithin(-2, -3, -1));
     // [1, 2, 3, 3, 4]
+
+    // Ability to set and unset elements from the Arr
+    $arr = Arr::make(['mango' => '🥭', 'banana' => '🍌']);
+    $arr->set('apple', '🍎');
+    print_result($arr->arr());
+    // ['mango' => '🥭', 'banana' => '🍌', 'apple' => '🍎']
+    $arr->unset('banana');
+    print_result($arr->arr());
+    // ['mango' => '🥭', 'apple' => '🍎']
 }

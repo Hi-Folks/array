@@ -1,18 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HiFolks\DataType;
 
 use ArrayAccess;
 use Closure;
+use Countable;
 use HiFolks\DataType\Traits\Calculable;
 use Iterator;
 use Traversable;
 
-class Arr implements Iterator, ArrayAccess
+final class Arr implements Iterator, ArrayAccess, Countable
 {
     use Calculable;
 
-    protected array $arr;
+    private array $arr;
 
     public function __construct(array $arr = [])
     {
@@ -106,6 +109,27 @@ class Arr implements Iterator, ArrayAccess
     public function get(mixed $index): mixed
     {
         return $this->arr[$index] ?? null;
+    }
+
+    /**
+     * Set a value to a specific key
+     */
+    public function set(int|string $key, mixed $value): void
+    {
+        $this->arr[$key] = $value;
+    }
+
+    /**
+     * Unset an array element by their key if it exists
+     */
+    public function unset(mixed $index): bool
+    {
+        if ($this->get($index)) {
+            unset($this->arr[$index]);
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -698,7 +722,12 @@ class Arr implements Iterator, ArrayAccess
     }
 
     /**
-     * The copyWithin() method shallow copies part of an array to another location in the same array and returns it without modifying its length.
+     * The copyWithin() method shallow copies part of an array to another
+     * location in the same array and returns it without modifying its length.
+     *
+     * @param int $target
+     * @param int $start
+     * @param int|null $end
      * @return array
      */
     public function copyWithin(int $target, int $start = 0, int $end = null): array
