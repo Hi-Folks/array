@@ -6,7 +6,7 @@ use Closure;
 
 class Operation
 {
-    public static function sum($field): Closure
+    public static function sum(int|string $field): Closure
     {
         return fn ($result, $element) => $result + $element[$field];
     }

@@ -60,6 +60,8 @@ The Arr class provides some methods:
 - copyWithin(): copies part of the array to a location but keeps the original length.
 - isEmpty(): checks if provided array is empty or not;
 - values(): it creates a new Arr object with the values of the current one (keys are skipped)
+- set(): ability to set an element to the array with a specific key
+- unset(): ability to unset an element by the key
 
 ## Table class
 Table class allows you to manage bi dimensional array, something like:
@@ -73,6 +75,9 @@ Table class allows you to manage bi dimensional array, something like:
 ]
 ```
 
+Each row within the Table will be of type `Arr` so it allows you to lean on all of the methods that
+are available via the `Arr` object.
+
 **Table class** allows you to filter, order, select some fields, create calculated fields.
 The methods:
 - select(): select some fields
@@ -81,6 +86,10 @@ The methods:
 - groupBy(): grouping data
 - transform(): transforms a specific field with the provided function
 - orderBy(): sorting data (ascending or descending)
+
+`Table` now implements `\Countable` and `\Iterator`, this allows you to count the number of rows 
+and also loop over the rows using common loops.
+
 
 ## Installation
 
@@ -155,34 +164,45 @@ $dataTable = [
 ];
 $table = Table::make($dataTable);
 $arr = $table
-    ->select(['product' , 'price'])
+    ->select('product' , 'price')
     ->where('price', ">", 100)
-    ->calc('new_field', fn ($item) => $item['price'] * 2)
-    ->arr();
+    ->calc('new_field', fn ($item) => $item['price'] * 2);
 ```
 
 The result is
 ```
-array (
-  0 =>
+HiFolks\DataType\Table::__set_state(array(
+   'rows' =>
   array (
-    'product' => 'Desk',
-    'price' => 200,
-    'new_field' => 400,
+    0 =>
+    HiFolks\DataType\Arr::__set_state(array(
+       'arr' =>
+      array (
+        'product' => 'Desk',
+        'price' => 200,
+        'new_field' => 400,
+      ),
+    )),
+    1 =>
+    HiFolks\DataType\Arr::__set_state(array(
+       'arr' =>
+      array (
+        'product' => 'Door',
+        'price' => 300,
+        'new_field' => 600,
+      ),
+    )),
+    2 =>
+    HiFolks\DataType\Arr::__set_state(array(
+       'arr' =>
+      array (
+        'product' => 'Bookcase',
+        'price' => 150,
+        'new_field' => 300,
+      ),
+    )),
   ),
-  2 =>
-  array (
-    'product' => 'Door',
-    'price' => 300,
-    'new_field' => 600,
-  ),
-  3 =>
-  array (
-    'product' => 'Bookcase',
-    'price' => 150,
-    'new_field' => 300,
-  ),
-)
+))
 ```
 
 ## Testing
