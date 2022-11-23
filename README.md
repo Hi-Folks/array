@@ -86,8 +86,10 @@ The methods:
 - groupBy(): grouping data
 - transform(): transforms a specific field with the provided function
 - orderBy(): sorting data (ascending or descending)
+- toArray(): transform Table object into a native PHP array
 
-`Table` now implements `\Countable` and `\Iterator`, this allows you to count the number of rows 
+
+`Table` now implements `\Countable` and `\Iterator`, this allows you to count the number of rows
 and also loop over the rows using common loops.
 
 
@@ -150,7 +152,7 @@ Starting from:
     ['product' => 'Door', 'price' => 300, 'active' => false],
     ['product' => 'Bookcase', 'price' => 150, 'active' => true],
     ['product' => 'Door', 'price' => 100, 'active' => true],
-] 
+]
 ```
 I would like to **filter** the rows with price greater than 100, **select** only "product" and "price" fields, and for each rows **create a new field** named "new_filed" that is a calculated field (doubling the price):
 ```php
