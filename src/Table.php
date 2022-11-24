@@ -40,6 +40,18 @@ final class Table implements Countable, Iterator
     }
 
     /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        $result = [];
+        foreach ($this->rows() as $key => $row) {
+            $result[$key] = $row->arr();
+        }
+        return $result;
+    }
+
+    /**
      * @param array<int|string, mixed>|Arr $arr
      * @return $this
      */
