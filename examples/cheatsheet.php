@@ -8,6 +8,7 @@ $arr = Arr::make([1, 2, 3, 4, 5, 6]);
 
 // Returns new Arr joining 2 arrays together (the current one and a new one)
 print_result($arr->concat([10, 11, 12]));
+
 print_result($arr->concat([10, 11, 12], 13, [14, 15]));
 print_result($arr->concat($arr, $arr));
 
@@ -241,42 +242,42 @@ function print_result(mixed $something): void
 
             break;
     }
-
-    // Returns the first element in the array that satisfies the testing function
-    $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 8, 5, 14]);
-
-    print_result($arr->find(fn ($element) => $element > 5));
-    // 6
-    print_result($arr->find(fn ($element) => $element < 5));
-    // 1
-    print_result($arr->find(fn ($element) => $element > 10000));
-    // null
-    print_result($arr->find(fn ($element, $index) => $element > 1 && $index > 1));
-    // 3
-    $arr = Arr::make(['foo', 'bar', 'baz']);
-    print_result($arr->find(fn ($element) => str_contains($element, 'a')));
-    // 'bar'
-
-    // Returns the shadow copied part of the array to another location and keeps its length
-    $arr = Arr::make([1, 2, 3, 4, 5]);
-    print_result($arr->copyWithin(-2));
-    // [1, 2, 3, 1, 2]
-    $arr = Arr::make([1, 2, 3, 4, 5]);
-    print_result($arr->copyWithin(0, 3));
-    // [4, 5, 3, 4, 5]
-    $arr = Arr::make([1, 2, 3, 4, 5]);
-    print_result($arr->copyWithin(0, 3, 4));
-    // [4, 2, 3, 4, 5]
-    $arr = Arr::make([1, 2, 3, 4, 5]);
-    print_result($arr->copyWithin(-2, -3, -1));
-    // [1, 2, 3, 3, 4]
-
-    // Ability to set and unset elements from the Arr
-    $arr = Arr::make(['mango' => '🥭', 'banana' => '🍌']);
-    $arr->set('apple', '🍎');
-    print_result($arr->arr());
-    // ['mango' => '🥭', 'banana' => '🍌', 'apple' => '🍎']
-    $arr->unset('banana');
-    print_result($arr->arr());
-    // ['mango' => '🥭', 'apple' => '🍎']
 }
+
+// Returns the first element in the array that satisfies the testing function
+$arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 8, 5, 14]);
+
+print_result($arr->find(fn ($element) => $element > 5));
+// 6
+print_result($arr->find(fn ($element) => $element < 5));
+// 1
+print_result($arr->find(fn ($element) => $element > 10000));
+// null
+print_result($arr->find(fn ($element, $index) => $element > 1 && $index > 1));
+// 3
+$arr = Arr::make(['foo', 'bar', 'baz']);
+print_result($arr->find(fn ($element) => str_contains($element, 'a')));
+// 'bar'
+
+// Returns the shadow copied part of the array to another location and keeps its length
+$arr = Arr::make([1, 2, 3, 4, 5]);
+print_result($arr->copyWithin(-2));
+// [1, 2, 3, 1, 2]
+$arr = Arr::make([1, 2, 3, 4, 5]);
+print_result($arr->copyWithin(0, 3));
+// [4, 5, 3, 4, 5]
+$arr = Arr::make([1, 2, 3, 4, 5]);
+print_result($arr->copyWithin(0, 3, 4));
+// [4, 2, 3, 4, 5]
+$arr = Arr::make([1, 2, 3, 4, 5]);
+print_result($arr->copyWithin(-2, -3, -1));
+// [1, 2, 3, 3, 4]
+
+// Ability to set and unset elements from the Arr
+$arr = Arr::make(['mango' => '🥭', 'banana' => '🍌']);
+$arr->set('apple', '🍎');
+print_result($arr->arr());
+// ['mango' => '🥭', 'banana' => '🍌', 'apple' => '🍎']
+$arr->unset('banana');
+print_result($arr->arr());
+// ['mango' => '🥭', 'apple' => '🍎']
