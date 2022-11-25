@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0/0.0.12 - WIP
+## 0.1.0 - 2022-11-25
 - Ability to set and unset elements within Arr by @RoadSigns
 - Remove the extension of Arr within Table by @RoadSigns
 - Implement each row within in the Table object as Arr objects by @RoadSigns
