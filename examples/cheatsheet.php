@@ -215,34 +215,6 @@ print_result($arr->findIndex(fn ($element, $index) => $element > 1 && $index > 1
 // 2
 
 
-/**
- * Print a line for string, integer, array, boolean.
- */
-function print_result(mixed $something): void
-{
-    switch (gettype($something)) {
-        case 'string':
-            echo 'STRING  : '.$something.PHP_EOL;
-
-            break;
-        case 'integer':
-            echo 'INTEGER : '.$something.PHP_EOL;
-
-            break;
-        case 'array':
-            echo 'ARRAY   : '.implode(',', $something).PHP_EOL;
-
-            break;
-        case 'boolean':
-            echo 'BOOLEAN : '.(($something) ? 'true' : 'false').PHP_EOL;
-
-            break;
-        default:
-            var_dump($something);
-
-            break;
-    }
-}
 
 // Returns the first element in the array that satisfies the testing function
 $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 8, 5, 14]);
@@ -281,3 +253,35 @@ print_result($arr->arr());
 $arr->unset('banana');
 print_result($arr->arr());
 // ['mango' => '🥭', 'apple' => '🍎']
+
+
+
+
+/**
+ * Print a line for string, integer, array, boolean.
+ */
+function print_result(mixed $something): void
+{
+    switch (gettype($something)) {
+        case 'string':
+            echo 'STRING  : ' . $something . PHP_EOL;
+
+            break;
+        case 'integer':
+            echo 'INTEGER : ' . $something . PHP_EOL;
+
+            break;
+        case 'array':
+            echo 'ARRAY   : ' . implode(',', $something) . PHP_EOL;
+
+            break;
+        case 'boolean':
+            echo 'BOOLEAN : ' . (($something) ? 'true' : 'false') . PHP_EOL;
+
+            break;
+        default:
+            var_dump($something);
+
+            break;
+    }
+}
