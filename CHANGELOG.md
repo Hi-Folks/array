@@ -7,6 +7,7 @@
 - Implement Countable on the Table object to allow for easy counting of number of rows by @RoadSigns
 - Implement Iterator on the Table object to allow for easy looping over the rows by @RoadSigns
 - Each the method signature of the Table::select from array to spread `int|string` by @RoadSigns
+- Add toArray() to Table
 
 ## 0.0.11 - 2022-11-10
 - Refactor groupBy to return Table instances to allow for chaining @RoadSigns
@@ -104,5 +105,3 @@ Initial release with some Arr methods:
 - splice(): changes content of arr removing, replacing and adding elements;
 - toString(): the string representing the array (same as join(','));
 - isArray(): check if the input is an array.
-
-

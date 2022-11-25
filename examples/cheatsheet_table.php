@@ -106,3 +106,13 @@ var_export($table->groupBy('product'));
 // Order the table by the column
 echo PHP_EOL.'-------'.PHP_EOL;
 var_export($table->orderBy('product'));
+
+$table = Table::make([
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+]);
+
+print_r($table->toArray());

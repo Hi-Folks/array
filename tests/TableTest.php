@@ -331,3 +331,20 @@ it('can transform all of the elements in a specific column', function () use ($d
         ->and($cheapestOfEachProduct->last()?->arr())
         ->toMatchArray(['product' => 'Door', 'price' => '100.00', 'active' => true]);
 });
+
+it('can transform to native array', function () use ($dataTable) {
+    $table = Table::make($dataTable);
+    $array = $table->toArray();
+
+    expect($array)
+        ->toBeArray()
+        ->toHaveCount(5);
+    expect($array[1]["product"])->toEqual("Chair");
+
+    $table = Table::make([]);
+    $array = $table->toArray();
+
+    expect($array)
+        ->toBeArray()
+        ->toHaveCount(0);
+});
