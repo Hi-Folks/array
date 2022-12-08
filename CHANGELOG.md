@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 - 2022-12-08
+Welcome to PHP 8.2.
+Added PHP 8.2 in the matrix GitHub Actions Workflow
+
 ## 0.1.0 - 2022-11-25
 - Ability to set and unset elements within Arr by @RoadSigns
 - Remove the extension of Arr within Table by @RoadSigns
