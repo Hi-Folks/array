@@ -11,18 +11,27 @@ use HiFolks\DataType\Traits\Calculable;
 use Iterator;
 use Traversable;
 
+/**
+ * Class Arr
+ * @package HiFolks\DataType
+ *
+ * @implements Iterator<int|string, mixed>
+ * @implements ArrayAccess<int|string, mixed>
+ */
 final class Arr implements Iterator, ArrayAccess, Countable
 {
     use Calculable;
 
+    /** @var array<int|string, mixed> */
     private array $arr;
 
+    /** @param array<int|string, mixed> $arr */
     public function __construct(array $arr = [])
     {
         $this->arr = $arr;
     }
 
-    public static function fromFunction($callable, $count): Arr
+    public static function fromFunction(callable $callable, int $count): Arr
     {
         $array = [];
         for ($i = 0; $i < $count; $i++) {
@@ -45,7 +54,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
     /**
      * Creates a new Arr instance from a string or array-like object.
      *
-     * @param iterable|string $arrayLike
+     * @param iterable<int|string, mixed>|string $arrayLike
      * @param Closure|null $mapFn
      * @return self
      */
@@ -68,6 +77,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
         return $array->map($mapFn);
     }
 
+    /** @param array<int|string, mixed> $arr */
     public static function make(array $arr = []): self
     {
         return new self($arr);
@@ -97,6 +107,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
     /**
      * Get the array
+     * @return array<int|string, mixed>
      */
     public function arr(): array
     {
@@ -174,7 +185,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
         next($this->arr);
     }
 
-    public function prev()
+    public function prev(): mixed
     {
         return prev($this->arr);
     }
@@ -235,7 +246,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * It returns Arr or [] depending on $returnArrClass value
      *
      * @param bool $returnArrClass true if you need Arr object
-     * @return int[]|string[]|Arr
+     * @return int|string|array<int|string, mixed>|Arr
      */
     public function keys(bool $returnArrClass = false): int|string|array|Arr
     {
@@ -247,7 +258,8 @@ final class Arr implements Iterator, ArrayAccess, Countable
     }
 
     /**
-     * Add an $element to the end of an array and returns new length
+     * Add an $element to the end of an array and returns new length of the array.
+     * @param mixed $element
      */
     public function push(...$element): int
     {
@@ -290,6 +302,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
     /**
      * Append arrays into the current one
+     * @param mixed $elements
      */
     public function append(...$elements): self
     {
@@ -728,7 +741,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * @param int $target
      * @param int $start
      * @param int|null $end
-     * @return array
+     * @return array<int|string, mixed>
      */
     public function copyWithin(int $target, int $start = 0, int $end = null): array
     {

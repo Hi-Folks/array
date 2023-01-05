@@ -40,7 +40,7 @@ final class Table implements Countable, Iterator
     }
 
     /**
-     * @return array
+     * @return array<int|string, array<int|string, mixed>>
      */
     public function toArray(): array
     {
