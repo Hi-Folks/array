@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 - WIP
+- PHPStan Level 6, thanks to @RoadSigns
+- Updating Pint action for the GitHub Actions
+
 ## 0.1.1 - 2022-12-08
 Welcome to PHP 8.2.
 Added PHP 8.2 in the matrix GitHub Actions Workflow
