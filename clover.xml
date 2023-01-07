@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1673113231">
-  <project timestamp="1673113231">
+<coverage generated="1673123801">
+  <project timestamp="1673123801">
     <file name="/home/runner/work/array/array/src/Arr.php">
       <class name="HiFolks\DataType\Arr" namespace="global">
         <metrics complexity="93" methods="56" coveredmethods="56" conditionals="0" coveredconditionals="0" statements="145" coveredstatements="145" elements="201" coveredelements="201"/>
@@ -81,16 +81,16 @@
       <line num="325" type="stmt" count="3"/>
       <line num="326" type="stmt" count="3"/>
       <line num="327" type="stmt" count="3"/>
-      <line num="328" type="stmt" count="3"/>
-      <line num="330" type="stmt" count="3"/>
-      <line num="331" type="stmt" count="1"/>
+      <line num="329" type="stmt" count="3"/>
+      <line num="331" type="stmt" count="3"/>
       <line num="332" type="stmt" count="1"/>
       <line num="333" type="stmt" count="1"/>
       <line num="334" type="stmt" count="1"/>
       <line num="335" type="stmt" count="1"/>
-      <line num="337" type="stmt" count="1"/>
+      <line num="336" type="stmt" count="1"/>
       <line num="338" type="stmt" count="1"/>
       <line num="339" type="stmt" count="1"/>
+      <line num="340" type="stmt" count="1"/>
       <line num="341" type="stmt" count="1"/>
       <line num="344" type="stmt" count="1"/>
       <line num="348" type="stmt" count="3"/>
