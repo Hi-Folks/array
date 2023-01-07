@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1673080075">
-  <project timestamp="1673080075">
+<coverage generated="1673113231">
+  <project timestamp="1673113231">
     <file name="/home/runner/work/array/array/src/Arr.php">
       <class name="HiFolks\DataType\Arr" namespace="global">
         <metrics complexity="93" methods="56" coveredmethods="56" conditionals="0" coveredconditionals="0" statements="145" coveredstatements="145" elements="201" coveredelements="201"/>
       </class>
-      <line num="29" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="81"/>
-      <line num="31" type="stmt" count="81"/>
+      <line num="29" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="83"/>
+      <line num="31" type="stmt" count="83"/>
       <line num="34" type="method" name="fromFunction" visibility="public" complexity="2" crap="2" count="1"/>
       <line num="36" type="stmt" count="1"/>
       <line num="37" type="stmt" count="1"/>
@@ -23,8 +23,8 @@
       <line num="73" type="stmt" count="3"/>
       <line num="74" type="stmt" count="2"/>
       <line num="77" type="stmt" count="1"/>
-      <line num="81" type="method" name="make" visibility="public" complexity="1" crap="1" count="81"/>
-      <line num="83" type="stmt" count="81"/>
+      <line num="81" type="method" name="make" visibility="public" complexity="1" crap="1" count="83"/>
+      <line num="83" type="stmt" count="83"/>
       <line num="93" type="method" name="of" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="95" type="stmt" count="1"/>
       <line num="98" type="method" name="count" visibility="public" complexity="1" crap="1" count="47"/>
@@ -33,8 +33,8 @@
       <line num="105" type="stmt" count="37"/>
       <line num="112" type="method" name="arr" visibility="public" complexity="1" crap="1" count="29"/>
       <line num="114" type="stmt" count="29"/>
-      <line num="120" type="method" name="get" visibility="public" complexity="1" crap="1" count="30"/>
-      <line num="122" type="stmt" count="30"/>
+      <line num="120" type="method" name="get" visibility="public" complexity="1" crap="1" count="32"/>
+      <line num="122" type="stmt" count="32"/>
       <line num="128" type="method" name="set" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="130" type="stmt" count="2"/>
       <line num="136" type="method" name="unset" visibility="public" complexity="2" crap="2" count="2"/>
@@ -174,12 +174,12 @@
       <line num="660" type="stmt" count="1"/>
       <line num="666" type="method" name="offsetExists" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="668" type="stmt" count="2"/>
-      <line num="674" type="method" name="offsetGet" visibility="public" complexity="1" crap="1" count="12"/>
-      <line num="676" type="stmt" count="12"/>
-      <line num="682" type="method" name="offsetSet" visibility="public" complexity="2" crap="2" count="4"/>
-      <line num="684" type="stmt" count="4"/>
+      <line num="674" type="method" name="offsetGet" visibility="public" complexity="1" crap="1" count="14"/>
+      <line num="676" type="stmt" count="14"/>
+      <line num="682" type="method" name="offsetSet" visibility="public" complexity="2" crap="2" count="6"/>
+      <line num="684" type="stmt" count="6"/>
       <line num="685" type="stmt" count="1"/>
-      <line num="687" type="stmt" count="4"/>
+      <line num="687" type="stmt" count="6"/>
       <line num="694" type="method" name="offsetUnset" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="696" type="stmt" count="1"/>
       <line num="704" type="method" name="values" visibility="public" complexity="1" crap="1" count="1"/>
@@ -210,21 +210,23 @@
     </file>
     <file name="/home/runner/work/array/array/src/Classes/Operation.php">
       <class name="HiFolks\DataType\Classes\Operation" namespace="global">
-        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
       </class>
-      <line num="9" type="method" name="sum" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="11" type="stmt" count="0"/>
-      <metrics loc="14" ncloc="14" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      <line num="9" type="method" name="add" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="11" type="stmt" count="1"/>
+      <line num="14" type="method" name="double" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="16" type="stmt" count="1"/>
+      <metrics loc="19" ncloc="19" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
     </file>
     <file name="/home/runner/work/array/array/src/Table.php">
       <class name="HiFolks\DataType\Table" namespace="global">
         <metrics complexity="39" methods="23" coveredmethods="23" conditionals="0" coveredconditionals="0" statements="88" coveredstatements="88" elements="111" coveredelements="111"/>
       </class>
-      <line num="24" type="method" name="make" visibility="public" complexity="2" crap="2" count="23"/>
-      <line num="26" type="stmt" count="23"/>
-      <line num="27" type="stmt" count="23"/>
-      <line num="28" type="stmt" count="23"/>
-      <line num="31" type="stmt" count="23"/>
+      <line num="24" type="method" name="make" visibility="public" complexity="2" crap="2" count="25"/>
+      <line num="26" type="stmt" count="25"/>
+      <line num="27" type="stmt" count="25"/>
+      <line num="28" type="stmt" count="25"/>
+      <line num="31" type="stmt" count="25"/>
       <line num="37" type="method" name="rows" visibility="public" complexity="1" crap="1" count="22"/>
       <line num="39" type="stmt" count="22"/>
       <line num="45" type="method" name="toArray" visibility="public" complexity="2" crap="2" count="1"/>
@@ -232,17 +234,17 @@
       <line num="48" type="stmt" count="1"/>
       <line num="49" type="stmt" count="1"/>
       <line num="51" type="stmt" count="1"/>
-      <line num="58" type="method" name="append" visibility="public" complexity="1" crap="1" count="23"/>
-      <line num="60" type="stmt" count="23"/>
-      <line num="61" type="stmt" count="23"/>
-      <line num="67" type="method" name="first" visibility="public" complexity="1" crap="1" count="11"/>
-      <line num="69" type="stmt" count="11"/>
-      <line num="70" type="stmt" count="11"/>
+      <line num="58" type="method" name="append" visibility="public" complexity="1" crap="1" count="25"/>
+      <line num="60" type="stmt" count="25"/>
+      <line num="61" type="stmt" count="25"/>
+      <line num="67" type="method" name="first" visibility="public" complexity="1" crap="1" count="13"/>
+      <line num="69" type="stmt" count="13"/>
+      <line num="70" type="stmt" count="13"/>
       <line num="76" type="method" name="last" visibility="public" complexity="1" crap="1" count="12"/>
       <line num="78" type="stmt" count="12"/>
       <line num="79" type="stmt" count="12"/>
-      <line num="86" type="method" name="getFromFirst" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="88" type="stmt" count="1"/>
+      <line num="86" type="method" name="getFromFirst" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="88" type="stmt" count="3"/>
       <line num="95" type="method" name="getFromLast" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="97" type="stmt" count="2"/>
       <line num="104" type="method" name="select" visibility="public" complexity="4" crap="4" count="7"/>
@@ -293,10 +295,10 @@
       <line num="190" type="stmt" count="2"/>
       <line num="193" type="stmt" count="3"/>
       <line num="194" type="stmt" count="3"/>
-      <line num="202" type="method" name="calc" visibility="public" complexity="2" crap="2" count="1"/>
-      <line num="204" type="stmt" count="1"/>
-      <line num="205" type="stmt" count="1"/>
-      <line num="208" type="stmt" count="1"/>
+      <line num="202" type="method" name="calc" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="204" type="stmt" count="3"/>
+      <line num="205" type="stmt" count="3"/>
+      <line num="208" type="stmt" count="3"/>
       <line num="216" type="method" name="groupBy" visibility="public" complexity="3" crap="3" count="2"/>
       <line num="218" type="stmt" count="2"/>
       <line num="220" type="stmt" count="2"/>
@@ -315,10 +317,10 @@
       <line num="249" type="stmt" count="1"/>
       <line num="252" type="method" name="count" visibility="public" complexity="1" crap="1" count="14"/>
       <line num="254" type="stmt" count="14"/>
-      <line num="261" type="method" name="getArr" visibility="private" complexity="2" crap="2" count="23"/>
-      <line num="263" type="stmt" count="23"/>
-      <line num="264" type="stmt" count="23"/>
-      <line num="266" type="stmt" count="23"/>
+      <line num="261" type="method" name="getArr" visibility="private" complexity="2" crap="2" count="25"/>
+      <line num="263" type="stmt" count="25"/>
+      <line num="264" type="stmt" count="25"/>
+      <line num="266" type="stmt" count="25"/>
       <line num="269" type="method" name="current" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="271" type="stmt" count="1"/>
       <line num="274" type="method" name="next" visibility="public" complexity="1" crap="1" count="1"/>
@@ -345,6 +347,6 @@
       <line num="28" type="stmt" count="1"/>
       <metrics loc="31" ncloc="21" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
     </file>
-    <metrics files="4" loc="1117" ncloc="712" classes="4" methods="82" coveredmethods="81" conditionals="0" coveredconditionals="0" statements="238" coveredstatements="237" elements="320" coveredelements="318"/>
+    <metrics files="4" loc="1122" ncloc="717" classes="4" methods="83" coveredmethods="83" conditionals="0" coveredconditionals="0" statements="239" coveredstatements="239" elements="322" coveredelements="322"/>
   </project>
 </coverage>
