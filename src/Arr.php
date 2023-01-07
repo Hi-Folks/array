@@ -302,7 +302,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
     /**
      * Append arrays into the current one
-     * @param mixed $elements
+     * @param array<int|string, mixed> $elements
      */
     public function append(...$elements): self
     {
@@ -316,7 +316,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * This method does not change the existing Arr object,
      * but instead returns a new Arr object
      *
-     * @param  mixed  ...$elements
+     * @param  array<int|string, mixed>|Arr  ...$elements
      * @return Arr object
      */
     public function concat(mixed ...$elements): Arr
@@ -325,6 +325,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
         foreach ($elements as $element) {
             switch (gettype($element)) {
                 case 'array':
+                    /** @var array<int|string, mixed> $element */
                     $array = array_merge($array, $element);
 
                     break;
@@ -336,8 +337,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
                     break;
                 case 'object':
-                    if (get_class($element) === get_class($this)) {
-                        /** @var Arr $element */
+                    if ($element instanceof Arr) {
                         $array = array_merge($array, $element->arr());
                     }
 
