@@ -6,8 +6,13 @@ use Closure;
 
 class Operation
 {
-    public static function sum(int|string $field): Closure
+    public static function add(int|string $field, int|float $value): Closure
     {
-        return fn ($result, $element) => $result + $element[$field];
+        return fn ($element) => $value + $element[$field];
+    }
+
+    public static function double(int|string $field): Closure
+    {
+        return fn ($element) => $element[$field] * 2;
     }
 }
