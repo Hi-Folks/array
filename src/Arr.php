@@ -302,7 +302,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
     /**
      * Append arrays into the current one
-     * @param mixed $elements
+     * @param array<int|string, mixed> $elements
      */
     public function append(...$elements): self
     {
