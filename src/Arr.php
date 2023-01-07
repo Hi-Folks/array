@@ -316,7 +316,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * This method does not change the existing Arr object,
      * but instead returns a new Arr object
      *
-     * @param  mixed  ...$elements
+     * @param  array<int|string, mixed>|Arr  ...$elements
      * @return Arr object
      */
     public function concat(mixed ...$elements): Arr
