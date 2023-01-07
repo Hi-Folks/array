@@ -325,6 +325,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
         foreach ($elements as $element) {
             switch (gettype($element)) {
                 case 'array':
+                    /** @var array<int|string, mixed> $element */
                     $array = array_merge($array, $element);
 
                     break;
@@ -336,8 +337,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
                     break;
                 case 'object':
-                    if (get_class($element) === get_class($this)) {
-                        /** @var Arr $element */
+                    if ($element instanceof Arr) {
                         $array = array_merge($array, $element->arr());
                     }
 
