@@ -64,7 +64,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
             $arrayLike = str_split($arrayLike);
         }
 
-        if (is_a($arrayLike, Traversable::class)) {
+        if ($arrayLike instanceof Traversable) {
             $arrayLike = iterator_to_array($arrayLike);
         }
 
@@ -337,6 +337,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
                     break;
                 case 'object':
                     if (get_class($element) === get_class($this)) {
+                        /** @var Arr $element */
                         $array = array_merge($array, $element->arr());
                     }
 
@@ -477,9 +478,9 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * Returns index of the first element in arr passing the callback function
      *
      * @param  callable  $callback the function for finding the index
-     * @return int
+     * @return int|string
      */
-    public function findIndex(callable $callback): int
+    public function findIndex(callable $callback): int|string
     {
         foreach ($this->arr as $key => $element) {
             if ($callback($element, $key, $this->arr)) {
