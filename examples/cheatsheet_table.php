@@ -145,3 +145,17 @@ $table = Table::make([
 var_export($table->orderBy('product', 'desc'));
 
 print_r($table->toArray());
+
+// Group the table by a column
+echo PHP_EOL.'-------'.PHP_EOL;
+$table = Table::make([
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+]);
+
+var_export($table->groupBy('product'));
+
+print_r($table->toArray());

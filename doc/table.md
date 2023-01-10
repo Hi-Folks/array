@@ -188,3 +188,33 @@ var_export(
 ```
 
 Both orders can be inforced by using `asc` and `desc`
+
+## Group By a column
+For example if you want to group the products by their `product` value you can use *groupBy()* method.
+
+```php
+use HiFolks\DataType\Table;
+use HiFolks\DataType\Classes\Operation;
+
+$table = Table::make([
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+]);
+var_export(
+    $table->groupBy('product');
+);
+/*
+[
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Desk', 'price' => 200, 'active' => true]
+]
+*/
+```
+
+The `groupBy` method will always keep the first one that it finds, so if you want to keep only the product
+that costs the most you'll have to use the `orderBy` method before the `groupBy` method.
