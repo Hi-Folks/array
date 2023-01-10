@@ -218,3 +218,35 @@ var_export(
 
 The `groupBy` method will always keep the first one that it finds, so if you want to keep only the product
 that costs the most you'll have to use the `orderBy` method before the `groupBy` method.
+
+
+## Transform a column with a custom function
+For example if you want to transform all values in a column within the table you can use *transform()* method.
+
+```php
+use HiFolks\DataType\Table;
+use HiFolks\DataType\Classes\Operation;
+
+$table = Table::make([
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+]);
+var_export(
+    $table->transform('price', function ($value) {
+        return $value * 100;
+    })
+);
+/*
+[
+    ['product' => 'Door', 'price' => 10000, 'active' => true],
+    ['product' => 'Chair', 'price' => 10000, 'active' => true],
+    ['product' => 'Bookcase', 'price' => 15000, 'active' => true],
+    ['product' => 'Desk', 'price' => 20000, 'active' => true]
+]
+*/
+```
+
+This can be used if you wanted to turn the price from dollars into cent i.e 200 to 20000
