@@ -160,3 +160,31 @@ var_export(
 */
 ```
 
+By default, the order is desc. If you want to order in descending order you can use *orderBy($field, $order)* method.
+
+```php
+use HiFolks\DataType\Table;
+use HiFolks\DataType\Classes\Operation;
+
+$table = Table::make([
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+]);
+var_export(
+    $table->orderBy('price', 'asc')
+);
+/*
+[
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+]
+*/
+```
+
+Both orders can be inforced by using `asc` and `desc`

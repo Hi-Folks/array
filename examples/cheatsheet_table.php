@@ -101,12 +101,11 @@ var_export($table->except('active', 'price'));
 
 // Group the Table by the column
 echo PHP_EOL.'-------'.PHP_EOL;
-var_export($table->groupBy('product'));
+$result = $table->groupBy('product');
+var_export($result);
 
-// Order the table by the column
+// Order the table by the column using default value (desc)
 echo PHP_EOL.'-------'.PHP_EOL;
-var_export($table->orderBy('product'));
-
 $table = Table::make([
     ['product' => 'Desk', 'price' => 200, 'active' => true],
     ['product' => 'Chair', 'price' => 100, 'active' => true],
@@ -114,5 +113,35 @@ $table = Table::make([
     ['product' => 'Bookcase', 'price' => 150, 'active' => true],
     ['product' => 'Door', 'price' => 100, 'active' => true],
 ]);
+
+var_export($table->orderBy('product'));
+
+print_r($table->toArray());
+
+// Order the table by the column asc
+echo PHP_EOL.'-------'.PHP_EOL;
+$table = Table::make([
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+]);
+
+var_export($table->orderBy('product', 'asc'));
+
+print_r($table->toArray());
+
+// Order the table by the column desc
+echo PHP_EOL.'-------'.PHP_EOL;
+$table = Table::make([
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+]);
+
+var_export($table->orderBy('product', 'desc'));
 
 print_r($table->toArray());
