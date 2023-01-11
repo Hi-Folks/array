@@ -75,7 +75,7 @@ Table class allows you to manage bi dimensional array, something like:
 ]
 ```
 
-Each row within the Table will be of type `Arr` so it allows you to lean on all of the methods that
+Each row within the Table will be of type `Arr` so it allows you to lean on all the methods that
 are available via the `Arr` object.
 
 **Table class** allows you to filter, order, select some fields, create calculated fields.
