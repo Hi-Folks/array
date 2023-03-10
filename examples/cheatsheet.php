@@ -1,6 +1,6 @@
 <?php
 
-require './vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use HiFolks\DataType\Arr;
 
@@ -37,24 +37,24 @@ print_result($arr->lastIndexOf(5));
 
 // Calls function fn for each element in the array
 $x = $arr->forEach(
-    fn ($element, $key) => $key * $element
+    fn ($element, $key): int|float => $key * $element
 );
 print_result($x->arr());
 
 // Returns true if all elements in arr pass the test in fn
-$bool = $arr->every(fn ($element) => $element > 1);
+$bool = $arr->every(fn ($element): bool => $element > 1);
 print_result($bool);
 
 // Returns true if at least one element in arr pass the test in fn
-$bool = $arr->some(fn ($element, $key) => $element > 2);
+$bool = $arr->some(fn ($element, $key): bool => $element > 2);
 print_result($bool);
 
 // Returns new array with elements of arr passing the filtering function fn
-$arr2 = $arr->filter(fn ($element) => $element > 3);
+$arr2 = $arr->filter(fn ($element): bool => $element > 3);
 print_result($arr2);
 
 // Returns new array with the results of running fn on every element
-$arr2 = $arr->map(fn ($element) => $element + 1);
+$arr2 = $arr->map(fn ($element): int|float => $element + 1);
 print_result($arr2);
 
 // Returns a flat array with sub-arrays concatenated
@@ -64,7 +64,7 @@ print_result($arr2);
 
 // Returns a Arr same as ->map() with a successive ->flat()
 $arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
-$arr2 = $arr->flatMap(fn ($element) => [$element, $element * 2]);
+$arr2 = $arr->flatMap(fn ($element): array => [$element, $element * 2]);
 print_result($arr2);
 
 // Changes all elements in range to at the specified value
@@ -78,12 +78,12 @@ print_result($arr);
 
 // Returns a single value which is the function's accumulated result L2R
 $arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
-$value = $arr->reduce(fn ($previousValue, $currentValue) => $previousValue + $currentValue);
+$value = $arr->reduce(fn ($previousValue, $currentValue): float|int|array => $previousValue + $currentValue);
 print_result($value);
 
 // Returns a single value which is the function's accumulated result R2L
 $arr = Arr::make([1, 2, 3, 4, 5, 6, 7]);
-$value = $arr->reduceRight(fn ($previousValue, $currentValue) => $previousValue + $currentValue);
+$value = $arr->reduceRight(fn ($previousValue, $currentValue): float|int|array => $previousValue + $currentValue);
 print_result($value);
 
 // extract only values
@@ -141,11 +141,11 @@ $arr = Arr::from('foo');
 print_result($arr);
 
 // Create Arr from array-like object
-$arr = Arr::from([1, 2, 3], fn ($x) => $x + $x);
+$arr = Arr::from([1, 2, 3], fn ($x): float|int|array => $x + $x);
 print_result($arr);
 
 // Create Arr from a function
-$arr = Arr::fromFunction(fn () => random_int(0, 10), 5);
+$arr = Arr::fromFunction(fn (): int => random_int(0, 10), 5);
 print_result($arr);
 
 // Create Arr with a value
@@ -203,13 +203,13 @@ print_result($entries);
 
 // Returns index of the first element in the array that satisfies the testing function
 $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
-print_result($arr->findIndex(fn ($element) => $element > 0));
+print_result($arr->findIndex(fn ($element): bool => $element > 0));
 // 0
-print_result($arr->findIndex(fn ($element) => $element > 1));
+print_result($arr->findIndex(fn ($element): bool => $element > 1));
 // 1
-print_result($arr->findIndex(fn ($element) => $element > 10000));
+print_result($arr->findIndex(fn ($element): bool => $element > 10000));
 // -1
-print_result($arr->findIndex(fn ($element, $index) => $element > 1 && $index > 1));
+print_result($arr->findIndex(fn ($element, $index): bool => $element > 1 && $index > 1));
 // 2
 
 
@@ -217,16 +217,16 @@ print_result($arr->findIndex(fn ($element, $index) => $element > 1 && $index > 1
 // Returns the first element in the array that satisfies the testing function
 $arr = Arr::make([1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 8, 5, 14]);
 
-print_result($arr->find(fn ($element) => $element > 5));
+print_result($arr->find(fn ($element): bool => $element > 5));
 // 6
-print_result($arr->find(fn ($element) => $element < 5));
+print_result($arr->find(fn ($element): bool => $element < 5));
 // 1
-print_result($arr->find(fn ($element) => $element > 10000));
+print_result($arr->find(fn ($element): bool => $element > 10000));
 // null
-print_result($arr->find(fn ($element, $index) => $element > 1 && $index > 1));
+print_result($arr->find(fn ($element, $index): bool => $element > 1 && $index > 1));
 // 3
 $arr = Arr::make(['foo', 'bar', 'baz']);
-print_result($arr->find(fn ($element) => str_contains($element, 'a')));
+print_result($arr->find(fn ($element): bool => str_contains($element, 'a')));
 // 'bar'
 
 // Returns the shadow copied part of the array to another location and keeps its length
