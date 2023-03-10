@@ -19,7 +19,6 @@ final class Table implements Countable, Iterator
 
     /**
      * @param array<int|string, array<int|string, mixed>|Arr> $array
-     * @return Table
      */
     public static function make(array $array): self
     {
@@ -61,46 +60,28 @@ final class Table implements Countable, Iterator
         return $this;
     }
 
-    /**
-     * @return Arr|null
-     */
     public function first(): ?Arr
     {
         $array = array_reverse($this->rows);
         return array_pop($array);
     }
 
-    /**
-     * @return Arr|null
-     */
     public function last(): ?Arr
     {
         $reference = $this->rows;
         return array_pop($reference);
     }
 
-    /**
-     * @param int|string $field
-     * @return mixed
-     */
     public function getFromFirst(int|string $field): mixed
     {
         return $this->first()?->get($field);
     }
 
-    /**
-     * @param int|string $field
-     * @return mixed
-     */
     public function getFromLast(int|string $field): mixed
     {
         return $this->last()?->get($field);
     }
 
-    /**
-     * @param int|string ...$columns
-     * @return self
-     */
     public function select(int|string ...$columns): self
     {
         $table = self::make([]);
@@ -121,9 +102,6 @@ final class Table implements Countable, Iterator
     /**
      * It returns a new Table instance with data, excluding the attributes listed in
      * $columns
-     *
-     * @param  int|string ...$columns
-     * @return self
      */
     public function except(int|string ...$columns): self
     {
@@ -139,12 +117,6 @@ final class Table implements Countable, Iterator
         return $table;
     }
 
-    /**
-     * @param  string|int  $field
-     * @param  mixed  $operator
-     * @param  mixed  $value
-     * @return self
-     */
     public function where(string|int $field, mixed $operator = null, mixed $value = null): self
     {
         if (func_num_args() === 1) {
@@ -171,23 +143,14 @@ final class Table implements Countable, Iterator
         return self::make($filteredArray);
     }
 
-    /**
-     * @param string|int $field
-     * @param string $order
-     * @return Table
-     */
     public function orderBy(string|int $field, string $order = 'desc'): self
     {
         $array = $this->rows();
 
         if ($order !== 'asc') {
-            $closure = static function (Arr $item1, Arr $item2) use ($field) {
-                return $item2->get($field) <=> $item1->get($field);
-            };
+            $closure = static fn (Arr $item1, Arr $item2) => $item2->get($field) <=> $item1->get($field);
         } else {
-            $closure = static function ($item1, $item2) use ($field) {
-                return $item1->get($field) <=> $item2->get($field);
-            };
+            $closure = static fn ($item1, $item2) => $item1->get($field) <=> $item2->get($field);
         }
 
         usort($array, $closure);
@@ -195,8 +158,6 @@ final class Table implements Countable, Iterator
     }
 
     /**
-     * @param  string|int  $destinationField
-     * @param  callable  $function
      * @return $this
      */
     public function calc(string|int $destinationField, callable $function): self
@@ -210,8 +171,6 @@ final class Table implements Countable, Iterator
 
     /**
      * This will only return the values for the first time it a unique row within that group
-     * @param string|int $field
-     * @return Table
      */
     public function groupBy(string|int $field): Table
     {
@@ -256,7 +215,6 @@ final class Table implements Countable, Iterator
 
     /**
      * @param array<int|string, mixed>|Arr $value
-     * @return Arr
      */
     private function getArr(array|Arr $value): Arr
     {

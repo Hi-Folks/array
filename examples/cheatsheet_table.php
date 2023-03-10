@@ -171,6 +171,4 @@ $table = Table::make([
 ]);
 
 // This function is making the price from 200 to 20000 which would be used to turn dollars to cents
-var_export($table->transform('price', function ($item) {
-    return $item * 100;
-}));
+var_export($table->transform('price', fn ($item) => $item * 100));

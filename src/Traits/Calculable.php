@@ -6,8 +6,6 @@ trait Calculable
 {
     /**
      * Returns the sum of values as an integer or float; 0 if the array is empty.
-     *
-     * @return int|float
      */
     public function sum(): int|float
     {
@@ -16,8 +14,6 @@ trait Calculable
 
     /**
      * Returns the average of values as an integer of float; 0 if the array is empty
-     *
-     * @return int|float
      */
     public function avg(): int|float
     {

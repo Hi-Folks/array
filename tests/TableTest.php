@@ -320,9 +320,7 @@ it('can get the cheapest of all products that are active', function () use ($dat
 
 it('can transform all of the elements in a specific column', function () use ($dataTable) {
     $table = Table::make($dataTable);
-    $cheapestOfEachProduct = $table->transform('price', function ($price) {
-        return number_format($price, 2);
-    });
+    $cheapestOfEachProduct = $table->transform('price', fn ($price) => number_format($price, 2));
 
     expect($cheapestOfEachProduct)
         ->toHaveCount(5)

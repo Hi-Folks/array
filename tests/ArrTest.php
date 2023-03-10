@@ -54,9 +54,7 @@ it('is Array forEach', function () {
     expect($arr->length())->toEqual(2);
     expect($arr->push(100))->toEqual(3);
     expect($arr->length())->toEqual(3);
-    $x = $arr->forEach(function ($element, $key) {
-        return $key * $element.PHP_EOL;
-    });
+    $x = $arr->forEach(fn ($element, $key) => $key * $element.PHP_EOL);
     expect($x->length())->toEqual(3);
     expect($x->get(2))->toEqual(200);
 });
@@ -241,9 +239,7 @@ it('matches some element', function () {
     expect($bool)->toEqual(false);
 
     $arr = Arr::make([1, 2, 3, 4, 5]);
-    $even = function ($element) {
-        return $element % 2 === 0;
-    };
+    $even = fn ($element) => $element % 2 === 0;
     $bool = $arr->some($even);
     expect($bool)->toEqual(true);
 });
@@ -462,7 +458,7 @@ it('tests keys() method', function () {
 
     $keys = $arr->keys();
     expect($keys)->toBeArray();
-    expect(count($keys))->toEqual(12);
+    expect(is_countable($keys) ? count($keys) : 0)->toEqual(12);
     expect($keys[4])->toEqual('05');
 
     foreach ($arrKeys as $key => $value) {
