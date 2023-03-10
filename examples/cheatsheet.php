@@ -37,9 +37,7 @@ print_result($arr->lastIndexOf(5));
 
 // Calls function fn for each element in the array
 $x = $arr->forEach(
-    function ($element, $key) {
-        return $key * $element;
-    }
+    fn ($element, $key) => $key * $element
 );
 print_result($x->arr());
 

@@ -41,11 +41,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
         return self::make($array);
     }
 
-    /**
-     * @param  mixed  $value
-     * @param  int  $count
-     * @return self
-     */
     public static function fromValue(mixed $value, int $count): self
     {
         return self::make(array_fill(0, $count, $value));
@@ -55,8 +50,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * Creates a new Arr instance from a string or array-like object.
      *
      * @param iterable<int|string, mixed>|string $arrayLike
-     * @param Closure|null $mapFn
-     * @return self
      */
     public static function from(iterable|string $arrayLike, ?Closure $mapFn = null): self
     {
@@ -87,7 +80,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * Creates a new Arr instance from a variable number of arguments,
      * regardless of number or type of the arguments.
      *
-     * @param  mixed  ...$elements
      * @return Arr object
      */
     public static function of(mixed ...$elements): self
@@ -229,9 +221,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
     /**
      * It executes a provided function ($callback) once for each element.
-     *
-     * @param  callable  $callback
-     * @return Arr
      */
     public function forEach(callable $callback): self
     {
@@ -259,9 +248,8 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
     /**
      * Add an $element to the end of an array and returns new length of the array.
-     * @param mixed $element
      */
-    public function push(...$element): int
+    public function push(mixed ...$element): int
     {
         return array_push($this->arr, ...$element);
     }
@@ -316,8 +304,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * This method does not change the existing Arr object,
      * but instead returns a new Arr object
      *
-     * @param  array<int|string, mixed>|Arr  ...$elements
-     * @return Arr object
      */
     public function concat(mixed ...$elements): Arr
     {
@@ -352,7 +338,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * Joins all elements into a string, separated by $separator
      *
      * @param  string  $separator the separator, could be also a string with more than 1 char
-     * @return string
      */
     public function join(string $separator = ','): string
     {
@@ -367,7 +352,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      *
      * @param int $start start index (array start from 0, start included)
      * @param int|null $end end index (array starts from 0, end not included)
-     * @return Arr
      */
     public function slice(int $start, int $end = null): Arr
     {
@@ -408,9 +392,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
     /**
      * Returns true if all elements in Arr pass the test in fn.
-     *
-     * @param  callable  $callback
-     * @return bool
      */
     public function every(callable $callback): bool
     {
@@ -431,9 +412,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * the provided function returns true;
      * otherwise it returns false.
      * It doesn't modify the array.
-     *
-     * @param  callable  $callback
-     * @return bool
      */
     public function some(callable $callback): bool
     {
@@ -450,9 +428,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * Determines whether the array includes a certain value $element among its entries,
      * returning true or false as appropriate
      *
-     * @param  mixed  $element
      * @param  int|null  $fromIndex
-     * @return bool
      */
     public function includes(mixed $element, int $fromIndex = null): bool
     {
@@ -467,7 +443,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * Returns new Arr with elements of arr passing the filtering function fn
      *
      * @param  callable  $callback the function for filtering
-     * @return Arr
      */
     public function filter(callable $callback): Arr
     {
@@ -478,7 +453,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * Returns index of the first element in arr passing the callback function
      *
      * @param  callable  $callback the function for finding the index
-     * @return int|string
      */
     public function findIndex(callable $callback): int|string
     {
@@ -494,9 +468,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
     /**
      * Returns a new Arr populated with the results of
      * calling a provided function on every element in the calling array
-     *
-     * @param  callable  $callback
-     * @return Arr
      */
     public function map(callable $callback): Arr
     {
@@ -505,8 +476,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
     /**
      * Returns a new Arr object as flatten array with subarrays concatenated
-     *
-     * @return Arr
      */
     public function flat(): self
     {
@@ -521,9 +490,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
     /**
      * The flatMap method is identical to a map followed by a call to flat of depth 1
-     *
-     * @param callable $callback
-     * @return Arr
      */
     public function flatMap(callable $callback): self
     {
@@ -555,7 +521,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * @param  mixed  $value the value to fill the array with
      * @param  int  $start start index (from 0)
      * @param  int|null  $end end index (default, the end of array)
-     * @return void
      */
     public function fill(mixed $value, int $start = 0, int $end = null): void
     {
@@ -573,8 +538,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * The final result of running the reducer across all elements of the array
      * is a single value.
      *
-     * @param  callable  $callback
-     * @param  mixed  $initialValue
      * @return mixed the result
      */
     public function reduce(callable $callback, mixed $initialValue = 0): mixed
@@ -585,10 +548,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
     /**
      * Applies a function against an accumulator and each value of the array
      * (from right-to-left) to reduce it to a single value.
-     *
-     * @param  callable  $callback
-     * @param  mixed  $initialValue
-     * @return mixed
      */
     public function reduceRight(callable $callback, mixed $initialValue = 0): mixed
     {
@@ -601,7 +560,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * and the last array element becomes the first.
      *
      * @param  bool  $preserve_keys if set to true keys are preserved
-     * @return Arr
      */
     public function reverse(bool $preserve_keys = false): Arr
     {
@@ -613,8 +571,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
     /**
      * Sorts the elements of an Arr object in place and returns the sorted Arr object.
      * The default sort order is ascending
-     *
-     * @return Arr
      */
     public function sort(): Arr
     {
@@ -641,8 +597,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
     /**
      * Returns a string representing arr its elements (same as arr.join(','))
-     *
-     * @return string
      */
     public function toString(): string
     {
@@ -739,8 +693,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * The copyWithin() method shallow copies part of an array to another
      * location in the same array and returns it without modifying its length.
      *
-     * @param int $target
-     * @param int $start
      * @param int|null $end
      * @return array<int|string, mixed>
      */
