@@ -3,7 +3,7 @@
 ## 0.1.2 - WIP
 - PHPStan Level 6, thanks to @RoadSigns
 - Updating Pint action for the GitHub Actions
-- Adding Rector with UP_TO_PHP_80 and DEAD_CODE options
+- Adding Rector with UP_TO_PHP_80, DEAD_CODE, CODE_QUALITY, EARLY_RETURN, TYPE_DECLARATION, PRIVATIZATION options
 
 ## 0.1.1 - 2022-12-08
 Welcome to PHP 8.2.

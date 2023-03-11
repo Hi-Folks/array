@@ -1,6 +1,6 @@
 <?php
 
-require './vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use HiFolks\DataType\Table;
 
@@ -54,7 +54,7 @@ echo PHP_EOL.'------- Filter and calculate new field'.PHP_EOL;
 $result = $table
     ->select('product', 'price')
     ->where('price', '>', 100)
-    ->calc('new_field', fn ($item) => $item['price'] * 2);
+    ->calc('new_field', fn ($item): int|float => $item['price'] * 2);
 var_export($result);
 /*
 HiFolks\DataType\Table::__set_state(array(
@@ -171,4 +171,4 @@ $table = Table::make([
 ]);
 
 // This function is making the price from 200 to 20000 which would be used to turn dollars to cents
-var_export($table->transform('price', fn ($item) => $item * 100));
+var_export($table->transform('price', fn ($item): int|float => $item * 100));
