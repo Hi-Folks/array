@@ -38,7 +38,7 @@ jobs:
         run: composer install --prefer-dist --no-interaction
 
       - name: Execute tests
-        run: vendor/bin/pest
+        run: composer test
 
       - name: Execute Static Code Analysis
-        run: vendor/bin/phpstan analyse
+        run: composer phpstan
