@@ -10,9 +10,11 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         php: [8.0, 8.1, 8.2]
-        stability: [prefer-lowest, prefer-stable]
+        exclude:
+          - operating-system: windows-latest
+            php-versions: [8.0, 8.1]
 
-    name: P${{ matrix.php }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -31,10 +33,10 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Install dependencies
-        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+        run: composer install --prefer-dist --no-interaction
 
       - name: Execute tests
-        run: vendor/bin/pest
+        run: composer test
 
       - name: Execute Static Code Analysis
-        run: vendor/bin/phpstan analyse
+        run: composer phpstan
