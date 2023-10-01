@@ -178,13 +178,31 @@ final class Table implements Countable, Iterator
 
         foreach ($this->rows as $value) {
             $property = $value->get($field);
-            if (array_key_exists(strval($property), $result)) {
+            $property = $this->castVariableForStrval($property);
+            
+            if (!$property
+                || array_key_exists(strval($property), $result)) {
                 continue;
             }
             $result[$property] = $value;
         }
 
         return self::make(array_values($result));
+    }
+
+
+    /**
+     * strval sometimes crashes when passed a mixed value, this fixes that problem.
+     */
+    private function castVariableForStrval(mixed $property): bool|float|int|string|null
+    {
+        return match(gettype($property)) {
+            'boolean' => (bool) $property,
+            'double' => (float) $property,
+            'integer' => (int) $property,
+            'string' => (string) $property,
+            default => null,
+        };
     }
 
     /**
