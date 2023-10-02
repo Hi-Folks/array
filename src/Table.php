@@ -179,7 +179,7 @@ final class Table implements Countable, Iterator
         foreach ($this->rows as $value) {
             $property = $value->get($field);
             $property = $this->castVariableForStrval($property);
-            
+
             if (!$property
                 || array_key_exists(strval($property), $result)) {
                 continue;
