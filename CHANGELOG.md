@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1 - 2024-05-23
+Fine-tuning release: removing version from composer.json and fixing changelog
+
 ## 1.0.0 - 2024-05-23
 - PHPStan Level 9, thanks to @RoadSigns
 - Updating Pint action for the GitHub Actions
