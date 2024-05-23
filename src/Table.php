@@ -44,7 +44,7 @@ final class Table implements Countable, Iterator
     public function toArray(): array
     {
         $result = [];
-        foreach ($this->rows() as $key => $row) {
+        foreach ($this->rows as $key => $row) {
             $result[$key] = $row->arr();
         }
         return $result;
@@ -89,9 +89,7 @@ final class Table implements Countable, Iterator
             $newRow = [];
             foreach ($columns as $column) {
                 $value = $row->get($column);
-                if ($column !== null) {
-                    $newRow[$column] = $value;
-                }
+                $newRow[$column] = $value;
             }
             $table->append(Arr::make($newRow));
         }
@@ -129,14 +127,14 @@ final class Table implements Countable, Iterator
         }
 
         $function = match ($operator) {
-            '==' => fn ($element) => $element->get($field) == $value,
-            '>' => fn ($element) => $element->get($field) > $value,
-            '<' => fn ($element) => $element->get($field) < $value,
-            '>=' => fn ($element) => $element->get($field) >= $value,
-            '<=' => fn ($element) => $element->get($field) <= $value,
-            '!=' => fn ($element) => $element->get($field) != $value,
-            '!==' => fn ($element) => $element->get($field) !== $value,
-            default => fn ($element) => $element->get($field) === $value
+            '==' => fn ($element): bool => $element->get($field) == $value,
+            '>' => fn ($element): bool => $element->get($field) > $value,
+            '<' => fn ($element): bool => $element->get($field) < $value,
+            '>=' => fn ($element): bool => $element->get($field) >= $value,
+            '<=' => fn ($element): bool => $element->get($field) <= $value,
+            '!=' => fn ($element): bool => $element->get($field) != $value,
+            '!==' => fn ($element): bool => $element->get($field) !== $value,
+            default => fn ($element): bool => $element->get($field) === $value
         };
         $filteredArray = array_filter($this->rows, $function);
 
@@ -145,12 +143,12 @@ final class Table implements Countable, Iterator
 
     public function orderBy(string|int $field, string $order = 'desc'): self
     {
-        $array = $this->rows();
+        $array = $this->rows;
 
         if ($order !== 'asc') {
-            $closure = static fn (Arr $item1, Arr $item2) => $item2->get($field) <=> $item1->get($field);
+            $closure = static fn (Arr $item1, Arr $item2): int => $item2->get($field) <=> $item1->get($field);
         } else {
-            $closure = static fn ($item1, $item2) => $item1->get($field) <=> $item2->get($field);
+            $closure = static fn ($item1, $item2): int => $item1->get($field) <=> $item2->get($field);
         }
 
         usort($array, $closure);
@@ -179,9 +177,10 @@ final class Table implements Countable, Iterator
         foreach ($this->rows as $value) {
             $property = $value->get($field);
             $property = $this->castVariableForStrval($property);
-
-            if (!$property
-                || array_key_exists(strval($property), $result)) {
+            if (!$property) {
+                continue;
+            }
+            if (array_key_exists(strval($property), $result)) {
                 continue;
             }
             $result[$property] = $value;
@@ -197,10 +196,10 @@ final class Table implements Countable, Iterator
     private function castVariableForStrval(mixed $property): bool|float|int|string|null
     {
         return match(gettype($property)) {
-            'boolean' => (bool) $property,
-            'double' => (float) $property,
-            'integer' => (int) $property,
-            'string' => (string) $property,
+            'boolean' => $property,
+            'double' => $property,
+            'integer' => $property,
+            'string' => $property,
             default => null,
         };
     }
@@ -212,7 +211,7 @@ final class Table implements Countable, Iterator
         string|int $field,
         callable $function,
     ): self {
-        $array = $this->rows();
+        $array = $this->rows;
 
         foreach ($array as $row) {
             /** @var array<int, mixed> $keys */
@@ -228,7 +227,7 @@ final class Table implements Countable, Iterator
 
     public function count(): int
     {
-        return count($this->rows());
+        return count($this->rows);
     }
 
     /**
@@ -237,7 +236,7 @@ final class Table implements Countable, Iterator
     private function getArr(array|Arr $value): Arr
     {
         if (!$value instanceof Arr) {
-            $value = Arr::make($value);
+            return Arr::make($value);
         }
         return $value;
     }

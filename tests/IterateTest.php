@@ -2,7 +2,7 @@
 
 use HiFolks\DataType\Arr;
 
-it('iterates', function () {
+it('iterates', function (): void {
     $arr = Arr::make([100, 101, 102]);
     foreach ($arr as $element) {
         expect($element)->toBeGreaterThanOrEqual(100);
@@ -10,7 +10,7 @@ it('iterates', function () {
     }
 });
 
-it('iterates prev and next', function () {
+it('iterates prev and next', function (): void {
     $arr = Arr::make([100, 101, 102]);
     $arr->next();
     $arr->next();

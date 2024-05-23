@@ -226,7 +226,7 @@ print_result($arr->find(fn ($element): bool => $element > 10000));
 print_result($arr->find(fn ($element, $index): bool => $element > 1 && $index > 1));
 // 3
 $arr = Arr::make(['foo', 'bar', 'baz']);
-print_result($arr->find(fn ($element): bool => str_contains($element, 'a')));
+print_result($arr->find(fn ($element): bool => str_contains((string) $element, 'a')));
 // 'bar'
 
 // Returns the shadow copied part of the array to another location and keeps its length

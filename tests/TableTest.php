@@ -11,7 +11,7 @@ $dataTable = [
     ['product' => 'Door', 'price' => 100, 'active' => true],
 ];
 
-it('is Table', function () use ($dataTable) {
+it('is Table', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect($table->rows())
         ->toBeArray()
@@ -19,12 +19,12 @@ it('is Table', function () use ($dataTable) {
         ->toBeInstanceOf(Arr::class);
 });
 
-it('is Table countable', function () use ($dataTable) {
+it('is Table countable', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect($table)->toHaveCount(5);
 });
 
-it('is iterable', function () use ($dataTable) {
+it('is iterable', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect($table)->toBeInstanceOf(Iterator::class);
     foreach ($table as $row) {
@@ -45,7 +45,7 @@ it('is iterable', function () use ($dataTable) {
         ->toMatchArray(['product' => 'Chair', 'price' => 100, 'active' => true]);
 });
 
-it('can get first', function () use ($dataTable) {
+it('can get first', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect($table->rows())->toBeArray()
         ->and($table->first())
@@ -58,7 +58,7 @@ it('can get first', function () use ($dataTable) {
         ->toMatchArray(['product', 'price', 'active']);
 });
 
-it('can get column from first', function () use ($dataTable) {
+it('can get column from first', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect($table->rows())
         ->toBeArray()
@@ -69,7 +69,7 @@ it('can get column from first', function () use ($dataTable) {
         ->toBeNull();
 });
 
-it('can get last', function () use ($dataTable) {
+it('can get last', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect($table->rows())->toBeArray()
         ->and($table->last())->toHaveCount(3)
@@ -82,7 +82,7 @@ it('can get last', function () use ($dataTable) {
         ->toMatchArray(['product', 'price', 'active']);
 });
 
-it('can get column from last', function () use ($dataTable) {
+it('can get column from last', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect($table->rows())
         ->toBeArray()
@@ -93,7 +93,7 @@ it('can get column from last', function () use ($dataTable) {
         ->toBeNull();
 });
 
-it('can select', function () use ($dataTable) {
+it('can select', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect($table->rows())->toBeArray()
         ->and(
@@ -111,7 +111,7 @@ it('can select', function () use ($dataTable) {
         ->toMatchArray(['product' => 'Desk', 'active' => true]);
 });
 
-it('can except', function () use ($dataTable) {
+it('can except', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect($table->rows())->toBeArray()
         ->and($table->except('price')->last())
@@ -137,7 +137,7 @@ it('can except', function () use ($dataTable) {
         ->and($table->rows())->toHaveCount(5);
 });
 
-it('can filter', function () use ($dataTable) {
+it('can filter', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect($table->rows())->toBeArray()
         ->and($table->select('product', 'price')->last())
@@ -177,7 +177,7 @@ it('can filter', function () use ($dataTable) {
         )->toEqual(100);
 });
 
-it('can filter greater than', function () use ($dataTable) {
+it('can filter greater than', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect(
         $table->select('product', 'price')
@@ -191,7 +191,7 @@ it('can filter greater than', function () use ($dataTable) {
     )->toHaveCount(5);
 });
 
-it('can filter true', function () use ($dataTable) {
+it('can filter true', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect(
         $table->where('active')
@@ -199,7 +199,7 @@ it('can filter true', function () use ($dataTable) {
     )->toHaveCount(4);
 });
 
-it('can filter smaller', function () use ($dataTable) {
+it('can filter smaller', function () use ($dataTable): void {
     $table = Table::make($dataTable);
 
     expect(
@@ -214,7 +214,7 @@ it('can filter smaller', function () use ($dataTable) {
     )->toHaveCount(0);
 });
 
-it('can filter not equal', function () use ($dataTable) {
+it('can filter not equal', function () use ($dataTable): void {
     $table = Table::make($dataTable);
 
     expect(
@@ -236,13 +236,13 @@ it('can filter not equal', function () use ($dataTable) {
     )->toHaveCount(5);
 });
 
-it('can create calculated field', function () use ($dataTable) {
+it('can create calculated field', function () use ($dataTable): void {
     $table = Table::make($dataTable);
 
     $calculatedTable = $table
         ->select('product', 'price')
         ->where('price', '>', 100)
-        ->calc('new_field', fn ($item) => $item['price'] * 2);
+        ->calc('new_field', fn ($item): int|float => $item['price'] * 2);
 
     expect($calculatedTable)->toHaveCount(3)
         ->and($calculatedTable->first()?->get('price'))->toEqual(200)
@@ -251,7 +251,7 @@ it('can create calculated field', function () use ($dataTable) {
         ->and($calculatedTable->last()?->get('new_field'))->toEqual(300);
 });
 
-it('can group', function () use ($dataTable) {
+it('can group', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     $groupedTable = $table->groupBy('product');
 
@@ -263,14 +263,14 @@ it('can group', function () use ($dataTable) {
         ->toMatchArray(['product' => 'Bookcase', 'price' => 150, 'active' => true]);
 });
 
-it('can append Arr', function () use ($dataTable) {
+it('can append Arr', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect($table)->toHaveCount(5);
     $table->append(Arr::make([]));
     expect($table)->toHaveCount(6);
 });
 
-it('can append array', function () use ($dataTable) {
+it('can append array', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     expect($table)->toHaveCount(5);
     $table->append([]);
@@ -281,7 +281,7 @@ it('can append array', function () use ($dataTable) {
 });
 
 
-it('orders by desc', function () use ($dataTable) {
+it('orders by desc', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     $orderedTable = $table->orderBy('price');
     expect($orderedTable)
@@ -292,7 +292,7 @@ it('orders by desc', function () use ($dataTable) {
         ->toMatchArray(['product' => 'Door', 'price' => 100, 'active' => true]);
 });
 
-it('orders by asc', function () use ($dataTable) {
+it('orders by asc', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     $orderedTable = $table->orderBy('product', 'asc');
     expect($orderedTable)
@@ -303,7 +303,7 @@ it('orders by asc', function () use ($dataTable) {
         ->toMatchArray(['product' => 'Door', 'price' => 100, 'active' => true]);
 });
 
-it('can get the cheapest of all products that are active', function () use ($dataTable) {
+it('can get the cheapest of all products that are active', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     $cheapestOfEachProduct = $table
         ->where('active', '=', true)
@@ -318,9 +318,9 @@ it('can get the cheapest of all products that are active', function () use ($dat
         ->toMatchArray(['product' => 'Desk', 'price' => 200, 'active' => true]);
 });
 
-it('can transform all of the elements in a specific column', function () use ($dataTable) {
+it('can transform all of the elements in a specific column', function () use ($dataTable): void {
     $table = Table::make($dataTable);
-    $cheapestOfEachProduct = $table->transform('price', fn ($price) => number_format($price, 2));
+    $cheapestOfEachProduct = $table->transform('price', fn ($price): string => number_format($price, 2));
 
     expect($cheapestOfEachProduct)
         ->toHaveCount(5)
@@ -330,7 +330,7 @@ it('can transform all of the elements in a specific column', function () use ($d
         ->toMatchArray(['product' => 'Door', 'price' => '100.00', 'active' => true]);
 });
 
-it('can transform to native array', function () use ($dataTable) {
+it('can transform to native array', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     $array = $table->toArray();
 
