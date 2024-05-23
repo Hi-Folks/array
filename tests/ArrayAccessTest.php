@@ -2,14 +2,14 @@
 
 use HiFolks\DataType\Arr;
 
-it('access to element', function () {
+it('access to element', function (): void {
     $arr = Arr::make([100, 101, 102]);
     expect($arr[0])->toEqual(100);
     expect($arr[1])->toEqual(101);
     expect($arr[2])->toEqual(102);
 });
 
-it('create elements', function () {
+it('create elements', function (): void {
     $arr = Arr::make();
     $arr['test01'] = 'Some';
     $arr['test02'] = 'Thing';
@@ -26,7 +26,7 @@ it('create elements', function () {
     expect($arr[2])->toBeNull();
     expect($arr[1])->toEqual($arr->get(1));
 });
-it('isset and empty', function () {
+it('isset and empty', function (): void {
     $arr = Arr::make();
     $arr['test01'] = 'Some';
     $arr['test02'] = 'Thing';
@@ -37,7 +37,7 @@ it('isset and empty', function () {
     expect(empty($arr['not exists']))->toBeTrue();
 });
 
-it('unset', function () {
+it('unset', function (): void {
     $arr = Arr::make();
     $arr['test01'] = 'Some';
     $arr['test02'] = 'Thing';

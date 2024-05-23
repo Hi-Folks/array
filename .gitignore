@@ -10,5 +10,5 @@ phpunit.xml
 psalm.xml
 vendor
 .php-cs-fixer.cache
-
+/.phpunit.cache
 .DS_Store

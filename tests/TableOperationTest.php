@@ -11,7 +11,7 @@ $dataTable = [
     ['product' => 'Door', 'price' => 100, 'active' => true],
 ];
 
-it('multiply by 2 a field', function () use ($dataTable) {
+it('multiply by 2 a field', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     $resultTable = $table->calc("price2", Operation::double("price"));
     expect($table->getFromFirst("price"))->toEqual(200);
@@ -21,7 +21,7 @@ it('multiply by 2 a field', function () use ($dataTable) {
     expect($table->first()->get("price2"))->toEqual(400);
     expect($resultTable->first()->get("price2"))->toEqual(400);
 });
-it('add value to a field', function () use ($dataTable) {
+it('add value to a field', function () use ($dataTable): void {
     $table = Table::make($dataTable);
     $resultTable = $table->calc("price2", Operation::add("price", 50));
     expect($table->getFromFirst("price"))->toEqual(200);

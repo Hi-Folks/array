@@ -61,7 +61,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
             $arrayLike = iterator_to_array($arrayLike);
         }
 
-        $array = self::make((array) $arrayLike);
+        $array = self::make($arrayLike);
 
         if (! is_callable($mapFn)) {
             return $array;
@@ -268,7 +268,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
     /**
      * Add element to start of Arr and return new length
      *
-     * @param  mixed  $element the elements to add to the front of the array
      * @return int the new length of the array upon which the method was called.
      */
     public function unshift(mixed ...$element): int
@@ -371,7 +370,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
     /**
      * Returns index of first occurrence of element in arr
      *
-     * @param  mixed  $searchElement the element to search
      * @return string|int|bool the index of element found. If it is not found, false is returned
      */
     public function indexOf(mixed $searchElement): string|int|bool
@@ -382,7 +380,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
     /**
      * Returns index of last occurrence of element in Arr
      *
-     * @param  mixed  $searchElement the element to search
      * @return string|int|bool the index of element found. If it is not found, false is returned
      */
     public function lastIndexOf(mixed $searchElement): string|int|bool
@@ -481,7 +478,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
     {
         $array = array_reduce(
             $this->arr,
-            fn ($result, $element) => array_merge($result, is_array($element) ? [...$element] : [$element]),
+            fn ($result, $element): array => array_merge($result, is_array($element) ? [...$element] : [$element]),
             []
         );
 
@@ -518,7 +515,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
     /**
      * Changes all elements in range from $start for $count, to the specified value
      *
-     * @param  mixed  $value the value to fill the array with
      * @param  int  $start start index (from 0)
      * @param  int|null  $end end index (default, the end of array)
      */
@@ -587,7 +583,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      *
      * @param  int  $start the index at which to start changing the array
      * @param  int|null  $deleteCount an integer indicating the number of elements in the array to remove from $start
-     * @param  mixed  $newElements The elements to add to the array, beginning from $start
      * @return Arr an array containing the deleted elements
      */
     public function splice(int $start, int $deleteCount = null, mixed $newElements = []): Arr
@@ -606,7 +601,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
     /**
      * Returns true if the input is an array
      *
-     * @param  mixed  $input the input value, to test if it is an array
      * @return bool true if $input is an array, false otherwise
      */
     public static function isArray(mixed $input): bool

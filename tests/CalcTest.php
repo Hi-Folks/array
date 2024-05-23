@@ -2,7 +2,7 @@
 
 use HiFolks\DataType\Arr;
 
-it('sum Array', function () {
+it('sum Array', function (): void {
     $arr = Arr::make([1, 2, 3]);
     expect($arr->sum())->toEqual(6);
 
@@ -12,7 +12,7 @@ it('sum Array', function () {
     expect($arr->sum())->toEqual(100);
 });
 
-it('avg Array', function () {
+it('avg Array', function (): void {
     $arr = Arr::make([1, 2, 3]);
     expect($arr->avg())->toEqual(2);
 

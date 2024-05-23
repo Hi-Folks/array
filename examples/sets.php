@@ -1,6 +1,6 @@
 <?php
 
-require './vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use HiFolks\DataType\Arr;
 
@@ -10,5 +10,5 @@ $arrA = Arr::make([1, 3, 4, 5]);
 $arrB = Arr::make([1, 2, 5, 6, 7]);
 
 echo " --- Intersection" . PHP_EOL;
-$intersection = $arrA->filter(fn ($x) => $arrB->includes($x));
+$intersection = $arrA->filter(fn ($x): bool => $arrB->includes($x));
 echo $intersection->toString() . PHP_EOL;
