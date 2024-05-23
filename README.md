@@ -101,7 +101,6 @@ You can install the package via composer:
 composer require hi-folks/array
 ```
 
-> Currently, this package is under development. It's **not** "production ready". It is to be considered "not production ready" until it is in version v0.0.x. When version 0.1.x will be released, it means that the package is considered stable.
 
 ## Usage
 
