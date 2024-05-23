@@ -1,7 +1,7 @@
 # Changelog
 
 ## 1.0.0 - 2024-05-23
-- PHPStan Level 6, thanks to @RoadSigns
+- PHPStan Level 9, thanks to @RoadSigns
 - Updating Pint action for the GitHub Actions
 - Upgrading dependencies (Rector 1, PHP 8.3, some GitHub Actions, ...)
 - Adding Rector with UP_TO_PHP_81, DEAD_CODE, CODE_QUALITY, EARLY_RETURN, TYPE_DECLARATION, PRIVATIZATION options

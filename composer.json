@@ -1,6 +1,5 @@
 {
     "name": "hi-folks/array",
-    "version": "0.1.2",
     "description": "Arr class for managing arrays, and Table class for managing bi-dimensional arrays, built on top of the PHP array functions.",
     "keywords": [
         "Hi-Folks",
