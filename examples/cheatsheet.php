@@ -161,7 +161,7 @@ print_result($arr);
 // Extract keys with keys()
 $fruits = Arr::make([
     'kiwi' => '🥝',
-    'fragola' => '🍓',
+    'strawberry' => '🍓',
     'lemon' => '🍋',
     'mango' => '🥭',
     'apple' => '🍎',
@@ -192,7 +192,7 @@ print_result($arr->includes(3, 2));
 // Extract entries with entries()
 $fruits = Arr::make([
     'kiwi' => '🥝',
-    'fragola' => '🍓',
+    'strawberry' => '🍓',
     'lemon' => '🍋',
     'mango' => '🥭',
     'apple' => '🍎',
@@ -252,6 +252,22 @@ $arr->unset('banana');
 print_result($arr->arr());
 // ['mango' => '🥭', 'apple' => '🍎']
 
+$fruits = Arr::make([
+    'green' => [
+        'kiwi' => '🥝',
+        'mango' => '🥭'
+    ],
+    'red' => [
+        'strawberry' => '🍓',
+        'apple' => '🍎'
+    ],
+    'yellow' => [
+        'lemon' => '🍋',
+        'banana' => '🍌',
+    ]
+]);
+print_result($fruits->get('red'));
+print_result($fruits->get('red.strawberry'));
 
 
 
