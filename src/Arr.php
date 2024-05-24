@@ -108,10 +108,25 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
     /**
      * Get the element with $index
+     * @param non-empty-string $charNestedKey
      */
-    public function get(mixed $index): mixed
+    public function get(mixed $index, mixed $defaultValue = null, string $charNestedKey = "."): mixed
     {
-        return $this->arr[$index] ?? null;
+        if (is_string($index)) {
+            $indexString = strval($index);
+            if (str_contains($indexString, $charNestedKey)) {
+                $nestedValue = $this->arr;
+                foreach (explode($charNestedKey, $indexString) as $nestedKey) {
+                    if (is_array($nestedValue) && array_key_exists($nestedKey, $nestedValue)) {
+                        $nestedValue = $nestedValue[$nestedKey];
+                    } else {
+                        return $defaultValue;
+                    }
+                }
+                return $nestedValue;
+            }
+        }
+        return $this->arr[$index] ?? $defaultValue;
     }
 
     /**

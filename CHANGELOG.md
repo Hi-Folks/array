@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2 - 2024-05-24
+- The Arr `get()` method supports 'dot' (or custom) notation for nested arrays for example $arr->get('first-level.second-level.third-level')
+- The Arr `get()` method supports the default value
+
 ## 1.0.1 - 2024-05-23
 Fine-tuning release: removing version from composer.json and fixing changelog
 

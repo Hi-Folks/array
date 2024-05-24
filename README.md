@@ -63,6 +63,43 @@ The Arr class provides some methods:
 - set(): ability to set an element to the array with a specific key
 - unset(): ability to unset an element by the key
 
+### The `get()` method
+The `get()` method supports keys with the dot (or custom) notation for retrieving values from nested arrays.
+For example:
+
+```php
+$fruits = Arr::make([
+    'green' => [
+        'kiwi' => '🥝',
+        'mango' => '🥭'
+    ],
+    'red' => [
+        'strawberry' => '🍓',
+        'apple' => '🍎'
+    ],
+    'yellow' => [
+        'lemon' => '🍋',
+        'banana' => '🍌',
+    ]
+]);
+$fruits->get('red'); // 🍓,🍎
+$fruits->get('red.strawberry'); // 🍓
+```
+
+You can customize the notation with a different character:
+
+```php
+$fruits->get('red#strawberry', charNestedKey: '#'); // 🍓
+```
+You can define a default value in the case the key doesn't exist:
+
+```php
+$fruits->get('red#somestrangefruit',
+'🫠', '#'); // 🫠
+```
+
+
+
 ## Table class
 Table class allows you to manage bi dimensional array, something like:
 ```
