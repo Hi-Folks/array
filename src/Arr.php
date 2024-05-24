@@ -117,7 +117,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
             if (str_contains($indexString, $charNestedKey)) {
                 $nestedValue = $this->arr;
                 foreach (explode($charNestedKey, $indexString) as $nestedKey) {
-                    if (is_array($nestedValue) && key_exists($nestedKey, $nestedValue)) {
+                    if (is_array($nestedValue) && array_key_exists($nestedKey, $nestedValue)) {
                         $nestedValue = $nestedValue[$nestedKey];
                     } else {
                         return $defaultValue;
