@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.3 - 2024-05-25
+- Add the Arr `getArr()` method for retrieving portions of complex nested arrays as Arr object.
+
 ## 1.0.2 - 2024-05-24
 - The Arr `get()` method supports 'dot' (or custom) notation for nested arrays for example $arr->get('first-level.second-level.third-level')
 - The Arr `get()` method supports the default value
