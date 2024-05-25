@@ -108,6 +108,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
 
     /**
      * Get the element with $index
+     *
      * @param non-empty-string $charNestedKey
      */
     public function get(mixed $index, mixed $defaultValue = null, string $charNestedKey = "."): mixed
@@ -128,6 +129,47 @@ final class Arr implements Iterator, ArrayAccess, Countable
         }
         return $this->arr[$index] ?? $defaultValue;
     }
+
+    /**
+     * Get the element with $index as Arr object
+     * This is helpful when the element is an array, and you
+     * need to get the Arr object instead of the classic array
+     * In the case the $index doesn't exist, an empty Arr can be returned
+     * @param non-empty-string $charNestedKey
+     */
+    public function getArr(mixed $index, mixed $defaultValue = null, string $charNestedKey = "."): Arr
+    {
+        $value = $this->getArrNullable($index, $defaultValue, $charNestedKey);
+        if (is_null($value)) {
+            return Arr::make([]);
+        }
+        return $value;
+    }
+    /**
+     * Get the element with $index as Arr object
+     * This is helpful when the element is an array, and you
+     * need to get the Arr object instead of the classic array
+     * In the case the $index doesn't exist, null can be returned
+     * @param non-empty-string $charNestedKey
+     */
+    public function getArrNullable(mixed $index, mixed $defaultValue = null, string $charNestedKey = "."): Arr|null
+    {
+        $value = $this->get($index, $defaultValue, $charNestedKey);
+        if (is_null($value)) {
+            return null;
+        }
+        if (is_scalar($value)) {
+            return self::make([ $value]);
+        }
+        if (is_array($value)) {
+            return self::make($value);
+        }
+        if ($value instanceof Arr) {
+            return $value;
+        }
+        return Arr::make([]);
+    }
+
 
     /**
      * Set a value to a specific key

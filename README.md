@@ -27,6 +27,7 @@ The Arr class provides some methods:
 - length(): length/size of the array;
 - arr(): returns data with the type PHP array
 - get(): get the element by index
+- getArr(): get the element (as Arr::class instance) by index (helpful for nested arrays)
 - Iterator methods: current(), next(), prev(), key(), valid(), rewind()
 - forEach(): execute a function for each element;
 - push(): add new element (at the end);
@@ -98,6 +99,47 @@ $fruits->get('red#somestrangefruit',
 '🫠', '#'); // 🫠
 ```
 
+### The `getArr()` method
+If you need to manage complex array (nested array), or an array obtained from a complex JSON structure, you can access to a portion of the array and obtain an Arr object.
+Just because in case of complex array the get() method could return a classic array.
+
+Let's see an example:
+
+```php
+    $arr = Arr::make(
+        [
+            "avocado" =>
+                [
+                    'name' => 'Avocado',
+                    'fruit' => '🥑',
+                    'wikipedia' => 'https://en.wikipedia.org/wiki/Avocado'
+                ],
+            "apple" =>
+                [
+                    'name' => 'Apple',
+                    'fruit' => '🍎',
+                    'wikipedia' => 'https://en.wikipedia.org/wiki/Apple'
+                ],
+            "banana" =>
+                [
+                    'name' => 'Banana',
+                    'fruit' => '🍌',
+                    'wikipedia' => 'https://en.wikipedia.org/wiki/Banana'
+                ],
+            "cherry" =>
+                [
+                    'name' => 'Cherry',
+                    'fruit' => '🍒',
+                    'wikipedia' => 'https://en.wikipedia.org/wiki/Cherry'
+                ],
+        ]
+    );
+$appleArr = $arr->getArr("apple")
+// $appleArr is an Arr instance so that you can access
+// to the Arr methods like count()
+$arr->getArr("apple")->count();
+
+```
 
 
 ## Table class
