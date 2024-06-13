@@ -65,7 +65,7 @@ The Arr class provides some methods:
 - unset(): ability to unset an element by the key
 
 ### The `get()` method
-The `get()` method supports keys with the dot (or custom) notation for retrieving values from nested arrays.
+The `get()` method supports keys/indexes with the dot (or custom) notation for retrieving values from nested arrays.
 For example:
 
 ```php
@@ -100,8 +100,8 @@ $fruits->get('red#somestrangefruit',
 ```
 
 ### The `getArr()` method
-If you need to manage complex array (nested array), or an array obtained from a complex JSON structure, you can access to a portion of the array and obtain an Arr object.
-Just because in case of complex array the get() method could return a classic array.
+If you need to manage a complex array (nested array), or an array obtained from a complex JSON structure, you can access a portion of the array and obtain an Arr object.
+Just because in the case of a complex array the `get()` method could return a classic array.
 
 Let's see an example:
 
@@ -140,10 +140,54 @@ $appleArr = $arr->getArr("apple")
 $arr->getArr("apple")->count();
 
 ```
+### The `set()` method
+The `set()` method supports keys with the dot (or custom) notation for setting values for nested arrays.
+If a key doesn't exist, the `set()` method will create a new key and will set the value.
+If a key already exists, the `set()` method will replace the value related to the key.
 
+For example:
+
+```php
+$articleText = "Some words as a sample sentence";
+$textField = Arr::make();
+$textField->set("type", "doc");
+$textField->set("content.0.content.0.text", $articleText);
+$textField->set("content.0.content.0.type", "text");
+$textField->set("content.0.type", "paragraph");
+```
+
+So when you try to set a nested key as "content.0.content.0.text", it will be created elements as a nested array.
+So if you try to dump the value of the array of `$textField` you will see the following structure:
+
+```
+var_dump($textField->arr());
+
+array(2) {
+  ["type"]=>
+  string(3) "doc"
+  ["content"]=>
+  array(1) {
+    [0]=>
+    array(2) {
+      ["content"]=>
+      array(1) {
+        [0]=>
+        array(2) {
+          ["text"]=>
+          string(31) "Some words as a sample sentence"
+          ["type"]=>
+          string(4) "text"
+        }
+      }
+      ["type"]=>
+      string(9) "paragraph"
+    }
+  }
+}
+```
 
 ## Table class
-Table class allows you to manage bi dimensional array, something like:
+Table class allows you to manage bi-dimensional array, something like:
 ```
 [
     ['product' => 'Desk', 'price' => 200, 'active' => true],

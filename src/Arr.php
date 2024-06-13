@@ -171,12 +171,35 @@ final class Arr implements Iterator, ArrayAccess, Countable
     }
 
 
+
     /**
-     * Set a value to a specific key
+     * Set a value to a specific $index
+     * You can use the dot notation for setting a nested value.
+     * @param non-empty-string $charNestedKey
      */
-    public function set(int|string $key, mixed $value): void
+    public function set(int|string $index, mixed $value, string $charNestedKey = "."): void
     {
-        $this->arr[$key] = $value;
+        if (is_string($index)) {
+            $array = &$this->arr;
+            $keys = explode($charNestedKey, $index);
+            foreach ($keys as $i => $key) {
+                if (count($keys) === 1) {
+                    break;
+                }
+                unset($keys[$i]);
+
+                if (!isset($array[$key]) || !is_array($array[$key])) {
+                    $array[$key] = [];
+                }
+
+                $array = &$array[$key];
+            }
+
+            $array[array_shift($keys)] = $value;
+            return;
+
+        }
+        $this->arr[$index] = $value;
     }
 
     /**

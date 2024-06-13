@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.4 - 2024-06-13
+- Add the Arr `set()` method supports 'dot' (or custom) notation for nested arrays for setting nested values, for example, `$arr`->set('first-level.second-level.third-level', "something")`
+
 ## 1.0.3 - 2024-05-25
 - Add the Arr `getArr()` method for retrieving portions of complex nested arrays as Arr object.
 
