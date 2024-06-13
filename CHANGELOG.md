@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0 - 2024-06-13
+- Add the Arr `set()` method supports 'dot' (or custom) notation for nested arrays for setting nested values, for example, `$arr`->set('first-level.second-level.third-level', "something")`
+- Renamed the `$index` parameter, into `$key` for `set()` and `get()` method. Why: in my opinion "index" is more related to array integer keys . "key" is more generic and refers to generic keys (string for example).
+
 ## 1.0.3 - 2024-05-25
 - Add the Arr `getArr()` method for retrieving portions of complex nested arrays as Arr object.
 

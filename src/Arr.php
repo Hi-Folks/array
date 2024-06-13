@@ -107,17 +107,17 @@ final class Arr implements Iterator, ArrayAccess, Countable
     }
 
     /**
-     * Get the element with $index
+     * Get the element with $key
      *
      * @param non-empty-string $charNestedKey
      */
-    public function get(mixed $index, mixed $defaultValue = null, string $charNestedKey = "."): mixed
+    public function get(mixed $key, mixed $defaultValue = null, string $charNestedKey = "."): mixed
     {
-        if (is_string($index)) {
-            $indexString = strval($index);
-            if (str_contains($indexString, $charNestedKey)) {
+        if (is_string($key)) {
+            $keyString = strval($key);
+            if (str_contains($keyString, $charNestedKey)) {
                 $nestedValue = $this->arr;
-                foreach (explode($charNestedKey, $indexString) as $nestedKey) {
+                foreach (explode($charNestedKey, $keyString) as $nestedKey) {
                     if (is_array($nestedValue) && array_key_exists($nestedKey, $nestedValue)) {
                         $nestedValue = $nestedValue[$nestedKey];
                     } else {
@@ -127,34 +127,34 @@ final class Arr implements Iterator, ArrayAccess, Countable
                 return $nestedValue;
             }
         }
-        return $this->arr[$index] ?? $defaultValue;
+        return $this->arr[$key] ?? $defaultValue;
     }
 
     /**
-     * Get the element with $index as Arr object
+     * Get the element with $key as Arr object
      * This is helpful when the element is an array, and you
      * need to get the Arr object instead of the classic array
-     * In the case the $index doesn't exist, an empty Arr can be returned
+     * In the case the $key doesn't exist, an empty Arr can be returned
      * @param non-empty-string $charNestedKey
      */
-    public function getArr(mixed $index, mixed $defaultValue = null, string $charNestedKey = "."): Arr
+    public function getArr(mixed $key, mixed $defaultValue = null, string $charNestedKey = "."): Arr
     {
-        $value = $this->getArrNullable($index, $defaultValue, $charNestedKey);
+        $value = $this->getArrNullable($key, $defaultValue, $charNestedKey);
         if (is_null($value)) {
             return Arr::make([]);
         }
         return $value;
     }
     /**
-     * Get the element with $index as Arr object
+     * Get the element with $key as Arr object
      * This is helpful when the element is an array, and you
      * need to get the Arr object instead of the classic array
-     * In the case the $index doesn't exist, null can be returned
+     * In the case the $key doesn't exist, null can be returned
      * @param non-empty-string $charNestedKey
      */
-    public function getArrNullable(mixed $index, mixed $defaultValue = null, string $charNestedKey = "."): Arr|null
+    public function getArrNullable(mixed $key, mixed $defaultValue = null, string $charNestedKey = "."): Arr|null
     {
-        $value = $this->get($index, $defaultValue, $charNestedKey);
+        $value = $this->get($key, $defaultValue, $charNestedKey);
         if (is_null($value)) {
             return null;
         }
@@ -171,21 +171,44 @@ final class Arr implements Iterator, ArrayAccess, Countable
     }
 
 
+
     /**
-     * Set a value to a specific key
+     * Set a value to a specific $key
+     * You can use the dot notation for setting a nested value.
+     * @param non-empty-string $charNestedKey
      */
-    public function set(int|string $key, mixed $value): void
+    public function set(int|string $key, mixed $value, string $charNestedKey = "."): void
     {
+        if (is_string($key)) {
+            $array = &$this->arr;
+            $keys = explode($charNestedKey, $key);
+            foreach ($keys as $i => $key) {
+                if (count($keys) === 1) {
+                    break;
+                }
+                unset($keys[$i]);
+
+                if (!isset($array[$key]) || !is_array($array[$key])) {
+                    $array[$key] = [];
+                }
+
+                $array = &$array[$key];
+            }
+
+            $array[array_shift($keys)] = $value;
+            return;
+
+        }
         $this->arr[$key] = $value;
     }
 
     /**
      * Unset an array element by their key if it exists
      */
-    public function unset(mixed $index): bool
+    public function unset(mixed $key): bool
     {
-        if ($this->get($index)) {
-            unset($this->arr[$index]);
+        if ($this->get($key)) {
+            unset($this->arr[$key]);
             return true;
         }
 
