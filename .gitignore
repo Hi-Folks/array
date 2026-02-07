@@ -12,3 +12,4 @@ vendor
 .php-cs-fixer.cache
 /.phpunit.cache
 .DS_Store
+.build/

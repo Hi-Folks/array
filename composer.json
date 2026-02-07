@@ -15,11 +15,11 @@
         }
     ],
     "require": {
-        "php": "^8.1|^8.2|^8.3"
+        "php": "^8.2|^8.3|^8.4|^8.5"
     },
     "require-dev": {
         "laravel/pint": "^1.2",
-        "pestphp/pest": "^2",
+        "phpunit/phpunit": "^11.0",
         "phpstan/phpstan": "^1.6",
         "rector/rector": "^1"
     },
@@ -35,18 +35,17 @@
     },
     "scripts": {
         "all": [
-            "@test", "@format", "@phpstan"
+            "@test",
+            "@format",
+            "@phpstan"
         ],
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html ./.build/tests",
         "phpstan": "vendor/bin/phpstan",
         "format": "vendor/bin/pint"
     },
     "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
-        }
+        "sort-packages": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true

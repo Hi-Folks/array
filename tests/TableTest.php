@@ -1,348 +1,292 @@
 <?php
 
+namespace HiFolks\Array\Tests;
+
 use HiFolks\DataType\Arr;
 use HiFolks\DataType\Table;
+use Iterator;
+use PHPUnit\Framework\TestCase;
 
-$dataTable = [
-    ['product' => 'Desk', 'price' => 200, 'active' => true],
-    ['product' => 'Chair', 'price' => 100, 'active' => true],
-    ['product' => 'Door', 'price' => 300, 'active' => false],
-    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
-    ['product' => 'Door', 'price' => 100, 'active' => true],
-];
+class TableTest extends TestCase
+{
+    private array $dataTable;
 
-it('is Table', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect($table->rows())
-        ->toBeArray()
-        ->and($table->first())
-        ->toBeInstanceOf(Arr::class);
-});
-
-it('is Table countable', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect($table)->toHaveCount(5);
-});
-
-it('is iterable', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect($table)->toBeInstanceOf(Iterator::class);
-    foreach ($table as $row) {
-        expect($row)->toBeInstanceOf(Arr::class);
+    protected function setUp(): void
+    {
+        $this->dataTable = [
+            ['product' => 'Desk', 'price' => 200, 'active' => true],
+            ['product' => 'Chair', 'price' => 100, 'active' => true],
+            ['product' => 'Door', 'price' => 300, 'active' => false],
+            ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+            ['product' => 'Door', 'price' => 100, 'active' => true],
+        ];
     }
 
-    $table->rewind();
-    $table->next();
-    $table->next();
-    expect($table->current())
-        ->toBeInstanceOf(Arr::class)
-        ->and($table->current()->arr())
-        ->toMatchArray(['product' => 'Door', 'price' => 300, 'active' => false]);
-    $table->prev();
-    expect($table->current())
-        ->toBeInstanceOf(Arr::class)
-        ->and($table->current()->arr())
-        ->toMatchArray(['product' => 'Chair', 'price' => 100, 'active' => true]);
-});
+    public function test_is_table(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertIsArray($table->rows());
+        $this->assertInstanceOf(Arr::class, $table->first());
+    }
 
-it('can get first', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect($table->rows())->toBeArray()
-        ->and($table->first())
-        ->toBeInstanceOf(Arr::class)
-        ->and($table->first())
-        ->toHaveCount(3)
-        ->and($table->first()?->keys())
-        ->toBeArray()
-        ->toHaveCount(3)
-        ->toMatchArray(['product', 'price', 'active']);
-});
+    public function test_is_table_countable(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertCount(5, $table);
+    }
 
-it('can get column from first', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect($table->rows())
-        ->toBeArray()
-        ->and($table->getFromFirst('price'))
-        ->toBeInt()
-        ->toEqual(200)
-        ->and($table->getFromFirst('unknown_column'))
-        ->toBeNull();
-});
+    public function test_is_iterable(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertInstanceOf(Iterator::class, $table);
+        foreach ($table as $row) {
+            $this->assertInstanceOf(Arr::class, $row);
+        }
 
-it('can get last', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect($table->rows())->toBeArray()
-        ->and($table->last())->toHaveCount(3)
-        ->and($table->last()?->arr())
-        ->toBeArray()
-        ->toMatchArray(['product' => 'Door', 'price' => 100, 'active' => true])
-        ->and($table->last()?->keys())
-        ->toBeArray()
-        ->toHaveCount(3)
-        ->toMatchArray(['product', 'price', 'active']);
-});
+        $table->rewind();
+        $table->next();
+        $table->next();
+        $this->assertInstanceOf(Arr::class, $table->current());
+        $this->assertEquals(['product' => 'Door', 'price' => 300, 'active' => false], $table->current()->arr());
+        $table->prev();
+        $this->assertInstanceOf(Arr::class, $table->current());
+        $this->assertEquals(['product' => 'Chair', 'price' => 100, 'active' => true], $table->current()->arr());
+    }
 
-it('can get column from last', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect($table->rows())
-        ->toBeArray()
-        ->and($table->getFromLast('price'))
-        ->toBeInt()
-        ->toEqual(100)
-        ->and($table->getFromLast('unknown_column'))
-        ->toBeNull();
-});
+    public function test_can_get_first(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertIsArray($table->rows());
+        $this->assertInstanceOf(Arr::class, $table->first());
+        $this->assertCount(3, $table->first());
+        $this->assertIsArray($table->first()?->keys());
+        $this->assertCount(3, $table->first()?->keys());
+        $this->assertEquals(['product', 'price', 'active'], $table->first()?->keys());
+    }
 
-it('can select', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect($table->rows())->toBeArray()
-        ->and(
-            $table->select('product', 'active')
-                ->last()
-        )
-        ->toBeInstanceOf(Arr::class)
-        ->and($table->select('product', 'active')->last())
-        ->toHaveCount(2)
-        ->and($table->select('product', 'active')->last()?->keys())
-        ->toMatchArray(['product', 'active'])
-        ->and($table->first()?->get('active'))
-        ->toBeTrue()
-        ->and($table->first()?->arr())
-        ->toMatchArray(['product' => 'Desk', 'active' => true]);
-});
+    public function test_can_get_column_from_first(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertIsArray($table->rows());
+        $this->assertIsInt($table->getFromFirst('price'));
+        $this->assertEquals(200, $table->getFromFirst('price'));
+        $this->assertNull($table->getFromFirst('unknown_column'));
+    }
 
-it('can except', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect($table->rows())->toBeArray()
-        ->and($table->except('price')->last())
-        ->toBeInstanceOf(Arr::class)
-        ->and($table->except('price')->last())
-        ->toHaveCount(2)
-        ->and($table->except('price')->last()?->keys())
-        ->toMatchArray(['product', 'active'])
-        ->and($table->first()?->get('active'))
-        ->toBeTrue()
-        ->and($table->first()?->arr())
-        ->toMatchArray(['product' => 'Desk', 'active' => true])
-        ->and($table->rows())->toHaveCount(5);
+    public function test_can_get_last(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertIsArray($table->rows());
+        $this->assertCount(3, $table->last());
+        $this->assertIsArray($table->last()?->arr());
+        $this->assertEquals(['product' => 'Door', 'price' => 100, 'active' => true], $table->last()?->arr());
+        $this->assertIsArray($table->last()?->keys());
+        $this->assertCount(3, $table->last()?->keys());
+        $this->assertEquals(['product', 'price', 'active'], $table->last()?->keys());
+    }
 
-    $table = Table::make($dataTable);
-    expect($table->rows())->toBeArray()
-        ->and($table->except('field_not_exist')->last())
-        ->toBeInstanceOf(Arr::class)
-        ->and($table->except('field_not_exist')->last())
-        ->toHaveCount(3)
-        ->and($table->except('field_not_exists')->last()?->keys())
-        ->toMatchArray(['product', 'price', 'active'])
-        ->and($table->rows())->toHaveCount(5);
-});
+    public function test_can_get_column_from_last(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertIsArray($table->rows());
+        $this->assertIsInt($table->getFromLast('price'));
+        $this->assertEquals(100, $table->getFromLast('price'));
+        $this->assertNull($table->getFromLast('unknown_column'));
+    }
 
-it('can filter', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect($table->rows())->toBeArray()
-        ->and($table->select('product', 'price')->last())
-        ->toBeInstanceOf(Arr::class)
-        ->and($table->select('product', 'price')->last())
-        ->toHaveCount(2)
-        ->and(
-            $table->select('product', 'price')
-                ->where('price', 100)
-                ->last()
-        )->toHaveCount(2)
-        ->and(
-            $table->select('product', 'price')
-                ->where('price', 100)
-        )->toHaveCount(2)
-        ->and(
-            $table->select('product', 'price')
-                ->where('price', 100)
-                ->last()
-                ?->keys()
-        )->toMatchArray(['product', 'price'])
-        ->and(
-            $table->select('product', 'price')
-                ->where('price', "IDONTKNOW", 100)
-                ->last()
-                ?->keys()
-        )->toMatchArray(['product', 'price'])
-        ->and(
-            $table->select('product', 'price')
-                ->where('price', "IDONTKNOW", 200)
-                ->getFromLast("price")
-        )->toEqual(200)
-        ->and(
-            $table->select('product', 'price')
-                ->where('price', "IDONTKNOW", 100)
-                ->getFromLast("price")
-        )->toEqual(100);
-});
+    public function test_can_select(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertIsArray($table->rows());
+        $this->assertInstanceOf(Arr::class, $table->select('product', 'active')->last());
+        $this->assertCount(2, $table->select('product', 'active')->last());
+        $this->assertEquals(['product', 'active'], $table->select('product', 'active')->last()?->keys());
+        $this->assertTrue($table->first()?->get('active'));
+        $firstArr = $table->first()?->arr();
+        $this->assertEquals('Desk', $firstArr['product']);
+        $this->assertTrue($firstArr['active']);
+    }
 
-it('can filter greater than', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect(
-        $table->select('product', 'price')
-        ->where('price', '>', 100)
-    )->toHaveCount(3);
+    public function test_can_except(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertIsArray($table->rows());
+        $this->assertInstanceOf(Arr::class, $table->except('price')->last());
+        $this->assertCount(2, $table->except('price')->last());
+        $this->assertEquals(['product', 'active'], $table->except('price')->last()?->keys());
+        $this->assertTrue($table->first()?->get('active'));
+        $firstArr = $table->first()?->arr();
+        $this->assertEquals('Desk', $firstArr['product']);
+        $this->assertTrue($firstArr['active']);
+        $this->assertCount(5, $table->rows());
 
-    $table = Table::make($dataTable);
-    expect(
-        $table->select('product', 'price')
-        ->where('price', '>=', 100)
-    )->toHaveCount(5);
-});
+        $table = Table::make($this->dataTable);
+        $this->assertIsArray($table->rows());
+        $this->assertInstanceOf(Arr::class, $table->except('field_not_exist')->last());
+        $this->assertCount(3, $table->except('field_not_exist')->last());
+        $this->assertEquals(['product', 'price', 'active'], $table->except('field_not_exists')->last()?->keys());
+        $this->assertCount(5, $table->rows());
+    }
 
-it('can filter true', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect(
-        $table->where('active')
-        ->select('product', 'price')
-    )->toHaveCount(4);
-});
+    public function test_can_filter(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertIsArray($table->rows());
+        $this->assertInstanceOf(Arr::class, $table->select('product', 'price')->last());
+        $this->assertCount(2, $table->select('product', 'price')->last());
+        $this->assertCount(2, $table->select('product', 'price')->where('price', 100)->last());
+        $this->assertCount(2, $table->select('product', 'price')->where('price', 100));
+        $this->assertEquals(
+            ['product', 'price'],
+            $table->select('product', 'price')->where('price', 100)->last()?->keys()
+        );
+        $this->assertEquals(
+            ['product', 'price'],
+            $table->select('product', 'price')->where('price', "IDONTKNOW", 100)->last()?->keys()
+        );
+        $this->assertEquals(
+            200,
+            $table->select('product', 'price')->where('price', "IDONTKNOW", 200)->getFromLast("price")
+        );
+        $this->assertEquals(
+            100,
+            $table->select('product', 'price')->where('price', "IDONTKNOW", 100)->getFromLast("price")
+        );
+    }
 
-it('can filter smaller', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
+    public function test_can_filter_greater_than(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertCount(3, $table->select('product', 'price')->where('price', '>', 100));
 
-    expect(
-        $table->select('product', 'price')
-        ->where('price', '<=', 100)
-    )->toHaveCount(2);
+        $table = Table::make($this->dataTable);
+        $this->assertCount(5, $table->select('product', 'price')->where('price', '>=', 100));
+    }
 
-    $table = Table::make($dataTable);
-    expect(
-        $table->select('product', 'price')
-        ->where('price', '<', 100)
-    )->toHaveCount(0);
-});
+    public function test_can_filter_true(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertCount(4, $table->where('active')->select('product', 'price'));
+    }
 
-it('can filter not equal', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
+    public function test_can_filter_smaller(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertCount(2, $table->select('product', 'price')->where('price', '<=', 100));
 
-    expect(
-        $table->select('product', 'price')
-        ->where('price', '!=', '100')
-    )->toHaveCount(3);
+        $table = Table::make($this->dataTable);
+        $this->assertCount(0, $table->select('product', 'price')->where('price', '<', 100));
+    }
 
-    $table = Table::make($dataTable);
+    public function test_can_filter_not_equal(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertCount(3, $table->select('product', 'price')->where('price', '!=', '100'));
 
-    expect(
-        $table->select('product', 'price')
-        ->where('price', '!==', 100)
-    )->toHaveCount(3);
+        $table = Table::make($this->dataTable);
+        $this->assertCount(3, $table->select('product', 'price')->where('price', '!==', 100));
 
-    $table = Table::make($dataTable);
-    expect(
-        $table->select('product', 'price')
-        ->where('price', '!==', '100')
-    )->toHaveCount(5);
-});
+        $table = Table::make($this->dataTable);
+        $this->assertCount(5, $table->select('product', 'price')->where('price', '!==', '100'));
+    }
 
-it('can create calculated field', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
+    public function test_can_create_calculated_field(): void
+    {
+        $table = Table::make($this->dataTable);
 
-    $calculatedTable = $table
-        ->select('product', 'price')
-        ->where('price', '>', 100)
-        ->calc('new_field', fn ($item): int|float => $item['price'] * 2);
+        $calculatedTable = $table
+            ->select('product', 'price')
+            ->where('price', '>', 100)
+            ->calc('new_field', fn ($item): int|float => $item['price'] * 2);
 
-    expect($calculatedTable)->toHaveCount(3)
-        ->and($calculatedTable->first()?->get('price'))->toEqual(200)
-        ->and($calculatedTable->first()?->get('new_field'))->toEqual(400)
-        ->and($calculatedTable->last()?->get('price'))->toEqual(150)
-        ->and($calculatedTable->last()?->get('new_field'))->toEqual(300);
-});
+        $this->assertCount(3, $calculatedTable);
+        $this->assertEquals(200, $calculatedTable->first()?->get('price'));
+        $this->assertEquals(400, $calculatedTable->first()?->get('new_field'));
+        $this->assertEquals(150, $calculatedTable->last()?->get('price'));
+        $this->assertEquals(300, $calculatedTable->last()?->get('new_field'));
+    }
 
-it('can group', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    $groupedTable = $table->groupBy('product');
+    public function test_can_group(): void
+    {
+        $table = Table::make($this->dataTable);
+        $groupedTable = $table->groupBy('product');
 
-    expect($groupedTable)
-        ->toHaveCount(4)
-        ->and($groupedTable->first()?->arr())
-        ->toMatchArray(['product' => 'Desk', 'price' => 200, 'active' => true])
-        ->and($groupedTable->last()?->arr())
-        ->toMatchArray(['product' => 'Bookcase', 'price' => 150, 'active' => true]);
-});
+        $this->assertCount(4, $groupedTable);
+        $this->assertEquals(['product' => 'Desk', 'price' => 200, 'active' => true], $groupedTable->first()?->arr());
+        $this->assertEquals(['product' => 'Bookcase', 'price' => 150, 'active' => true], $groupedTable->last()?->arr());
+    }
 
-it('can append Arr', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect($table)->toHaveCount(5);
-    $table->append(Arr::make([]));
-    expect($table)->toHaveCount(6);
-});
+    public function test_can_append_arr(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertCount(5, $table);
+        $table->append(Arr::make([]));
+        $this->assertCount(6, $table);
+    }
 
-it('can append array', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    expect($table)->toHaveCount(5);
-    $table->append([]);
-    expect($table)
-        ->toHaveCount(6)
-        ->and($table->last())
-        ->toBeInstanceOf(Arr::class);
-});
+    public function test_can_append_array(): void
+    {
+        $table = Table::make($this->dataTable);
+        $this->assertCount(5, $table);
+        $table->append([]);
+        $this->assertCount(6, $table);
+        $this->assertInstanceOf(Arr::class, $table->last());
+    }
 
+    public function test_orders_by_desc(): void
+    {
+        $table = Table::make($this->dataTable);
+        $orderedTable = $table->orderBy('price');
+        $this->assertCount(5, $orderedTable);
+        $this->assertEquals(['product' => 'Door', 'price' => 300, 'active' => false], $orderedTable->first()?->arr());
+        $this->assertEquals(['product' => 'Door', 'price' => 100, 'active' => true], $orderedTable->last()?->arr());
+    }
 
-it('orders by desc', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    $orderedTable = $table->orderBy('price');
-    expect($orderedTable)
-        ->toHaveCount(5)
-        ->and($orderedTable->first()?->arr())
-        ->toMatchArray(['product' => 'Door', 'price' => 300, 'active' => false])
-        ->and($orderedTable->last()?->arr())
-        ->toMatchArray(['product' => 'Door', 'price' => 100, 'active' => true]);
-});
+    public function test_orders_by_asc(): void
+    {
+        $table = Table::make($this->dataTable);
+        $orderedTable = $table->orderBy('product', 'asc');
+        $this->assertCount(5, $orderedTable);
+        $this->assertEquals(['product' => 'Bookcase', 'price' => 150, 'active' => true], $orderedTable->first()?->arr());
+        $this->assertEquals(['product' => 'Door', 'price' => 100, 'active' => true], $orderedTable->last()?->arr());
+    }
 
-it('orders by asc', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    $orderedTable = $table->orderBy('product', 'asc');
-    expect($orderedTable)
-        ->toHaveCount(5)
-        ->and($orderedTable->first()?->arr())
-        ->toMatchArray(['product' => 'Bookcase', 'price' => 150, 'active' => true])
-        ->and($orderedTable->last()?->arr())
-        ->toMatchArray(['product' => 'Door', 'price' => 100, 'active' => true]);
-});
+    public function test_can_get_the_cheapest_of_all_products_that_are_active(): void
+    {
+        $table = Table::make($this->dataTable);
+        $cheapestOfEachProduct = $table
+            ->where('active', '=', true)
+            ->orderBy('price', 'asc')
+            ->groupBy('product');
 
-it('can get the cheapest of all products that are active', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    $cheapestOfEachProduct = $table
-        ->where('active', '=', true)
-        ->orderBy('price', 'asc')
-        ->groupBy('product');
+        $this->assertCount(4, $cheapestOfEachProduct);
+        $this->assertEquals(['product' => 'Chair', 'price' => 100, 'active' => true], $cheapestOfEachProduct->first()?->arr());
+        $this->assertEquals(['product' => 'Desk', 'price' => 200, 'active' => true], $cheapestOfEachProduct->last()?->arr());
+    }
 
-    expect($cheapestOfEachProduct)
-        ->toHaveCount(4)
-        ->and($cheapestOfEachProduct->first()?->arr())
-        ->toMatchArray(['product' => 'Chair', 'price' => 100, 'active' => true])
-        ->and($cheapestOfEachProduct->last()?->arr())
-        ->toMatchArray(['product' => 'Desk', 'price' => 200, 'active' => true]);
-});
+    public function test_can_transform_all_of_the_elements_in_a_specific_column(): void
+    {
+        $table = Table::make($this->dataTable);
+        $cheapestOfEachProduct = $table->transform('price', fn ($price): string => number_format($price, 2));
 
-it('can transform all of the elements in a specific column', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    $cheapestOfEachProduct = $table->transform('price', fn ($price): string => number_format($price, 2));
+        $this->assertCount(5, $cheapestOfEachProduct);
+        $this->assertEquals(['product' => 'Desk', 'price' => '200.00', 'active' => true], $cheapestOfEachProduct->first()?->arr());
+        $this->assertEquals(['product' => 'Door', 'price' => '100.00', 'active' => true], $cheapestOfEachProduct->last()?->arr());
+    }
 
-    expect($cheapestOfEachProduct)
-        ->toHaveCount(5)
-        ->and($cheapestOfEachProduct->first()?->arr())
-        ->toMatchArray(['product' => 'Desk', 'price' => '200.00', 'active' => true])
-        ->and($cheapestOfEachProduct->last()?->arr())
-        ->toMatchArray(['product' => 'Door', 'price' => '100.00', 'active' => true]);
-});
+    public function test_can_transform_to_native_array(): void
+    {
+        $table = Table::make($this->dataTable);
+        $array = $table->toArray();
 
-it('can transform to native array', function () use ($dataTable): void {
-    $table = Table::make($dataTable);
-    $array = $table->toArray();
+        $this->assertIsArray($array);
+        $this->assertCount(5, $array);
+        $this->assertEquals("Chair", $array[1]["product"]);
 
-    expect($array)
-        ->toBeArray()
-        ->toHaveCount(5);
-    expect($array[1]["product"])->toEqual("Chair");
+        $table = Table::make([]);
+        $array = $table->toArray();
 
-    $table = Table::make([]);
-    $array = $table->toArray();
-
-    expect($array)
-        ->toBeArray()
-        ->toHaveCount(0);
-});
+        $this->assertIsArray($array);
+        $this->assertCount(0, $array);
+    }
+}

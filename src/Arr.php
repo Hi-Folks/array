@@ -432,7 +432,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * @param int $start start index (array start from 0, start included)
      * @param int|null $end end index (array starts from 0, end not included)
      */
-    public function slice(int $start, int $end = null): Arr
+    public function slice(int $start, ?int $end = null): Arr
     {
         if (is_null($end)) {
             $end = $this->length();
@@ -507,7 +507,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      *
      * @param  int|null  $fromIndex
      */
-    public function includes(mixed $element, int $fromIndex = null): bool
+    public function includes(mixed $element, ?int $fromIndex = null): bool
     {
         if (is_null($fromIndex)) {
             return in_array($element, $this->arr, true);
@@ -598,7 +598,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * @param  int  $start start index (from 0)
      * @param  int|null  $end end index (default, the end of array)
      */
-    public function fill(mixed $value, int $start = 0, int $end = null): void
+    public function fill(mixed $value, int $start = 0, ?int $end = null): void
     {
         if (is_null($end)) {
             $end = $this->length() - 1;
@@ -665,7 +665,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * @param  int|null  $deleteCount an integer indicating the number of elements in the array to remove from $start
      * @return Arr an array containing the deleted elements
      */
-    public function splice(int $start, int $deleteCount = null, mixed $newElements = []): Arr
+    public function splice(int $start, ?int $deleteCount = null, mixed $newElements = []): Arr
     {
         return self::make(array_splice($this->arr, $start, $deleteCount, $newElements));
     }
@@ -770,7 +770,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * @param int|null $end
      * @return array<int|string, mixed>
      */
-    public function copyWithin(int $target, int $start = 0, int $end = null): array
+    public function copyWithin(int $target, int $start = 0, ?int $end = null): array
     {
         $arrayLength = $this->length();
         $chuck = $this->slice($start, $end);
