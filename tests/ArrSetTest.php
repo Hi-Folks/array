@@ -32,20 +32,6 @@ class ArrSetTest extends TestCase
     public function test_nested_set_array(): void
     {
         $articleText = "Some words as a sample sentence";
-        $textFieldArray = [
-            "type" => "doc",
-            "content" => [
-                [
-                    "content" => [
-                        [
-                            "text" => $articleText,
-                            "type" => "text"
-                        ]
-                    ],
-                    "type" => "paragraph"
-                ]
-            ]
-        ];
         $textField = Arr::make();
         $textField->set("type", "doc");
         $textField->set("content.0.content.0.text", $articleText);
