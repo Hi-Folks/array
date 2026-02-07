@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1770501592">
-  <project timestamp="1770501592" name="Clover Coverage">
+<coverage generated="1770502020">
+  <project timestamp="1770502020" name="Clover Coverage">
     <package name="HiFolks\DataType">
       <file name="/home/runner/work/array/array/src/Arr.php">
         <class name="HiFolks\DataType\Arr" namespace="HiFolks\DataType">
