@@ -22,13 +22,9 @@ final class Arr implements Iterator, ArrayAccess, Countable
 {
     use Calculable;
 
-    /** @var array<int|string, mixed> */
-    private array $arr;
-
     /** @param array<int|string, mixed> $arr */
-    public function __construct(array $arr = [])
+    public function __construct(private array $arr = [])
     {
-        $this->arr = $arr;
     }
 
     public static function fromFunction(callable $callable, int $count): Arr
@@ -111,7 +107,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      *
      * @param non-empty-string $charNestedKey
      */
-    public function get(mixed $key, mixed $defaultValue = null, string $charNestedKey = "."): mixed
+    public function get(int|string $key, mixed $defaultValue = null, string $charNestedKey = "."): mixed
     {
         if (is_string($key)) {
             $keyString = strval($key);
@@ -137,7 +133,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * In the case the $key doesn't exist, an empty Arr can be returned
      * @param non-empty-string $charNestedKey
      */
-    public function getArr(mixed $key, mixed $defaultValue = null, string $charNestedKey = "."): Arr
+    public function getArr(int|string $key, mixed $defaultValue = null, string $charNestedKey = "."): Arr
     {
         $value = $this->getArrNullable($key, $defaultValue, $charNestedKey);
         if (is_null($value)) {
@@ -152,7 +148,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * In the case the $key doesn't exist, null can be returned
      * @param non-empty-string $charNestedKey
      */
-    public function getArrNullable(mixed $key, mixed $defaultValue = null, string $charNestedKey = "."): Arr|null
+    public function getArrNullable(int|string $key, mixed $defaultValue = null, string $charNestedKey = "."): Arr|null
     {
         $value = $this->get($key, $defaultValue, $charNestedKey);
         if (is_null($value)) {
@@ -195,7 +191,10 @@ final class Arr implements Iterator, ArrayAccess, Countable
                 $array = &$array[$key];
             }
 
-            $array[array_shift($keys)] = $value;
+            $lastKey = array_shift($keys);
+            if ($lastKey !== null) {
+                $array[$lastKey] = $value;
+            }
             return;
 
         }
@@ -205,7 +204,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
     /**
      * Unset an array element by their key if it exists
      */
-    public function unset(mixed $key): bool
+    public function unset(int|string $key): bool
     {
         if ($this->get($key)) {
             unset($this->arr[$key]);
@@ -315,9 +314,9 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * It returns Arr or [] depending on $returnArrClass value
      *
      * @param bool $returnArrClass true if you need Arr object
-     * @return int|string|array<int|string, mixed>|Arr
+     * @return array<int|string, mixed>|Arr
      */
-    public function keys(bool $returnArrClass = false): int|string|array|Arr
+    public function keys(bool $returnArrClass = false): array|Arr
     {
         if ($returnArrClass) {
             return self::make(array_keys($this->arr));
@@ -504,8 +503,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
     /**
      * Determines whether the array includes a certain value $element among its entries,
      * returning true or false as appropriate
-     *
-     * @param  int|null  $fromIndex
      */
     public function includes(mixed $element, ?int $fromIndex = null): bool
     {
@@ -767,7 +764,6 @@ final class Arr implements Iterator, ArrayAccess, Countable
      * The copyWithin() method shallow copies part of an array to another
      * location in the same array and returns it without modifying its length.
      *
-     * @param int|null $end
      * @return array<int|string, mixed>
      */
     public function copyWithin(int $target, int $start = 0, ?int $end = null): array
@@ -775,7 +771,7 @@ final class Arr implements Iterator, ArrayAccess, Countable
         $arrayLength = $this->length();
         $chuck = $this->slice($start, $end);
         if ($target < 0) {
-            $target = $arrayLength - (int) abs($target);
+            $target = $arrayLength - abs($target);
         }
 
         foreach ($chuck as $value) {

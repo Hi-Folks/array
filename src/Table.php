@@ -177,13 +177,17 @@ final class Table implements Countable, Iterator
         foreach ($this->rows as $value) {
             $property = $value->get($field);
             $property = $this->castVariableForStrval($property);
-            if (!$property) {
+            if ($property === null) {
                 continue;
             }
-            if (array_key_exists(strval($property), $result)) {
+            if ($property === false) {
                 continue;
             }
-            $result[$property] = $value;
+            $key = is_bool($property) || is_float($property) ? strval($property) : $property;
+            if (array_key_exists(strval($key), $result)) {
+                continue;
+            }
+            $result[$key] = $value;
         }
 
         return self::make(array_values($result));
