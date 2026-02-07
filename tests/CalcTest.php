@@ -1,30 +1,38 @@
 <?php
 
+namespace HiFolks\Array\Tests;
+
 use HiFolks\DataType\Arr;
+use PHPUnit\Framework\TestCase;
 
-it('sum Array', function (): void {
-    $arr = Arr::make([1, 2, 3]);
-    expect($arr->sum())->toEqual(6);
+class CalcTest extends TestCase
+{
+    public function test_sum_array(): void
+    {
+        $arr = Arr::make([1, 2, 3]);
+        $this->assertEquals(6, $arr->sum());
 
-    $arr = Arr::make(['3', 2, 3]);
-    expect($arr->sum())->toEqual(8);
-    $arr = Arr::fromValue(1, 100);
-    expect($arr->sum())->toEqual(100);
-});
+        $arr = Arr::make(['3', 2, 3]);
+        $this->assertEquals(8, $arr->sum());
+        $arr = Arr::fromValue(1, 100);
+        $this->assertEquals(100, $arr->sum());
+    }
 
-it('avg Array', function (): void {
-    $arr = Arr::make([1, 2, 3]);
-    expect($arr->avg())->toEqual(2);
+    public function test_avg_array(): void
+    {
+        $arr = Arr::make([1, 2, 3]);
+        $this->assertEquals(2, $arr->avg());
 
-    $arr = Arr::fromValue(1, 100);
-    expect($arr->avg())->toEqual(1);
+        $arr = Arr::fromValue(1, 100);
+        $this->assertEquals(1, $arr->avg());
 
-    $arr = Arr::fromValue(1.2, 100);
-    expect(round($arr->avg(), 2))->toEqual(1.2);
+        $arr = Arr::fromValue(1.2, 100);
+        $this->assertEquals(1.2, round($arr->avg(), 2));
 
-    $arr = Arr::make([1.1, 1.5]);
-    expect($arr->avg())->toEqual(1.3);
+        $arr = Arr::make([1.1, 1.5]);
+        $this->assertEquals(1.3, $arr->avg());
 
-    $arr = Arr::make([]);
-    expect($arr->avg())->toEqual(0);
-});
+        $arr = Arr::make([]);
+        $this->assertEquals(0, $arr->avg());
+    }
+}

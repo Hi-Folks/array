@@ -1,22 +1,30 @@
 <?php
 
+namespace HiFolks\Array\Tests;
+
 use HiFolks\DataType\Arr;
+use PHPUnit\Framework\TestCase;
 
-it('iterates', function (): void {
-    $arr = Arr::make([100, 101, 102]);
-    foreach ($arr as $element) {
-        expect($element)->toBeGreaterThanOrEqual(100);
-        expect($element)->toBeLessThanOrEqual(102);
+class IterateTest extends TestCase
+{
+    public function test_iterates(): void
+    {
+        $arr = Arr::make([100, 101, 102]);
+        foreach ($arr as $element) {
+            $this->assertGreaterThanOrEqual(100, $element);
+            $this->assertLessThanOrEqual(102, $element);
+        }
     }
-});
 
-it('iterates prev and next', function (): void {
-    $arr = Arr::make([100, 101, 102]);
-    $arr->next();
-    $arr->next();
-    $element = $arr->current();
-    expect($element)->toEqual(102);
-    $arr->prev();
-    $element = $arr->current();
-    expect($element)->toEqual(101);
-});
+    public function test_iterates_prev_and_next(): void
+    {
+        $arr = Arr::make([100, 101, 102]);
+        $arr->next();
+        $arr->next();
+        $element = $arr->current();
+        $this->assertEquals(102, $element);
+        $arr->prev();
+        $element = $arr->current();
+        $this->assertEquals(101, $element);
+    }
+}

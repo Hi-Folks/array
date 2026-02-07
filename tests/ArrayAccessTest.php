@@ -1,56 +1,67 @@
 <?php
 
+namespace HiFolks\Array\Tests;
+
 use HiFolks\DataType\Arr;
+use PHPUnit\Framework\TestCase;
 
-it('access to element', function (): void {
-    $arr = Arr::make([100, 101, 102]);
-    expect($arr[0])->toEqual(100);
-    expect($arr[1])->toEqual(101);
-    expect($arr[2])->toEqual(102);
-});
+class ArrayAccessTest extends TestCase
+{
+    public function test_access_to_element(): void
+    {
+        $arr = Arr::make([100, 101, 102]);
+        $this->assertEquals(100, $arr[0]);
+        $this->assertEquals(101, $arr[1]);
+        $this->assertEquals(102, $arr[2]);
+    }
 
-it('create elements', function (): void {
-    $arr = Arr::make();
-    $arr['test01'] = 'Some';
-    $arr['test02'] = 'Thing';
-    expect($arr->count())->toEqual(2);
-    expect($arr['test02'])->toEqual('Thing');
-    expect($arr['test01'])->toEqual('Some');
+    public function test_create_elements(): void
+    {
+        $arr = Arr::make();
+        $arr['test01'] = 'Some';
+        $arr['test02'] = 'Thing';
+        $this->assertEquals(2, $arr->count());
+        $this->assertEquals('Thing', $arr['test02']);
+        $this->assertEquals('Some', $arr['test01']);
 
-    $arr = Arr::make();
-    $arr[] = 'first value';
-    $arr[] = 'second value';
-    expect($arr->count())->toEqual(2);
-    expect($arr[0])->toEqual('first value');
-    expect($arr[1])->toEqual('second value');
-    expect($arr[2])->toBeNull();
-    expect($arr[1])->toEqual($arr->get(1));
-});
-it('isset and empty', function (): void {
-    $arr = Arr::make();
-    $arr['test01'] = 'Some';
-    $arr['test02'] = 'Thing';
-    expect($arr->count())->toEqual(2);
-    expect(isset($arr['test01']))->toBeTrue();
-    expect(empty($arr['test01']))->toBeFalse();
-    expect(isset($arr['not exists']))->toBeFalse();
-    expect(empty($arr['not exists']))->toBeTrue();
-});
+        $arr = Arr::make();
+        $arr[] = 'first value';
+        $arr[] = 'second value';
+        $this->assertEquals(2, $arr->count());
+        $this->assertEquals('first value', $arr[0]);
+        $this->assertEquals('second value', $arr[1]);
+        $this->assertNull($arr[2]);
+        $this->assertEquals($arr->get(1), $arr[1]);
+    }
 
-it('unset', function (): void {
-    $arr = Arr::make();
-    $arr['test01'] = 'Some';
-    $arr['test02'] = 'Thing';
-    $arr['test03'] = '!!!';
-    expect($arr->count())->toEqual(3);
-    expect(isset($arr['test01']))->toBeTrue();
-    expect(empty($arr['test01']))->toBeFalse();
-    expect(isset($arr['test02']))->toBeTrue();
-    expect(empty($arr['test02']))->toBeFalse();
-    unset($arr['test02']);
-    expect($arr->count())->toEqual(2);
-    expect(isset($arr['test01']))->toBeTrue();
-    expect(empty($arr['test01']))->toBeFalse();
-    expect(isset($arr['test02']))->toBeFalse();
-    expect(empty($arr['test02']))->toBeTrue();
-});
+    public function test_isset_and_empty(): void
+    {
+        $arr = Arr::make();
+        $arr['test01'] = 'Some';
+        $arr['test02'] = 'Thing';
+        $this->assertEquals(2, $arr->count());
+        $this->assertTrue(isset($arr['test01']));
+        $this->assertFalse(empty($arr['test01']));
+        $this->assertFalse(isset($arr['not exists']));
+        $this->assertTrue(empty($arr['not exists']));
+    }
+
+    public function test_unset(): void
+    {
+        $arr = Arr::make();
+        $arr['test01'] = 'Some';
+        $arr['test02'] = 'Thing';
+        $arr['test03'] = '!!!';
+        $this->assertEquals(3, $arr->count());
+        $this->assertTrue(isset($arr['test01']));
+        $this->assertFalse(empty($arr['test01']));
+        $this->assertTrue(isset($arr['test02']));
+        $this->assertFalse(empty($arr['test02']));
+        unset($arr['test02']);
+        $this->assertEquals(2, $arr->count());
+        $this->assertTrue(isset($arr['test01']));
+        $this->assertFalse(empty($arr['test01']));
+        $this->assertFalse(isset($arr['test02']));
+        $this->assertTrue(empty($arr['test02']));
+    }
+}

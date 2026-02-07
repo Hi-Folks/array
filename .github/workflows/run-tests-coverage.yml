@@ -13,8 +13,8 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: [ '8.3' ]
-        dependency-stability: [ 'prefer-none' ]
+        php-versions: ["8.5"]
+        dependency-stability: ["prefer-none"]
 
     name: P${{ matrix.php-versions }} - L${{ matrix.laravel }} - ${{ matrix.dependency-stability }} - ${{ matrix.operating-system}}
 
@@ -24,6 +24,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
+          coverage: xdebug
       - name: Install Dependencies
         if: steps.vendor-cache.outputs.cache-hit != 'true'
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
@@ -35,7 +36,6 @@ jobs:
         if: matrix.dependency-stability == 'prefer-lowest'
         run: composer update --prefer-stable --prefer-lowest
 
-
       - name: Show dir
         run: pwd
       - name: PHP Version
@@ -43,15 +43,15 @@ jobs:
 
       # Code quality
 
-      - name: Execute tests (Unit and Feature tests) via PestPHP
+      - name: Execute tests (Unit and Feature tests) via PHPUnit
         # Set environment
         env:
           SESSION_DRIVER: array
-        run: vendor/bin/pest --coverage-clover clover.xml
+        run: vendor/bin/phpunit --coverage-clover clover.xml
 
       - name: Generate test coverage badge
         uses: timkrase/phpunit-coverage-badge@v1.2.1
         with:
-          coverage_badge_path: 'badge-coverage.svg'
+          coverage_badge_path: "badge-coverage.svg"
           push_badge: true
           repo_token: ${{ secrets.GITHUB_TOKEN }}

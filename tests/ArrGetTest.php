@@ -1,108 +1,116 @@
 <?php
 
+namespace HiFolks\Array\Tests;
+
 use HiFolks\DataType\Arr;
+use PHPUnit\Framework\TestCase;
 
-it('Basic get', function (): void {
-    $arr = Arr::make(['A','B','C']);
-    expect($arr->get(1))->toBe('B');
-    expect($arr->get(4))->toBeNull();
-    expect($arr->get(4, 'AAAA'))->toBe("AAAA");
-});
+class ArrGetTest extends TestCase
+{
+    public function test_basic_get(): void
+    {
+        $arr = Arr::make(['A', 'B', 'C']);
+        $this->assertSame('B', $arr->get(1));
+        $this->assertNull($arr->get(4));
+        $this->assertSame("AAAA", $arr->get(4, 'AAAA'));
+    }
 
-it('Basic nested get', function (): void {
-    $arr = Arr::make([
-        'A' => 'First',
-        'B' => ['some', 'thing'],
-        'C' => [ 'nested-item-1' => 10, 'nested-item-2' => 20],
-        'D' => []
-    ]);
-    expect($arr->get('A'))->toBe('First');
-    expect($arr->get('B'))->toBeArray();
-    expect($arr->get('B.0'))->toBe('some');
-    expect($arr->get('B.1'))->toBe('thing');
-    expect($arr->get('B.2'))->toBeNull();
-    expect($arr->get('B.2', 1234))->toBe(1234);
-    expect($arr->get('B#0', charNestedKey: '#'))->toBe('some');
-    expect($arr->get('B#1', charNestedKey: '#'))->toBe('thing');
-    expect($arr->get('B#2', charNestedKey: '#'))->toBeNull();
-    expect($arr->get('B#2', 1234, '#'))->toBe(1234);
+    public function test_basic_nested_get(): void
+    {
+        $arr = Arr::make([
+            'A' => 'First',
+            'B' => ['some', 'thing'],
+            'C' => ['nested-item-1' => 10, 'nested-item-2' => 20],
+            'D' => []
+        ]);
+        $this->assertSame('First', $arr->get('A'));
+        $this->assertIsArray($arr->get('B'));
+        $this->assertSame('some', $arr->get('B.0'));
+        $this->assertSame('thing', $arr->get('B.1'));
+        $this->assertNull($arr->get('B.2'));
+        $this->assertSame(1234, $arr->get('B.2', 1234));
+        $this->assertSame('some', $arr->get('B#0', charNestedKey: '#'));
+        $this->assertSame('thing', $arr->get('B#1', charNestedKey: '#'));
+        $this->assertNull($arr->get('B#2', charNestedKey: '#'));
+        $this->assertSame(1234, $arr->get('B#2', 1234, '#'));
 
-    expect($arr->get('C.0'))->toBeNull();
-    expect($arr->get('C.nested-item-1'))->toBe(10);
-    expect($arr->get('C.nested-item-2'))->toBe(20);
-    expect($arr->get('C.nested-item-2.other'))->toBeNull();
-    expect($arr->get('C.nested-item-2.other', 'zzz'))->toBe('zzz');
-    expect($arr->get('C#nested-item-2#other', 'zzz', '#'))->toBe('zzz');
-    expect($arr->get('C#nested-item-2#other', 'zzz'))->toBe('zzz');
-    expect($arr->get('C#nested-item-2', 'zzz'))->toBe('zzz');
-    expect($arr->get('C#nested-item-4', 'zzz'))->toBe('zzz');
-    expect($arr->get('D#nested-item-4', 'zzz'))->toBe('zzz');
-    expect($arr->get('D.0'))->toBeNull();
-    expect($arr->get('D', '0'))->toBeArray()->toHaveLength(0);
+        $this->assertNull($arr->get('C.0'));
+        $this->assertSame(10, $arr->get('C.nested-item-1'));
+        $this->assertSame(20, $arr->get('C.nested-item-2'));
+        $this->assertNull($arr->get('C.nested-item-2.other'));
+        $this->assertSame('zzz', $arr->get('C.nested-item-2.other', 'zzz'));
+        $this->assertSame('zzz', $arr->get('C#nested-item-2#other', 'zzz', '#'));
+        $this->assertSame('zzz', $arr->get('C#nested-item-2#other', 'zzz'));
+        $this->assertSame('zzz', $arr->get('C#nested-item-2', 'zzz'));
+        $this->assertSame('zzz', $arr->get('C#nested-item-4', 'zzz'));
+        $this->assertSame('zzz', $arr->get('D#nested-item-4', 'zzz'));
+        $this->assertNull($arr->get('D.0'));
+        $result = $arr->get('D', '0');
+        $this->assertIsArray($result);
+        $this->assertCount(0, $result);
+    }
 
-});
+    public function test_basic_get_arr(): void
+    {
+        $arr = Arr::make(['A', 'B', 'C']);
+        $this->assertInstanceOf(Arr::class, $arr->getArr(1));
+        $this->assertSame('B', $arr->getArr(1)->at(0));
+        $this->assertNull($arr->getArrNullable(4));
+        $this->assertInstanceOf(Arr::class, $arr->getArr(4, 'AAAA'));
+        $this->assertSame('AAAA', $arr->getArr(4, 'AAAA')->get(0));
 
+        $arr = Arr::make([
+            'A' => 'First',
+            'B' => ['some', 'thing'],
+            'C' => ['nested-item-1' => 10, 'nested-item-2' => 20],
+            'D' => []
+        ]);
 
-it('Basic getArr', function (): void {
-    $arr = Arr::make(['A','B','C']);
-    expect($arr->getArr(1))->toBeInstanceOf(Arr::class);
-    expect($arr->getArr(1)->at(0))->toBe('B');
-    expect($arr->getArrNullable(4))->toBeNull();
-    expect($arr->getArr(4, 'AAAA'))->toBeInstanceOf(Arr::class);
-    expect($arr->getArr(4, 'AAAA')->get(0))->toBe('AAAA');
+        $this->assertSame(10, $arr->getArr('C')->get('nested-item-1'));
+        $this->assertIsArray($arr->getArr('C')->entries()->get(0));
+        $this->assertSame(['nested-item-1', 10], $arr->getArr('C')->entries()->get(0));
+        $this->assertSame(['nested-item-1', 'nested-item-2'], $arr->getArr('C')->keys());
 
-
-    $arr = Arr::make([
-        'A' => 'First',
-        'B' => ['some', 'thing'],
-        'C' => [ 'nested-item-1' => 10, 'nested-item-2' => 20],
-        'D' => []
-    ]);
-
-    expect($arr->getArr('C')->get('nested-item-1'))->toBe(10);
-    expect($arr->getArr('C')->entries()->get(0))->toBeArray();
-    expect($arr->getArr('C')->entries()->get(0))->toBe(['nested-item-1',10]);
-    expect($arr->getArr('C')->keys())->toBe(['nested-item-1','nested-item-2' ]);
-
-    $arr = Arr::make(
-        [
-            "avocado" =>
-                [
-                    'name' => 'Avocado',
-                    'fruit' => '🥑',
-                    'wikipedia' => 'https://en.wikipedia.org/wiki/Avocado'
-                ],
-            "apple" =>
-                [
-                    'name' => 'Apple',
-                    'fruit' => '🍎',
-                    'wikipedia' => 'https://en.wikipedia.org/wiki/Apple'
-                ],
-            "banana" =>
-                [
-                    'name' => 'Banana',
-                    'fruit' => '🍌',
-                    'wikipedia' => 'https://en.wikipedia.org/wiki/Banana'
-                ],
-            "cherry" =>
-                [
-                    'name' => 'Cherry',
-                    'fruit' => '🍒',
-                    'wikipedia' => 'https://en.wikipedia.org/wiki/Cherry'
-                ],
-        ]
-    );
-    $appleArr = $arr->getArr("apple");
-    expect($appleArr->count())->toBe(3)
-        ->and($appleArr->get("name"))->toBe('Apple');
-    $appleNameArr = $arr->getArr("apple.name");
-    expect($appleNameArr->get(0))->toBe('Apple');
-    $appleNoExists = $arr->getArr("apple.name.noexists");
-    expect($appleNoExists)->toBeInstanceOf(Arr::class);
-    expect($appleNoExists->count())->toBe(0);
-    $appleNoExists = $arr->getArrNullable("apple.name.noexists");
-    expect($appleNoExists)->toBeNull();
-    $appleNoExists = $arr->getArr("apple.name.noexists", "some");
-    expect($appleNoExists)->toBeInstanceOf(Arr::class)
-        ->and($appleNoExists->get(0))->toBe("some");
-});
+        $arr = Arr::make(
+            [
+                "avocado" =>
+                    [
+                        'name' => 'Avocado',
+                        'fruit' => '🥑',
+                        'wikipedia' => 'https://en.wikipedia.org/wiki/Avocado'
+                    ],
+                "apple" =>
+                    [
+                        'name' => 'Apple',
+                        'fruit' => '🍎',
+                        'wikipedia' => 'https://en.wikipedia.org/wiki/Apple'
+                    ],
+                "banana" =>
+                    [
+                        'name' => 'Banana',
+                        'fruit' => '🍌',
+                        'wikipedia' => 'https://en.wikipedia.org/wiki/Banana'
+                    ],
+                "cherry" =>
+                    [
+                        'name' => 'Cherry',
+                        'fruit' => '🍒',
+                        'wikipedia' => 'https://en.wikipedia.org/wiki/Cherry'
+                    ],
+            ]
+        );
+        $appleArr = $arr->getArr("apple");
+        $this->assertSame(3, $appleArr->count());
+        $this->assertSame('Apple', $appleArr->get("name"));
+        $appleNameArr = $arr->getArr("apple.name");
+        $this->assertSame('Apple', $appleNameArr->get(0));
+        $appleNoExists = $arr->getArr("apple.name.noexists");
+        $this->assertInstanceOf(Arr::class, $appleNoExists);
+        $this->assertSame(0, $appleNoExists->count());
+        $appleNoExists = $arr->getArrNullable("apple.name.noexists");
+        $this->assertNull($appleNoExists);
+        $appleNoExists = $arr->getArr("apple.name.noexists", "some");
+        $this->assertInstanceOf(Arr::class, $appleNoExists);
+        $this->assertSame("some", $appleNoExists->get(0));
+    }
+}

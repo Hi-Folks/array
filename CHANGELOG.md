@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0 - WIP
+- Update to PHP 8.5
+- Migrate tests from Pest PHP v2 to PHPUnit 11
+- Remove deprecated code
+
 ## 1.1.0 - 2024-06-13
 - Add the Arr `set()` method supports 'dot' (or custom) notation for nested arrays for setting nested values, for example, `$arr`->set('first-level.second-level.third-level', "something")`
 - Renamed the `$index` parameter, into `$key` for `set()` and `get()` method. Why: in my opinion "index" is more related to array integer keys . "key" is more generic and refers to generic keys (string for example).
