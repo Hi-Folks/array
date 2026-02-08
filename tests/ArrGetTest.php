@@ -113,4 +113,26 @@ class ArrGetTest extends TestCase
         $this->assertInstanceOf(Arr::class, $appleNoExists);
         $this->assertSame("some", $appleNoExists->get(0));
     }
+
+    public function test_get_arr_nullable_returns_arr_instance_when_value_is_arr(): void
+    {
+        $inner = Arr::make([10, 20]);
+        $arr = Arr::make(['nested' => $inner]);
+
+        $result = $arr->getArrNullable('nested');
+        $this->assertInstanceOf(Arr::class, $result);
+        $this->assertSame(10, $result->get(0));
+        $this->assertSame(20, $result->get(1));
+    }
+
+    public function test_get_arr_nullable_returns_empty_arr_for_object_value(): void
+    {
+        $obj = new \stdClass();
+        $obj->name = 'test';
+        $arr = Arr::make(['item' => $obj]);
+
+        $result = $arr->getArrNullable('item');
+        $this->assertInstanceOf(Arr::class, $result);
+        $this->assertSame(0, $result->count());
+    }
 }

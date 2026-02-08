@@ -206,10 +206,11 @@ The methods:
 - select(): select some fields
 - except(): exclude some fields
 - where(): filter data
-- groupBy(): grouping data
+- groupBy(): grouping data into a Table of Tables, with an optional key mode (`GroupByKeyMode::VarExport`, `GroupByKeyMode::Strval`, `GroupByKeyMode::Int`)
 - transform(): transforms a specific field with the provided function
 - orderBy(): sorting data (ascending or descending)
 - toArray(): transform Table object into a native PHP array
+- toJson(): convert Table object into a JSON string
 
 
 `Table` now implements `\Countable` and `\Iterator`, this allows you to count the number of rows
@@ -327,6 +328,47 @@ HiFolks\DataType\Table::__set_state(array(
     )),
   ),
 ))
+```
+
+### Grouping data with `groupBy()`
+
+The `groupBy()` method groups rows by a field value and returns a **Table of Tables**. You can then use `get()` to access each group by its key and drill into the rows:
+
+```php
+use HiFolks\DataType\Table;
+
+$table = Table::make([
+    ['product' => 'Desk', 'price' => 200, 'active' => true],
+    ['product' => 'Chair', 'price' => 100, 'active' => true],
+    ['product' => 'Door', 'price' => 300, 'active' => false],
+    ['product' => 'Bookcase', 'price' => 150, 'active' => true],
+    ['product' => 'Door', 'price' => 100, 'active' => true],
+]);
+
+$grouped = $table->groupBy('product');
+$grouped->count(); // 4 groups: Desk, Chair, Door, Bookcase
+
+$deskItems = $grouped->get('Desk');
+$deskItems->count(); // 1
+
+$doorItems = $grouped->get('Door');
+$doorItems->count(); // 2
+
+$firstDoor = $doorItems->first();
+$firstDoor->get('price');   // 300
+$firstDoor->get('product'); // 'Door'
+$firstDoor->get('active');  // false
+```
+
+Because `groupBy()` returns a Table, you can chain it with `where()` and `orderBy()` to build powerful queries. For example, to get the cheapest active product in each group:
+
+```php
+$cheapest = $table
+    ->where('active', '=', true)
+    ->orderBy('price', 'asc')
+    ->groupBy('product');
+
+$cheapest->get('Door')->first()->get('price'); // 100
 ```
 
 ## Testing

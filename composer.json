@@ -35,14 +35,16 @@
     },
     "scripts": {
         "all": [
-            "@test",
             "@format",
-            "@phpstan"
+            "@rector",
+            "@phpstan",
+            "@test"
         ],
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html ./.build/tests",
         "phpstan": "vendor/bin/phpstan",
-        "format": "vendor/bin/pint"
+        "format": "vendor/bin/pint",
+        "rector": "vendor/bin/rector --dry-run"
     },
     "config": {
         "sort-packages": true

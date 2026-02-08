@@ -99,10 +99,13 @@ var_export($table->select('product', 'price'));
 echo PHP_EOL.'-------'.PHP_EOL;
 var_export($table->except('active', 'price'));
 
-// Group the Table by the column
+// Group the Table by the column (returns a Table of Tables)
 echo PHP_EOL.'-------'.PHP_EOL;
 $result = $table->groupBy('product');
-var_export($result);
+foreach ($result as $groupKey => $groupTable) {
+    echo "Group: $groupKey (" . count($groupTable) . " rows)" . PHP_EOL;
+}
+var_export($result->toArray());
 
 // Order the table by the column using default value (desc)
 echo PHP_EOL.'-------'.PHP_EOL;
@@ -156,7 +159,11 @@ $table = Table::make([
     ['product' => 'Door', 'price' => 100, 'active' => true],
 ]);
 
-var_export($table->groupBy('product'));
+$grouped = $table->groupBy('product');
+foreach ($grouped as $groupKey => $groupTable) {
+    echo "Group: $groupKey (" . count($groupTable) . " rows)" . PHP_EOL;
+}
+var_export($grouped->toArray());
 
 print_r($table->toArray());
 
