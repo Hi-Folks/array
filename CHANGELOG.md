@@ -1,11 +1,14 @@
 # Changelog
 
-## 2.0.0 - WIP
+## 2.0.0 - 2026-02-08
 - Update to PHP 8.5
 - Migrate tests from Pest PHP v2 to PHPUnit 11
 - Remove deprecated code
 - Update PHPStan version 2
 - Update Rector version 2
+- groupBy() return Table-of-Tables with key mode support
+- Table class, add the `get()` method to retrieve a row/group by key
+- Table class, add the `toJson()` method for JSON serialization
 
 ## 1.1.0 - 2024-06-13
 - Add the Arr `set()` method supports 'dot' (or custom) notation for nested arrays for setting nested values, for example, `$arr`->set('first-level.second-level.third-level', "something")`
