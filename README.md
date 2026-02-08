@@ -5,7 +5,6 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hi-folks/array.svg?style=for-the-badge)](https://packagist.org/packages/hi-folks/array)
 [![PHP Unit Tests](https://img.shields.io/github/actions/workflow/status/hi-folks/array/run-tests.yml?branch=main&style=for-the-badge)](https://github.com/Hi-Folks/array/actions)
 [![Total Downloads](https://img.shields.io/packagist/dt/hi-folks/array.svg?style=for-the-badge)](https://packagist.org/packages/hi-folks/array)
-[![Test Coverage](https://raw.githubusercontent.com/Hi-Folks/array/main/badge-coverage.svg)](https://packagist.org/packages/hi-folks/array)
 
 This package provides 2 classes:
 
