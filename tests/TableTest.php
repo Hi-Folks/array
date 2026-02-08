@@ -149,6 +149,36 @@ class TableTest extends TestCase
         $this->assertNull($table->getFromLast("unknown_column"));
     }
 
+    public function test_get_from_first_returns_null_on_grouped_table(): void
+    {
+        $table = Table::make($this->dataTable);
+        $grouped = $table->groupBy("product");
+
+        $this->assertNull($grouped->getFromFirst("product"));
+    }
+
+    public function test_get_from_last_returns_null_on_grouped_table(): void
+    {
+        $table = Table::make($this->dataTable);
+        $grouped = $table->groupBy("product");
+
+        $this->assertNull($grouped->getFromLast("product"));
+    }
+
+    public function test_get_from_first_returns_null_on_empty_table(): void
+    {
+        $table = Table::make([]);
+
+        $this->assertNull($table->getFromFirst("product"));
+    }
+
+    public function test_get_from_last_returns_null_on_empty_table(): void
+    {
+        $table = Table::make([]);
+
+        $this->assertNull($table->getFromLast("product"));
+    }
+
     public function test_can_select(): void
     {
         $table = Table::make($this->dataTable);
@@ -196,6 +226,17 @@ class TableTest extends TestCase
             $table->except("field_not_exists")->last()?->keys(),
         );
         $this->assertCount(5, $table->rows());
+    }
+
+    public function test_except_skips_non_arr_rows_on_grouped_table(): void
+    {
+        $table = Table::make($this->dataTable);
+        $grouped = $table->groupBy("product");
+
+        $result = $grouped->except("price");
+
+        // non-Arr rows are skipped, so the result is empty
+        $this->assertCount(0, $result);
     }
 
     public function test_can_filter(): void
@@ -321,6 +362,21 @@ class TableTest extends TestCase
         $this->assertEquals(400, $calculatedTable->first()?->get("new_field"));
         $this->assertEquals(150, $calculatedTable->last()?->get("price"));
         $this->assertEquals(300, $calculatedTable->last()?->get("new_field"));
+    }
+
+    public function test_calc_skips_non_arr_rows_on_grouped_table(): void
+    {
+        $table = Table::make($this->dataTable);
+        $grouped = $table->groupBy("product");
+
+        $result = $grouped->calc("doubled", fn ($item): int|float => $item["price"] * 2);
+
+        // calc returns $this, count unchanged
+        $this->assertCount(4, $result);
+        // sub-Tables are untouched (no "doubled" field injected)
+        $firstGroup = $result->first();
+        $this->assertInstanceOf(Table::class, $firstGroup);
+        $this->assertNull($firstGroup->first()?->get("doubled"));
     }
 
     public function test_can_group(): void
@@ -565,6 +621,24 @@ class TableTest extends TestCase
             ["product" => "Door", "price" => "100.00", "active" => true],
             $cheapestOfEachProduct->last()?->arr(),
         );
+    }
+
+    public function test_transform_skips_non_arr_rows_on_grouped_table(): void
+    {
+        $table = Table::make($this->dataTable);
+        $grouped = $table->groupBy("product");
+
+        $result = $grouped->transform(
+            "price",
+            fn ($price): string => number_format($price, 2),
+        );
+
+        // transform returns a new Table, count unchanged
+        $this->assertCount(4, $result);
+        // sub-Tables are untouched (price not formatted)
+        $firstGroup = $result->first();
+        $this->assertInstanceOf(Table::class, $firstGroup);
+        $this->assertSame(200, $firstGroup->first()?->get("price"));
     }
 
     public function test_can_transform_to_native_array(): void
